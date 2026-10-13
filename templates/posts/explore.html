@@ -1,0 +1,1161 @@
+{% extends 'base.html' %}
+
+{% block title %}
+InstaLite - Explore
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   INSTALITE EXPLORE
+========================================================= */
+
+.explore-page {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 25px 15px 50px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.explore-header {
+    margin-bottom: 25px;
+}
+
+.explore-title {
+    margin: 0;
+    color: #292b40;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.explore-subtitle {
+    margin: 6px 0 0;
+    color: #85879a;
+    font-size: 14px;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.explore-search {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.explore-search input {
+    flex: 1;
+    height: 45px;
+    border: 1px solid #dddbea;
+    border-radius: 12px;
+    padding: 0 16px;
+    font-size: 14px;
+    outline: none;
+    background: white;
+    box-shadow: 0 3px 12px rgba(70, 60, 100, 0.06);
+}
+
+.explore-search input:focus {
+    border-color: #a78bfa;
+}
+
+.explore-search button {
+    border: none;
+    border-radius: 12px;
+    padding: 0 22px;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.explore-search button:hover {
+    opacity: 0.92;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.explore-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+
+/* =========================
+   POST
+========================= */
+
+.explore-post {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #eee;
+    cursor: pointer;
+}
+
+.explore-post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.explore-post:hover img {
+    transform: scale(1.05);
+}
+
+
+/* =========================
+   HOVER OVERLAY
+========================= */
+
+.explore-overlay {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    opacity: 0;
+    transition: opacity 0.25s ease;
+
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.explore-post:hover .explore-overlay {
+    opacity: 1;
+}
+
+.explore-stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.explore-empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: #85879a;
+}
+
+.explore-empty i {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.explore-modal {
+    display: none;
+
+    position: fixed;
+    z-index: 9999;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.explore-modal.active {
+    display: flex;
+}
+
+.explore-modal-box {
+    width: 100%;
+    max-width: 1000px;
+    max-height: 90vh;
+
+    background: white;
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+}
+
+.explore-reel-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #111;
+}
+
+.explore-reel-badge {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    z-index: 2;
+    color: white;
+    font-size: 18px;
+    text-shadow: 0 2px 5px #000;
+    pointer-events: none;
+}
+
+
+
+/* =========================
+   MODAL IMAGE
+========================= */
+
+.modal-image-area {
+    background: #111;
+    min-height: 500px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-image-area img {
+    width: 100%;
+    height: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+
+/* =========================
+   MODAL INFO
+========================= */
+
+.modal-info {
+    padding: 25px;
+    overflow-y: auto;
+}
+
+.modal-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding-bottom: 18px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-avatar {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+
+    color: white;
+}
+
+.modal-username {
+    font-weight: 700;
+    color: #292b40;
+}
+
+.modal-caption {
+    margin-top: 20px;
+    color: #444;
+    line-height: 1.6;
+}
+
+.modal-stats {
+    margin-top: 25px;
+
+    display: flex;
+    gap: 20px;
+
+    font-weight: 600;
+    color: #444;
+}
+
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+.modal-close {
+    position: absolute;
+
+    top: 20px;
+    right: 25px;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: white;
+    color: #333;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    z-index: 10000;
+}
+/* =========================
+   SEARCH USERS
+========================= */
+
+.explore-users {
+    margin-bottom: 30px;
+}
+
+.explore-section-title {
+    margin: 0 0 12px;
+    color: #292b40;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.explore-user-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+
+    background: white;
+    border: 1px solid #eeeaf5;
+    border-radius: 14px;
+
+    text-decoration: none;
+    color: inherit;
+
+    box-shadow: 0 3px 12px rgba(70, 60, 100, 0.05);
+
+    transition: 0.2s ease;
+}
+
+.explore-user-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(70, 60, 100, 0.10);
+}
+
+.explore-user-avatar {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+
+    color: white;
+    font-size: 18px;
+}
+
+.explore-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    min-width: 0;
+}
+
+.explore-user-info strong {
+    color: #292b40;
+    font-size: 15px;
+}
+
+.explore-user-info span {
+    color: #85879a;
+    font-size: 13px;
+}
+
+.explore-user-arrow {
+    margin-left: auto;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.posts-title {
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+
+.posts-title h3 {
+    margin: 0;
+    color: #292b40;
+    font-size: 18px;
+}
+.explore-search-wrapper {
+    position: relative;
+}
+
+.explore-user-results {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    right: 100px;
+
+    background: white;
+    border-radius: 14px;
+
+    box-shadow: 0 8px 25px rgba(50, 40, 80, 0.12);
+
+    overflow: hidden;
+
+    z-index: 5000;
+
+    display: none;
+}
+
+.live-user-result {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 15px;
+
+    text-decoration: none;
+    color: #292b40;
+
+    transition: background 0.2s ease;
+}
+
+.live-user-result:hover {
+    background: #f7f4ff;
+}
+.live-user-avatar {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+
+    color: white;
+
+    overflow: hidden;
+}
+
+.live-user-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.live-user-name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+    .explore-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 7px;
+    }
+
+    .explore-modal-box {
+        grid-template-columns: 1fr;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-image-area {
+        min-height: 350px;
+        max-height: 50vh;
+    }
+
+    .modal-info {
+        padding: 18px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .explore-page {
+        padding: 15px 8px 40px;
+    }
+
+    .explore-title {
+        font-size: 25px;
+    }
+
+    .explore-search {
+        gap: 6px;
+    }
+
+    .explore-search button {
+        padding: 0 15px;
+    }
+
+    .explore-grid {
+        gap: 4px;
+    }
+
+    .explore-post {
+        border-radius: 6px;
+    }
+}
+
+/* =========================
+   EXPLORE REELS
+========================= */
+
+.explore-reel-card {
+    position: relative;
+}
+
+.explore-reel-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #111;
+}
+
+.explore-reel-card .explore-reel-badge {
+    pointer-events: none;
+}
+
+#modalReelVideo {
+    width: 100%;
+    height: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    background: #111;
+}
+
+.modal-image-area {
+    position: relative;
+}
+
+
+</style>
+
+
+<div class="explore-page">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="explore-header">
+
+    <h1 class="explore-title">
+        <i class="fa-solid fa-compass"></i>
+        Explore
+    </h1>
+
+    <p class="explore-subtitle">
+        Discover posts and people on InstaLite
+    </p>
+
+    <div class="explore-search-wrapper">
+
+        <form method="GET"
+              action="{% url 'explore' %}"
+              class="explore-search">
+
+            <input
+                type="text"
+                id="exploreSearchInput"
+                name="q"
+                value="{{ search }}"
+                placeholder="Search users or posts..."
+                autocomplete="off"
+            >
+
+            <button type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </button>
+
+        </form>
+
+        <div
+            id="exploreUserResults"
+            class="explore-user-results"
+        ></div>
+
+    </div>
+
+</div>
+
+    <!-- =========================
+         POSTS
+    ========================== -->
+{% if users %}
+
+<div class="explore-users">
+
+    <h3 class="explore-section-title">
+        <i class="fa-solid fa-user"></i>
+        People
+    </h3>
+
+    {% for user_result in users %}
+
+    <a
+        href="{% url 'public_profile' user_result.id %}"
+        class="explore-user-card"
+    >
+
+        <div class="explore-user-avatar">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+        <div class="explore-user-info">
+
+            <strong>
+                {{ user_result.username }}
+            </strong>
+
+        </div>
+
+        <i class="fa-solid fa-chevron-right explore-user-arrow"></i>
+
+    </a>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+
+{% if posts or reels %}
+<div class="explore-section-title posts-title">
+
+    <h3>
+        <i class="fa-solid fa-images"></i>
+        Posts
+    </h3>
+
+</div>
+
+<div class="explore-grid">
+
+    {% for post in posts %}
+
+    <div
+        class="explore-post"
+        onclick="openExplorePost(
+            '{{ post.image.url }}',
+            '{{ post.user.username|escapejs }}',
+            '{{ post.caption|default:""|escapejs }}',
+            '{{ post.likes.count }}',
+            '{{ post.comments.count }}'
+        )"
+    >
+
+        <img
+            src="{{ post.image.url }}"
+            alt="Post by {{ post.user.username }}"
+            loading="lazy"
+        >
+
+        <div class="explore-overlay">
+
+            <div class="explore-stat">
+
+                <i class="fa-solid fa-heart"></i>
+
+                <span>
+                    {{ post.likes.count }}
+                </span>
+
+            </div>
+
+            <div class="explore-stat">
+
+                <i class="fa-solid fa-comment"></i>
+
+                <span>
+                    {{ post.comments.count }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+ 
+{% for reel in reels %}
+<div
+    class="explore-post explore-reel-card"
+    data-video="{{ reel.video.url }}"
+    data-username="{{ reel.user.username }}"
+    data-caption="{{ reel.caption|default:'' }}"
+    data-likes="{{ reel.likes.count }}"
+    data-comments="{{ reel.comments.count }}"
+    onclick="openExploreReel(this)"
+>
+
+    <video
+        class="explore-reel-video explore-hover-reel"
+        src="{{ reel.video.url }}"
+        muted
+        playsinline
+        loop
+        preload="metadata"
+    ></video>
+
+    <span class="explore-reel-badge">
+        <i class="fa-solid fa-clapperboard"></i>
+    </span>
+
+    <div class="explore-overlay">
+        <div class="explore-stat">
+            <i class="fa-solid fa-heart"></i>
+            <span>{{ reel.likes.count }}</span>
+        </div>
+
+        <div class="explore-stat">
+            <i class="fa-solid fa-comment"></i>
+            <span>{{ reel.comments.count }}</span>
+        </div>
+    </div>
+
+</div>
+{% endfor %}
+
+
+</div>
+
+{% elif not users and not reels %}
+
+<div class="explore-empty">
+
+    <i class="fa-solid fa-compass"></i>
+
+    <h3>
+        No results found
+    </h3>
+
+    <p>
+        Try searching for another user or caption.
+    </p>
+
+</div>
+
+{% endif %}
+
+<!-- =========================================================
+     POST MODAL
+========================================================= -->
+
+<div
+    id="exploreModal"
+    class="explore-modal"
+    onclick="closeExplorePost(event)"
+>
+
+
+    <button
+        class="modal-close"
+        onclick="closeExplorePost()"
+    >
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+
+    <div
+        class="explore-modal-box"
+        onclick="event.stopPropagation()"
+    >
+
+
+        <!-- IMAGE -->
+
+        
+<div class="modal-image-area">
+
+    <img
+        id="modalPostImage"
+        src=""
+        alt="Post"
+    >
+
+    <video
+        id="modalReelVideo"
+        controls
+        playsinline
+        loop
+        style="display:none;"
+    ></video>
+
+</div>
+
+
+
+        <!-- INFO -->
+
+        <div class="modal-info">
+
+            <div class="modal-user">
+
+                <div class="modal-avatar">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+                <div
+                    class="modal-username"
+                    id="modalUsername"
+                >
+                </div>
+
+            </div>
+
+
+            <div
+                class="modal-caption"
+                id="modalCaption"
+            >
+            </div>
+
+
+            <div class="modal-stats">
+
+                <span>
+
+                    <i class="fa-solid fa-heart"></i>
+
+                    <span id="modalLikes">
+                    </span>
+
+                </span>
+
+
+                <span>
+
+                    <i class="fa-solid fa-comment"></i>
+
+                    <span id="modalComments">
+                    </span>
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   EXPLORE MODAL
+========================================================= */
+
+function openExplorePost(image, username, caption, likes, comments) {
+
+    const modal = document.getElementById("exploreModal");
+    const postImage = document.getElementById("modalPostImage");
+    const reelVideo = document.getElementById("modalReelVideo");
+
+    // Stop and hide any previously opened reel
+    reelVideo.pause();
+    reelVideo.removeAttribute("src");
+    reelVideo.load();
+    reelVideo.style.display = "none";
+
+    // Show the selected post image
+    postImage.src = image;
+    postImage.style.display = "block";
+
+    document.getElementById("modalUsername").textContent = "@" + username;
+    document.getElementById("modalCaption").textContent = caption;
+    document.getElementById("modalLikes").textContent = likes;
+    document.getElementById("modalComments").textContent = comments;
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+
+// Open a reel in the same modal
+function openExploreReel(card) {
+
+    const videoUrl = card.dataset.video;
+    const username = card.dataset.username;
+    const caption = card.dataset.caption;
+    const likes = card.dataset.likes;
+    const comments = card.dataset.comments;
+
+    const modal = document.getElementById("exploreModal");
+    const postImage = document.getElementById("modalPostImage");
+    const reelVideo = document.getElementById("modalReelVideo");
+
+    // Stop all grid reels while the modal is open
+    document.querySelectorAll(".explore-hover-reel").forEach(function(video) {
+        video.pause();
+    });
+
+    postImage.style.display = "none";
+    postImage.removeAttribute("src");
+
+    reelVideo.pause();
+    reelVideo.src = videoUrl;
+    reelVideo.style.display = "block";
+    reelVideo.currentTime = 0;
+    reelVideo.muted = false;
+
+    document.getElementById("modalUsername").textContent = "@" + username;
+    document.getElementById("modalCaption").textContent = caption;
+    document.getElementById("modalLikes").textContent = likes;
+    document.getElementById("modalComments").textContent = comments;
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+
+    reelVideo.play().catch(function() {
+        // The user can start playback using the video controls.
+    });
+}
+
+
+function closeExplorePost(event) {
+
+    if (
+        event &&
+        event.target !== document.getElementById("exploreModal")
+    ) {
+        return;
+    }
+
+    document.getElementById("exploreModal").classList.remove("active");
+
+    const reelVideo = document.getElementById("modalReelVideo");
+
+    reelVideo.pause();
+    reelVideo.removeAttribute("src");
+    reelVideo.load();
+    reelVideo.style.display = "none";
+    reelVideo.muted = true;
+
+    const postImage = document.getElementById("modalPostImage");
+    postImage.style.display = "block";
+
+    document.body.style.overflow = "";
+}
+
+
+
+/* ESC KEY */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            document.getElementById(
+                "exploreModal"
+            ).classList.remove("active");
+
+            document.body.style.overflow = "";
+
+        }
+
+    }
+);
+const exploreSearchInput =
+    document.getElementById("exploreSearchInput");
+
+const exploreUserResults =
+    document.getElementById("exploreUserResults");
+
+
+let exploreSearchTimer;
+
+
+exploreSearchInput.addEventListener("input", function () {
+
+    const query = this.value.trim();
+
+    clearTimeout(exploreSearchTimer);
+
+    if (query.length < 1) {
+
+        exploreUserResults.innerHTML = "";
+        exploreUserResults.style.display = "none";
+
+        return;
+    }
+
+    exploreSearchTimer = setTimeout(function () {
+
+        fetch(
+            "{% url 'search_users' %}?q=" +
+            encodeURIComponent(query)
+        )
+
+        .then(response => response.json())
+
+        .then(data => {
+
+            exploreUserResults.innerHTML = "";
+
+            if (!data.users.length) {
+
+                exploreUserResults.style.display = "none";
+
+                return;
+            }
+
+            data.users.forEach(function (user) {
+
+                const link =
+                    document.createElement("a");
+
+                link.href = user.profile_url;
+
+                link.className =
+                    "live-user-result";
+
+               link.innerHTML = `
+
+    <div class="live-user-avatar">
+
+        ${
+            user.profile_picture
+            ? `<img src="${user.profile_picture}" alt="${user.username}">`
+            : `<i class="fa-solid fa-user"></i>`
+        }
+
+    </div>
+
+    <div class="live-user-name">
+
+        ${user.username}
+
+    </div>
+
+`;
+
+                exploreUserResults.appendChild(link);
+
+            });
+
+            exploreUserResults.style.display = "block";
+
+        })
+
+        .catch(function () {
+
+            exploreUserResults.style.display = "none";
+
+        });
+
+    }, 250);
+
+});
+
+
+document.addEventListener("click", function(event) {
+
+    if (
+        !event.target.closest(".explore-search-wrapper")
+    ) {
+
+        exploreUserResults.style.display = "none";
+
+    }
+
+});
+
+const exploreReelObserver = new IntersectionObserver(function(entries) {
+
+    entries.forEach(function(entry) {
+
+        const video = entry.target;
+
+        // Do not autoplay grid videos while the modal is open
+        if (document.getElementById("exploreModal").classList.contains("active")) {
+            video.pause();
+            return;
+        }
+
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            video.play().catch(function() {});
+        } else {
+            video.pause();
+        }
+
+    });
+
+}, {
+    threshold: [0, 0.5, 1]
+});
+
+document.querySelectorAll(".explore-hover-reel").forEach(function(video) {
+    video.muted = true;
+    video.playsInline = true;
+    exploreReelObserver.observe(video);
+});
+
+
+</script>
+
+
+{% endblock %}

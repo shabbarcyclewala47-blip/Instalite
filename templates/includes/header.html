@@ -1,0 +1,387 @@
+{% load static %}
+
+<style>
+
+    .instalite-header {
+
+        width: 100%;
+
+        background:
+            rgba(255, 255, 255, 0.96);
+
+        backdrop-filter:
+            blur(14px);
+
+        -webkit-backdrop-filter:
+            blur(14px);
+
+        border-bottom:
+            1px solid #eeeeee;
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 1000;
+    }
+
+
+    .header-inner {
+
+        max-width: 1200px;
+
+        min-height: 62px;
+
+        margin: auto;
+
+        padding:
+            8px 18px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 20px;
+    }
+
+
+    .instalite-logo {
+
+        color: #262626;
+
+        text-decoration: none;
+
+        font-size: 22px;
+
+        font-weight: 700;
+    }
+
+
+    .instalite-logo:hover {
+
+        color: #262626;
+    }
+
+
+    .header-search {
+
+        position: relative;
+
+        flex: 1;
+
+        max-width: 350px;
+    }
+
+
+    .header-search-input {
+
+        width: 100%;
+
+        height: 38px;
+
+        border: none;
+
+        outline: none;
+
+        border-radius: 12px;
+
+        background: #f1f1f1;
+
+        padding:
+            0 14px 0 40px;
+
+        font-size: 14px;
+    }
+
+
+    .header-search-icon {
+
+        position: absolute;
+
+        left: 14px;
+
+        top: 50%;
+
+        transform:
+            translateY(-50%);
+
+        color: #777;
+    }
+
+
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.header-nav a {
+    color: #262626;
+    text-decoration: none;
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+header-nav a i {
+    display: inline-block;
+    font-size: 21px;
+    line-height: 1;
+}
+
+.header-nav .nav-label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+    .header-nav a:hover {
+
+        opacity: 0.65;
+    }
+
+
+    .header-profile-link {
+
+        display: flex !important;
+
+        align-items: center;
+
+        justify-content: center;
+    }
+
+
+    .header-profile-photo,
+    .header-profile-placeholder {
+
+        width: 33px;
+
+        height: 33px;
+
+        border-radius: 50%;
+
+        object-fit: cover;
+    }
+
+
+    .header-profile-placeholder {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: #eeeeee;
+
+        color: #777;
+
+        font-size: 14px;
+    }
+
+
+    @media (max-width: 700px) {
+
+        .header-inner {
+
+            gap: 10px;
+
+            padding:
+                8px 10px;
+        }
+
+
+        .instalite-logo {
+
+            font-size: 19px;
+        }
+
+
+        .header-nav {
+
+            gap: 12px;
+        }
+
+    }
+
+</style>
+
+
+<header class="instalite-header">
+
+    <div class="header-inner">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="{% url 'feed' %}"
+            class="instalite-logo"
+        >
+
+            InstaLite
+
+        </a>
+
+
+        <!-- SEARCH -->
+
+        <div class="header-search">
+
+            <i
+                class="fa-solid fa-magnifying-glass header-search-icon"
+            ></i>
+
+
+            <input
+
+                type="text"
+                id="headerSearchInput"
+                class="header-search-input"
+                placeholder="Search"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="header-nav">
+
+
+            <a
+                href="{% url 'feed' %}"
+                title="Home"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+            </a>
+
+
+<!-- CREATE POST -->
+
+<a
+    href="{% url 'create_post' %}"
+    title="Create Post"
+>
+    <i class="fa-solid fa-square-plus"></i>
+</a>
+
+
+<!-- REELS -->
+<a href="{% url 'reels' %}" title="Reels">
+    <i class="fa-solid fa-clapperboard"></i>
+    <span class="nav-label">Reels</span>
+</a>
+
+<!-- CREATE REEL -->
+<a href="{% url 'create_reel' %}" title="Create Reel">
+    <i class="fa-solid fa-circle-plus"></i>
+    <span class="nav-label">Create Reel</span>
+</a>
+
+            <a
+                href="{% url 'messages' %}"
+                title="Messages"
+            >
+
+                <i class="fa-regular fa-paper-plane"></i>
+
+            </a>
+
+
+            <a
+                href="{% url 'notifications' %}"
+                title="Notifications"
+            >
+
+                <i class="fa-regular fa-heart"></i>
+
+            </a>
+
+
+            <!-- CURRENT PROFILE PHOTO -->
+
+            <a
+                href="{% url 'profile' %}"
+                class="header-profile-link"
+                title="Profile"
+            >
+
+                {% if request.user.profile_picture %}
+
+                    <img
+                        src="{{ request.user.profile_picture.url }}"
+                        class="header-profile-photo"
+                        alt="{{ request.user.username }}"
+                    >
+
+                {% else %}
+
+                    <span
+                        class="header-profile-placeholder"
+                    >
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </span>
+
+                {% endif %}
+
+            </a>
+
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<script>
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+
+        const input =
+            document.getElementById(
+                'headerSearchInput'
+            );
+
+
+        if (!input) {
+
+            return;
+
+        }
+
+
+        input.addEventListener(
+            'keydown',
+            function (event) {
+
+
+                if (
+                    event.key === 'Enter'
+                ) {
+
+                    event.preventDefault();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>

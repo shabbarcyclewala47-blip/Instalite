@@ -1,0 +1,553 @@
+{% extends 'base.html' %}
+
+{% block title %}Log In | InstaLite{% endblock %}
+
+{% block content %}
+
+<style>
+
+    /* =========================
+       LOGIN PAGE
+    ========================= */
+
+    .login-page {
+        min-height: calc(100vh - 70px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fafafa;
+        padding: 30px 15px;
+    }
+
+
+    /* =========================
+       LOGIN CARD
+    ========================= */
+
+    .login-card {
+        width: 100%;
+        max-width: 390px;
+        background: #ffffff;
+
+        border: 1px solid #dbdbdb;
+        border-radius: 12px;
+
+        padding: 38px 34px;
+    }
+
+
+    /* =========================
+       LOGO
+    ========================= */
+
+    .login-logo {
+        text-align: center;
+
+        font-size: 30px;
+        font-weight: 700;
+
+        color: #262626;
+
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+    }
+
+    .login-logo i {
+        margin-right: 6px;
+    }
+
+
+    /* =========================
+       HEADING
+    ========================= */
+
+    .login-heading {
+        text-align: center;
+
+        font-size: 21px;
+        font-weight: 600;
+
+        color: #262626;
+
+        margin-bottom: 6px;
+    }
+
+    .login-subheading {
+        text-align: center;
+
+        color: #8e8e8e;
+
+        font-size: 13px;
+
+        margin-bottom: 27px;
+    }
+
+
+    /* =========================
+       DJANGO MESSAGES
+    ========================= */
+
+    .login-message {
+        font-size: 13px;
+        border-radius: 7px;
+        margin-bottom: 16px;
+    }
+
+
+    /* =========================
+       FORM GROUP
+    ========================= */
+
+    .login-form-group {
+        margin-bottom: 17px;
+    }
+
+    .login-label {
+        display: block;
+
+        font-size: 13px;
+        font-weight: 600;
+
+        color: #333;
+
+        margin-bottom: 7px;
+    }
+
+
+    /* =========================
+       INPUT
+    ========================= */
+
+    .login-input-wrapper {
+        position: relative;
+    }
+
+    .login-input-icon {
+        position: absolute;
+
+        left: 14px;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        color: #999;
+
+        font-size: 14px;
+
+        z-index: 2;
+    }
+
+    .login-input {
+        width: 100%;
+        height: 44px;
+
+        box-sizing: border-box;
+
+        border: 1px solid #dbdbdb;
+        border-radius: 7px;
+
+        background: #fafafa;
+
+        padding: 0 42px;
+
+        font-size: 14px;
+
+        color: #262626;
+
+        outline: none;
+
+        transition: 0.2s ease;
+    }
+
+    .login-input:focus {
+        background: #ffffff;
+
+        border-color: #999;
+
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .login-input::placeholder {
+        color: #aaa;
+    }
+
+
+    /* =========================
+       PASSWORD EYE
+    ========================= */
+
+    .password-toggle {
+        position: absolute;
+
+        right: 11px;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        border: none;
+        background: transparent;
+
+        color: #777;
+
+        cursor: pointer;
+
+        padding: 5px;
+    }
+
+    .password-toggle:hover {
+        color: #262626;
+    }
+
+
+    /* =========================
+       FORGOT PASSWORD
+    ========================= */
+
+    .forgot-password {
+        text-align: right;
+
+        margin-top: -5px;
+        margin-bottom: 20px;
+    }
+
+    .forgot-password a {
+        color: #555;
+
+        font-size: 12px;
+
+        text-decoration: none;
+    }
+
+    .forgot-password a:hover {
+        color: #000;
+
+        text-decoration: underline;
+    }
+
+
+    /* =========================
+       LOGIN BUTTON
+    ========================= */
+
+    .login-button {
+        width: 100%;
+        height: 44px;
+
+        border: none;
+        border-radius: 7px;
+
+        background: #262626;
+
+        color: #ffffff;
+
+        font-size: 14px;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: 0.2s ease;
+    }
+
+    .login-button:hover {
+        background: #000000;
+
+        transform: translateY(-1px);
+    }
+
+    .login-button:active {
+        transform: translateY(0);
+    }
+
+
+    /* =========================
+       DIVIDER
+    ========================= */
+
+    .login-divider {
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        margin: 25px 0;
+    }
+
+    .login-divider::before,
+    .login-divider::after {
+        content: "";
+
+        flex: 1;
+
+        height: 1px;
+
+        background: #eeeeee;
+    }
+
+    .login-divider span {
+        color: #999;
+
+        font-size: 11px;
+
+        text-transform: uppercase;
+    }
+
+
+    /* =========================
+       REGISTER SECTION
+    ========================= */
+
+    .register-section {
+        text-align: center;
+
+        font-size: 13px;
+
+        color: #737373;
+    }
+
+    .register-section a {
+        color: #262626;
+
+        font-weight: 600;
+
+        text-decoration: none;
+
+        margin-left: 4px;
+    }
+
+    .register-section a:hover {
+        text-decoration: underline;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 500px) {
+
+        .login-page {
+            padding: 20px 15px;
+
+            align-items: flex-start;
+        }
+
+        .login-card {
+            margin-top: 25px;
+
+            padding: 32px 23px;
+        }
+
+        .login-logo {
+            font-size: 28px;
+        }
+
+    }
+
+</style>
+
+
+<div class="login-page">
+
+    <div class="login-card">
+
+
+        <!-- LOGO -->
+
+        <div class="login-logo">
+
+            <i class="fa-brands fa-instagram"></i>
+
+            InstaLite
+
+        </div>
+
+
+        <!-- HEADING -->
+
+        <h1 class="login-heading">
+            Welcome Back
+        </h1>
+
+        <p class="login-subheading">
+            Log in to continue to InstaLite
+        </p>
+
+
+        <!-- DJANGO MESSAGES -->
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="alert alert-{{ message.tags }} login-message">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+        <!-- LOGIN FORM -->
+
+        <form method="post" action="{% url 'loggedin' %}">
+
+            {% csrf_token %}
+
+
+            <!-- USERNAME / EMAIL -->
+
+            <div class="login-form-group">
+
+                <label class="login-label">
+                    Username or Email
+                </label>
+
+                <div class="login-input-wrapper">
+
+                    <i class="fa-regular fa-user login-input-icon"></i>
+
+                    <input
+                        type="text"
+                        name="email"
+                        class="login-input"
+                        placeholder="Enter your username or email"
+                        required
+                        autocomplete="username"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="login-form-group">
+
+                <label class="login-label">
+                    Password
+                </label>
+
+                <div class="login-input-wrapper">
+
+                    <i class="fa-solid fa-lock login-input-icon"></i>
+
+                    <input
+                        type="password"
+                        name="password"
+                        id="loginPassword"
+                        class="login-input"
+                        placeholder="Enter your password"
+                        required
+                        autocomplete="current-password"
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="toggleLoginPassword()"
+                    >
+
+                        <i
+                            class="fa-regular fa-eye"
+                            id="loginPasswordEye"
+                        ></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORGOT PASSWORD -->
+
+            <div class="forgot-password">
+
+                <a href="{% url 'forgotpassword' %}">
+                    Forgot password?
+                </a>
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+
+                Log In
+
+            </button>
+
+        </form>
+
+
+        <!-- DIVIDER -->
+
+        <div class="login-divider">
+
+            <span>or</span>
+
+        </div>
+
+
+        <!-- REGISTER -->
+
+        <div class="register-section">
+
+            Don't have an account?
+
+            <a href="{% url 'register' %}">
+                Create Account
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+function toggleLoginPassword() {
+
+    const password =
+        document.getElementById("loginPassword");
+
+    const icon =
+        document.getElementById("loginPasswordEye");
+
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        icon.classList.remove("fa-eye");
+
+        icon.classList.add("fa-eye-slash");
+
+    } else {
+
+        password.type = "password";
+
+        icon.classList.remove("fa-eye-slash");
+
+        icon.classList.add("fa-eye");
+
+    }
+
+}
+
+</script>
+
+
+{% endblock %}

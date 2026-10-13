@@ -1,0 +1,275 @@
+
+{% extends "base.html" %}
+
+{% block title %}People You May Know | InstaLite{% endblock %}
+
+{% block extra_css %}
+<style>
+.people-page {
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.96),
+        rgba(247,241,255,.97),
+        rgba(236,250,255,.97)
+    );
+    border: 1px solid rgba(124,58,237,.13);
+    border-radius: 22px;
+    padding: 25px;
+    box-shadow: 0 12px 35px rgba(76,45,130,.09);
+}
+
+.people-page-heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 7px;
+}
+
+.people-page-heading i {
+    font-size: 24px;
+    color: #7c3aed;
+}
+
+.people-page h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #30264a;
+    margin: 0;
+}
+
+.people-page-subtitle {
+    color: #8e879f;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.people-page-row {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(124,58,237,.09);
+}
+
+.people-page-row:last-child {
+    border-bottom: none;
+}
+
+.people-page-avatar {
+    width: 54px;
+    height: 54px;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #7451df;
+    background: linear-gradient(135deg,#eee5ff,#dcf8ff);
+}
+
+.people-page-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.people-page-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.people-page-name {
+    color: #30264a;
+    font-size: 14px;
+    font-weight: 750;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.people-page-name:hover {
+    color: #7c3aed;
+}
+
+.people-page-details small {
+    display: block;
+    color: #9992aa;
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.people-page-follow {
+    border: none;
+    border-radius: 10px;
+    padding: 9px 15px;
+    background: linear-gradient(135deg,#7c3aed,#0891b2);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.people-page-follow:disabled {
+    opacity: .6;
+}
+
+.people-page-empty {
+    text-align: center;
+    padding: 45px 15px;
+    color: #8e879f;
+}
+
+.people-page-empty i {
+    display: block;
+    font-size: 35px;
+    color: #8b5cf6;
+    margin-bottom: 13px;
+}
+
+@media(max-width:760px) {
+    .people-page {
+        padding: 18px;
+    }
+
+    .people-page h2 {
+        font-size: 19px;
+    }
+
+    .people-page-follow {
+        padding: 8px 11px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="people-page" id="allPeopleSuggestions">
+
+    <div class="people-page-heading">
+        <i class="fa-solid fa-user-group"></i>
+        <h2>People You May Know</h2>
+    </div>
+
+    <p class="people-page-subtitle">
+        Discover new people and grow your InstaLite community.
+    </p>
+
+    <div id="allSuggestionsList">
+
+        {% for person in suggested_users %}
+
+        <div class="people-page-row suggestion-person"
+             data-user-id="{{ person.id }}">
+
+            <a href="{% url 'public_profile' person.id %}"
+               class="people-page-avatar suggestion-profile-link">
+
+                {% if person.profile_picture %}
+                    <img src="{{ person.profile_picture.url }}"
+                         alt="{{ person.username }}">
+                {% else %}
+                    <i class="fa-solid fa-user"></i>
+                {% endif %}
+
+            </a>
+
+            <div class="people-page-details">
+                <a href="{% url 'public_profile' person.id %}"
+                   class="people-page-name suggestion-profile-link">
+                    {{ person.username }}
+                </a>
+                <small>Suggested for you</small>
+            </div>
+
+            <form method="post"
+                  action="{% url 'follow_user' person.id %}"
+                  class="suggestion-follow-form">
+
+                {% csrf_token %}
+
+                <button type="submit" class="people-page-follow">
+                    Follow
+                </button>
+
+            </form>
+
+        </div>
+
+        {% empty %}
+
+        <div class="people-page-empty">
+            <i class="fa-solid fa-user-group"></i>
+            <h5>You're all caught up!</h5>
+            <p>There are no new people to suggest right now.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const list = document.getElementById('allSuggestionsList');
+
+    if (!list) return;
+
+    list.addEventListener('submit', async function (event) {
+        const form = event.target.closest('.suggestion-follow-form');
+
+        if (!form) return;
+
+        event.preventDefault();
+
+        const row = form.closest('.suggestion-person');
+        const button = form.querySelector('button');
+        const csrf = form.querySelector('[name="csrfmiddlewaretoken"]');
+
+        if (!row || !button || !csrf) return;
+
+        button.disabled = true;
+        button.textContent = 'Please wait...';
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrf.value,
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: new FormData(form),
+                credentials: 'same-origin'
+            });
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.message || 'Follow action failed.');
+            }
+
+            if (data.status === 'following' || data.status === 'requested') {
+                row.remove();
+            } else {
+                button.disabled = false;
+                button.textContent = 'Follow';
+            }
+
+            if (!list.querySelector('.suggestion-person')) {
+                list.innerHTML = `
+                    <div class="people-page-empty">
+                        <i class="fa-solid fa-user-group"></i>
+                        <h5>You're all caught up!</h5>
+                        <p>There are no new people to suggest right now.</p>
+                    </div>
+                `;
+            }
+        } catch (error) {
+            button.disabled = false;
+            button.textContent = 'Follow';
+            alert(error.message || 'Please try again.');
+        }
+    });
+});
+</script>
+{% endblock %}

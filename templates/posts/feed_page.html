@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+InstaLite - Feed
+{% endblock %}
+
+{% block content %}
+
+<div style="margin-bottom:20px;">
+
+    {% if user.is_authenticated %}
+
+    <h2 style="margin:0;color:#292b40;">
+        Welcome, {{ user.username }}
+    </h2>
+
+    <p style="margin:5px 0;color:#8c90a1;">
+        See the latest posts from InstaLite.
+    </p>
+
+    {% endif %}
+
+</div>
+
+{% include "feed.html" %}
+
+{% endblock %}

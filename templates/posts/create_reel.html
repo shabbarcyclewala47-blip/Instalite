@@ -1,0 +1,481 @@
+
+{% extends "base.html" %}
+
+{% block title %}Create Reel | InstaLite{% endblock %}
+
+{% block content %}
+<style>
+  
+/* =========================================================
+   INSTALITE UPLOAD REEL — PREMIUM GRADIENT THEME
+========================================================= */
+
+.reel-upload-page,
+.reel-upload-page * {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   UPLOAD REEL CONTAINER
+========================================================= */
+
+.reel-upload-page {
+    width: calc(100% - 30px);
+    max-width: 520px;
+
+    margin: 30px auto;
+
+    padding: 25px;
+
+    background:
+        radial-gradient(
+            ellipse at 5% 5%,
+            rgba(219, 39, 119, 0.11),
+            transparent 42%
+        ),
+        radial-gradient(
+            ellipse at 95% 15%,
+            rgba(124, 58, 237, 0.13),
+            transparent 42%
+        ),
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #f3edff 48%,
+            #eef5ff 100%
+        );
+
+    border: 1px solid rgba(124, 58, 237, 0.17);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 12px 35px rgba(91, 33, 182, 0.10),
+        0 4px 12px rgba(219, 39, 119, 0.05);
+}
+
+
+/* =========================================================
+   PAGE HEADING
+========================================================= */
+
+.reel-upload-page h2 {
+    margin: 0 0 8px;
+
+    color: #4c1d72;
+
+    font-size: 25px;
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+.reel-upload-page .subtitle {
+    color: #806b94;
+
+    margin-bottom: 24px;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FORM LABELS
+========================================================= */
+
+.reel-upload-page label {
+    display: block;
+
+    color: #55336f;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    margin: 16px 0 8px;
+}
+
+
+/* =========================================================
+   VIDEO UPLOAD INPUT
+========================================================= */
+
+.reel-upload-page input[type="file"] {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    padding: 12px;
+
+    border: 1px dashed rgba(124, 58, 237, 0.35);
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(243, 232, 255, 0.90),
+            rgba(255, 240, 248, 0.85),
+            rgba(224, 242, 254, 0.90)
+        );
+
+    color: #654780;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.reel-upload-page input[type="file"]:hover {
+    border-color: #c026d3;
+
+    box-shadow:
+        0 4px 12px rgba(124, 58, 237, 0.08);
+}
+
+.reel-upload-page input[type="file"]:focus-visible {
+    outline: 2px solid rgba(168, 85, 247, 0.30);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   REEL CAPTION TEXTAREA
+========================================================= */
+
+.reel-upload-page textarea {
+    display: block;
+
+    width: 100%;
+    min-height: 110px;
+
+    resize: vertical;
+
+    padding: 12px;
+
+    border: 1px solid rgba(124, 58, 237, 0.20);
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.98),
+            rgba(243, 232, 255, 0.85),
+            rgba(230, 243, 255, 0.80)
+        );
+
+    color: #4c1d72;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.reel-upload-page textarea::placeholder {
+    color: #a091b2;
+}
+
+.reel-upload-page textarea:focus {
+    border-color: #a855f7;
+
+    box-shadow:
+        0 0 0 4px rgba(168, 85, 247, 0.11);
+}
+
+
+/* =========================================================
+   VIDEO PREVIEW
+========================================================= */
+
+.reel-preview {
+    display: none;
+
+    width: 100%;
+    max-height: 420px;
+
+    object-fit: contain;
+
+    background: #090713;
+
+    border: 1px solid rgba(124, 58, 237, 0.20);
+
+    border-radius: 14px;
+
+    margin-top: 15px;
+
+    box-shadow:
+        0 6px 18px rgba(49, 24, 75, 0.12);
+}
+
+
+/* =========================================================
+   PUBLISH REEL BUTTON
+========================================================= */
+
+.publish-reel {
+    display: block;
+
+    width: 100%;
+
+    border: 0;
+
+    padding: 13px;
+
+    margin-top: 20px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #c026d3,
+            #db2777
+        );
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 16px rgba(124, 58, 237, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.publish-reel:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #6d28d9,
+            #a21caf,
+            #be185d
+        );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 22px rgba(124, 58, 237, 0.26);
+}
+
+.publish-reel:active {
+    transform: translateY(0);
+}
+
+.publish-reel:focus-visible {
+    outline: 3px solid rgba(168, 85, 247, 0.35);
+
+    outline-offset: 3px;
+}
+
+.publish-reel:disabled {
+    opacity: 0.65;
+
+    cursor: wait;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   REEL ERROR MESSAGE
+========================================================= */
+
+.reel-error {
+    color: #a61b45;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0f4,
+            #fce7f3,
+            #fdf2f8
+        );
+
+    border: 1px solid rgba(219, 39, 119, 0.20);
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    margin-bottom: 15px;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN — TABLETS
+========================================================= */
+
+@media (max-width: 768px) {
+    .reel-upload-page {
+        margin: 20px auto;
+
+        padding: 22px;
+
+        border-radius: 19px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN — MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+    .reel-upload-page {
+        width: calc(100% - 20px);
+
+        margin: 14px auto;
+
+        padding: 17px;
+
+        border-radius: 17px;
+    }
+
+    .reel-upload-page h2 {
+        font-size: 22px;
+    }
+
+    .reel-upload-page .subtitle {
+        margin-bottom: 20px;
+
+        font-size: 13px;
+    }
+
+    .reel-upload-page label {
+        font-size: 13px;
+    }
+
+    .reel-upload-page input[type="file"] {
+        padding: 10px;
+
+        font-size: 12px;
+    }
+
+    .reel-upload-page textarea {
+        min-height: 100px;
+
+        padding: 11px;
+    }
+
+    .reel-preview {
+        max-height: 360px;
+    }
+
+    .publish-reel {
+        padding: 13px;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY — REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .publish-reel,
+    .reel-upload-page input[type="file"],
+    .reel-upload-page textarea {
+        transition: none;
+    }
+}
+
+</style>
+
+<div class="reel-upload-page">
+    <h2><i class="bi bi-camera-reels"></i> Create a Reel</h2>
+    <p class="subtitle">Share a short video with your InstaLite community.</p>
+
+    {% if error %}
+        <div class="reel-error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST"
+          enctype="multipart/form-data"
+          id="reelUploadForm">
+        {% csrf_token %}
+
+        <label for="video">Choose your video</label>
+        <input type="file"
+               name="video"
+               id="video"
+               accept="video/mp4,video/webm,video/quicktime,.mp4,.webm,.mov"
+               required>
+
+        <video id="videoPreview"
+               class="reel-preview"
+               controls
+               playsinline></video>
+
+        <label for="caption">Caption</label>
+        <textarea name="caption"
+                  id="caption"
+                  rows="3"
+                  maxlength="500"
+                  placeholder="Write a caption...">{{ caption|default:'' }}</textarea>
+
+        <button class="publish-reel" type="submit">
+            <i class="bi bi-cloud-upload"></i> Publish Reel
+        </button>
+    </form>
+</div>
+
+<script>
+    const reelFileInput = document.getElementById('video');
+    const reelPreview = document.getElementById('videoPreview');
+    let reelPreviewUrl = null;
+
+    reelFileInput.addEventListener('change', function () {
+        const file = this.files[0];
+
+        if (reelPreviewUrl) {
+            URL.revokeObjectURL(reelPreviewUrl);
+            reelPreviewUrl = null;
+        }
+
+        if (!file) {
+            reelPreview.style.display = 'none';
+            reelPreview.removeAttribute('src');
+            return;
+        }
+
+        if (file.size > 100 * 1024 * 1024) {
+            alert('Maximum video size is 100 MB.');
+            this.value = '';
+            reelPreview.style.display = 'none';
+            return;      
+        }
+
+        reelPreviewUrl = URL.createObjectURL(file);
+        reelPreview.src = reelPreviewUrl;
+        reelPreview.style.display = 'block';
+    });
+</script>
+{% endblock %}

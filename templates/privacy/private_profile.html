@@ -1,0 +1,47 @@
+
+<div class="private-profile-notice">
+    <div class="private-lock">🔒</div>
+    <h3>This account is private</h3>
+    <p>
+        Follow this account and wait for approval. If your request
+        is accepted, follow them back to unlock their posts, Reels
+        and stories.
+    </p>
+
+    {% if pending_request %}
+        <button type="button" disabled>
+            Requested
+        </button>
+    {% elif is_following %}
+        <span>Waiting for mutual follow</span>
+    {% else %}
+        <form method="post"
+              action="{% url 'follow_user' profile_user.id %}">
+            {% csrf_token %}
+            <button type="submit">Follow</button>
+        </form>
+    {% endif %}
+</div>
+
+<style>
+.private-profile-notice {
+    max-width: 470px;
+    margin: 35px auto;
+    padding: 30px;
+    text-align: center;
+    border-radius: 24px;
+    background: linear-gradient(145deg, #f3edff, #fff0f8, #eef5ff);
+    border: 1px solid #e9d5ff;
+}
+.private-lock { font-size: 48px; }
+.private-profile-notice h3 { color: #5422a5; }
+.private-profile-notice p { color: #71657d; line-height: 1.7; }
+.private-profile-notice button {
+    border: 0;
+    border-radius: 12px;
+    padding: 11px 22px;
+    background: linear-gradient(110deg, #7c3aed, #db2777);
+    color: white;
+    font-weight: 700;
+}
+</style>

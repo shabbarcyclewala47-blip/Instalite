@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+
+{% block title %}
+Chat with {{ other_user.username }} - InstaLite
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+.chat-wrapper {
+    max-width: 850px;
+    height: calc(100vh - 150px);
+    min-height: 550px;
+    margin: 25px auto;
+    background: rgba(255,255,255,0.95);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(70,60,120,0.12);
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    padding: 16px 22px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    background: rgba(255,255,255,0.98);
+}
+
+.back-button {
+    text-decoration: none;
+    color: #5d5575;
+    font-size: 22px;
+    margin-right: 3px;
+}
+
+.chat-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.chat-default-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#7147ff,#18a5d8);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+
+.chat-user-info {
+    flex: 1;
+}
+
+.chat-username {
+    font-weight: 700;
+    color: #29234d;
+    font-size: 16px;
+}
+
+.chat-status {
+    color: #888;
+    font-size: 12px;
+}
+
+.chat-body {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+    background: #faf9ff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message-row {
+    display: flex;
+}
+
+.message-row.mine {
+    justify-content: flex-end;
+}
+
+.message-row.theirs {
+    justify-content: flex-start;
+}
+
+.chat-bubble {
+    max-width: 65%;
+    padding: 11px 15px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.mine .chat-bubble {
+    background: linear-gradient(135deg,#7147ff,#4e8de8);
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+.theirs .chat-bubble {
+    background: white;
+    color: #332d4d;
+    border: 1px solid #eee;
+    border-bottom-left-radius: 5px;
+}
+
+.chat-time {
+    font-size: 10px;
+    margin-top: 4px;
+    opacity: 0.65;
+}
+
+.chat-footer {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    background: white;
+}
+
+.chat-form {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 12px 18px;
+    outline: none;
+    background: #fafafa;
+}
+
+.chat-input:focus {
+    border-color: #7147ff;
+    box-shadow: 0 0 0 3px rgba(113,71,255,0.08);
+}
+
+.send-button {
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#7147ff,#149bd7);
+    color: white;
+    font-size: 18px;
+}
+
+.empty-chat {
+    margin: auto;
+    text-align: center;
+    color: #888;
+}
+
+.empty-chat i {
+    font-size: 50px;
+    color: #8b70ff;
+}
+
+</style>
+
+
+<div class="chat-wrapper">
+
+
+    <!-- HEADER -->
+
+    <div class="chat-header">
+
+        <a
+            href="{% url 'messages' %}"
+            class="back-button"
+        >
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+
+        {% if other_user.profile_picture %}
+
+            <img
+                src="{{ other_user.profile_picture.url }}"
+                class="chat-avatar"
+                alt="{{ other_user.username }}"
+            >
+
+        {% else %}
+
+            <div class="chat-default-avatar">
+                {{ other_user.username|first|upper }}
+            </div>
+
+        {% endif %}
+
+
+        <div class="chat-user-info">
+
+            <div class="chat-username">
+                {{ other_user.username }}
+            </div>
+
+            <div class="chat-status">
+                InstaLite user
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CHAT -->
+
+    <div class="chat-body" id="chatBody">
+
+        {% for message in chat_messages %}
+
+            {% if message.sender == request.user %}
+
+                <div class="message-row mine">
+
+                    <div class="chat-bubble">
+
+                        {{ message.text|linebreaksbr }}
+
+                        <div class="chat-time">
+
+                            {{ message.created_at|date:"M d, Y • h:i A" }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% else %}
+
+                <div class="message-row theirs">
+
+                    <div class="chat-bubble">
+
+                        {{ message.text|linebreaksbr }}
+
+                        <div class="chat-time">
+
+                            {{ message.created_at|date:"M d, Y • h:i A" }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+        {% empty %}
+
+            <div class="empty-chat">
+
+                <i class="bi bi-chat-heart"></i>
+
+                <h5>Start your conversation</h5>
+
+                <p>
+                    Send a message to {{ other_user.username }}.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- SEND MESSAGE -->
+
+    <div class="chat-footer">
+
+        <form
+            method="POST"
+            class="chat-form"
+        >
+
+            {% csrf_token %}
+
+            <input
+                type="text"
+                name="text"
+                class="chat-input"
+                placeholder="Message {{ other_user.username }}..."
+                autocomplete="off"
+                required
+            >
+
+            <button
+                type="submit"
+                class="send-button"
+            >
+                <i class="bi bi-send-fill"></i>
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const chatBody =
+    document.getElementById("chatBody");
+
+if (chatBody) {
+    chatBody.scrollTop =
+        chatBody.scrollHeight;
+}
+
+</script>
+
+{% endblock %}

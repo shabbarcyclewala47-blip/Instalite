@@ -1,0 +1,2480 @@
+
+<style>
+
+/* =========================================================
+   INSTALITE — PREMIUM SOFT GRADIENT FEED
+   Lavender • Mist Blue • Blush Pink
+========================================================= */
+
+.feed-container {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 12px;
+    border-radius: 26px;
+    background: linear-gradient(
+        145deg,
+        #eee8fb 0%,
+        #e5eafa 48%,
+        #f8e8f0 100%
+    );
+}
+
+/* =========================
+   POST CARD
+========================= */
+
+.post-card {
+    background: linear-gradient(
+        145deg,
+        #eee7fb 0%,
+        #e4eafa 52%,
+        #f8e5ef 100%
+    );
+    border: 1px solid #d9cdee;
+    border-radius: 22px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    box-shadow:
+        0 8px 24px rgba(105, 83, 151, 0.12),
+        0 2px 6px rgba(104, 120, 165, 0.06);
+    transition: box-shadow 0.25s ease,
+                transform 0.25s ease;
+}
+
+.post-card:hover {
+    box-shadow:
+        0 14px 32px rgba(105, 83, 151, 0.17);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   POST HEADER
+========================= */
+
+.post-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 16px 18px;
+    background: linear-gradient(
+        110deg,
+        #e7ddf8,
+        #dceafa 58%,
+        #f4dfea
+    );
+    border-bottom: 1px solid rgba(137, 113, 177, 0.12);
+}
+
+.post-user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.post-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        #9476d9,
+        #63a9ce,
+        #d78caf
+    );
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(117, 91, 163, 0.20);
+}
+
+.post-profile-picture {
+    object-fit: cover;
+    border: 2px solid #e9def7;
+    box-shadow: 0 4px 12px rgba(117, 91, 163, 0.20);
+}
+
+.post-user-details {
+    min-width: 0;
+}
+
+.post-username {
+    display: block;
+    color: #403354;
+    font-size: 15px;
+    font-weight: 750;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+}
+
+.post-username:hover {
+    color: #7655b4;
+}
+
+.post-time {
+    display: block;
+    margin-top: 3px;
+    color: #79718e;
+    font-size: 12px;
+}
+
+.post-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* =========================
+   FOLLOW BUTTON
+========================= */
+
+.follow-button {
+    border: 1px solid #a99ad7;
+    background: linear-gradient(135deg, #9176d3, #78a9ce);
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 11px;
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: 0.2s ease;
+    flex-shrink: 0;
+}
+
+.follow-button:hover {
+    background: linear-gradient(135deg, #8064c3, #6098bf);
+    transform: translateY(-1px);
+}
+
+.follow-button.following {
+    background: linear-gradient(135deg, #e3daf5, #d9eaf5);
+    color: #594782;
+    border: 1px solid #c8b9e6;
+}
+
+/* =========================
+   THREE DOT MENU
+========================= */
+
+.post-menu-wrapper {
+    position: relative;
+}
+
+.post-menu-button {
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: transparent;
+    color: #625778;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 19px;
+    transition: 0.2s ease;
+}
+
+.post-menu-button:hover {
+    background: #ded5f1;
+    color: #6c4eaa;
+}
+
+.post-menu {
+    position: absolute;
+    top: 43px;
+    right: 0;
+    min-width: 155px;
+    background: linear-gradient(145deg, #eee7fb, #e1eafa);
+    border: 1px solid #d4c7eb;
+    border-radius: 13px;
+    padding: 6px;
+    box-shadow: 0 12px 28px rgba(67, 49, 105, 0.17);
+    z-index: 1000;
+    display: none;
+}
+
+.post-menu.show {
+    display: block;
+}
+
+.delete-post-button {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #b64767;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    transition: 0.2s ease;
+}
+
+.delete-post-button:hover {
+    background: #f4dce7;
+    color: #a82f53;
+}
+
+/* =========================
+   POST CAPTION
+========================= */
+
+.post-caption {
+    padding: 0 18px 16px;
+    color: #574d6b;
+    font-size: 14px;
+    line-height: 1.7;
+    word-break: break-word;
+    background: linear-gradient(
+        110deg,
+        #e9e1f7,
+        #e1eaf7,
+        #f5e3ed
+    );
+}
+
+.post-caption strong {
+    color: #3f3157;
+    margin-right: 5px;
+}
+
+/* =========================
+   POST IMAGE
+========================= */
+
+.post-image-wrapper {
+    width: 100%;
+    background: linear-gradient(
+        135deg,
+        #d8ccef,
+        #cfe5f3,
+        #efd2e0
+    );
+    position: relative;
+    overflow: hidden;
+}
+
+.post-image {
+    width: 100%;
+    display: block;
+    max-height: 720px;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================
+   DOUBLE-TAP HEART
+========================= */
+
+.post-image-wrapper,
+.post-carousel,
+.post-carousel-item {
+    position: relative;
+}
+
+.double-tap-heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.2);
+    font-size: 105px;
+    color: #fff;
+    text-shadow:
+        0 4px 18px rgba(205, 85, 135, 0.45),
+        0 0 30px rgba(205, 85, 135, 0.32);
+    pointer-events: none;
+    z-index: 20;
+    opacity: 0;
+}
+
+.double-tap-heart.show {
+    animation: doubleTapHeart 0.75s ease forwards;
+}
+
+@keyframes doubleTapHeart {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.25);
+    }
+    45% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+}
+
+/* =========================
+   MULTIPLE IMAGE CAROUSEL
+========================= */
+
+.post-carousel {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(
+        135deg,
+        #d8ccef,
+        #cfe5f3,
+        #efd2e0
+    );
+}
+
+.post-carousel-inner,
+.post-carousel-item {
+    width: 100%;
+}
+
+.post-carousel-item img {
+    width: 100%;
+    display: block;
+    max-height: 720px;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.post-carousel .carousel-control-prev,
+.post-carousel .carousel-control-next {
+    width: 44px;
+    height: 44px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1;
+    background: rgba(73, 60, 101, 0.48);
+    border-radius: 50%;
+    margin: 0 12px;
+    transition: 0.2s ease;
+}
+
+.post-carousel .carousel-control-prev:hover,
+.post-carousel .carousel-control-next:hover {
+    background: rgba(73, 60, 101, 0.72);
+}
+
+.post-carousel .carousel-control-prev-icon,
+.post-carousel .carousel-control-next-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.post-carousel .carousel-indicators {
+    margin-bottom: 10px;
+}
+
+.post-carousel .carousel-indicators button {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: none;
+    margin: 0 3px;
+    opacity: 0.65;
+}
+
+.post-carousel .carousel-indicators button.active {
+    opacity: 1;
+}
+
+/* =========================
+   ACTION BAR
+========================= */
+
+.post-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 13px 18px 8px;
+    background: linear-gradient(
+        110deg,
+        #e7def7,
+        #dce9f7,
+        #f4e0eb
+    );
+    border-top: 1px solid rgba(137, 113, 177, 0.10);
+}
+
+.post-actions-left {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.action-btn {
+    border: none;
+    background: transparent;
+    color: #655a79;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.action-btn:hover {
+    background: #d9d1ef;
+    color: #7051b2;
+}
+
+.action-btn i {
+    font-size: 20px;
+}
+
+.like-button.liked,
+.like-button.liked i,
+.feed-reel-like.liked,
+.feed-reel-like.liked i {
+    color: #d94e7c;
+}
+
+.save-button.saved,
+.save-button.saved i,
+.feed-reel-save.saved,
+.feed-reel-save.saved i {
+    color: #705cc1;
+}
+
+/* =========================
+   LIKE COUNT
+========================= */
+
+.like-summary {
+    padding: 0 18px 9px;
+    color: #49395f;
+    font-size: 14px;
+    font-weight: 700;
+    background: linear-gradient(
+        110deg,
+        #e7def7,
+        #dce9f7,
+        #f4e0eb
+    );
+}
+
+/* =========================
+   COMMENTS
+========================= */
+
+.comment-box {
+    padding: 12px 18px 16px;
+    border-top: 1px solid #d9cdea;
+    background: linear-gradient(
+        135deg,
+        #e7def5,
+        #deebf7,
+        #f4e2ec
+    );
+}
+
+.comment-form,
+.feed-reel-comment-form {
+    margin: 0;
+}
+
+.comment-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.comment-input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid #c9bce3;
+    background: linear-gradient(
+        135deg,
+        #e3daf4,
+        #dceaf6
+    );
+    border-radius: 12px;
+    padding: 11px 13px;
+    outline: none;
+    color: #443751;
+    font-size: 13px;
+}
+
+.comment-input::placeholder {
+    color: #827791;
+}
+
+.comment-input:focus {
+    border-color: #9d89cf;
+    background: #eae4f6;
+    box-shadow: 0 0 0 3px rgba(135, 111, 191, 0.12);
+}
+
+.comment-submit {
+    border: none;
+    background: linear-gradient(135deg, #9278cd, #72a7cb);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.comment-submit:hover {
+    background: linear-gradient(135deg, #8063bd, #6096bb);
+}
+
+/* =========================
+   COMMENT PREVIEW
+========================= */
+
+.comments-preview {
+    padding: 0 18px 15px;
+    background: linear-gradient(
+        110deg,
+        #e7def7,
+        #dce9f7,
+        #f4e0eb
+    );
+}
+
+.comment-item {
+    margin-bottom: 7px;
+    color: #62566f;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.comment-item strong {
+    color: #423354;
+}
+
+/* =========================
+   FEED EMPTY STATE
+========================= */
+
+.feed-empty {
+    background: linear-gradient(
+        145deg,
+        #e9e0f8,
+        #dceaf7,
+        #f4e0ec
+    );
+    border-radius: 22px;
+    padding: 70px 25px;
+    text-align: center;
+    border: 1px solid #d7c9eb;
+    box-shadow: 0 10px 28px rgba(105, 83, 151, 0.12);
+}
+
+.feed-empty i {
+    font-size: 48px;
+    color: #8266c1;
+    margin-bottom: 15px;
+}
+
+.feed-empty h3 {
+    margin: 0 0 8px;
+    color: #403354;
+}
+
+.feed-empty p {
+    margin: 0;
+    color: #766d89;
+}
+
+/* =========================
+   FEED REELS
+========================= */
+
+.feed-reel-card {
+    width: 100%;
+}
+
+.feed-reel-video-wrapper {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(
+        135deg,
+        #d8ccef,
+        #cfe5f3,
+        #efd2e0
+    );
+    overflow: hidden;
+}
+
+.feed-reel-video {
+    display: block;
+    width: 100%;
+    max-height: 720px;
+    aspect-ratio: 9 / 14;
+    object-fit: contain;
+    background: #e0d9eb;
+    cursor: pointer;
+}
+
+.feed-reel-mute {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    z-index: 3;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(68, 54, 91, 0.78);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .feed-reel-video {
+        max-height: 600px;
+    }
+}
+
+/* =========================
+   POST VIEWS
+========================= */
+
+.post-view-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 12px;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: linear-gradient(
+        135deg,
+        #e3d8f5,
+        #f0dce8
+    );
+    border: 1px solid #d7c5e9;
+    color: #674c8d;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* =========================
+   TOAST MESSAGE
+========================= */
+
+.instalite-toast {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 99999;
+    background: linear-gradient(
+        135deg,
+        #7660ae,
+        #8d76c8,
+        #649dbf
+    );
+    color: #fff;
+    padding: 13px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 10px 26px rgba(85, 67, 128, 0.25);
+    opacity: 0;
+    transform: translateY(15px);
+    pointer-events: none;
+    transition: all 0.25s ease;
+}
+
+.instalite-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================
+   MOBILE RESPONSIVENESS
+========================= */
+
+@media (max-width: 768px) {
+    .feed-container {
+        width: 100%;
+        padding: 7px;
+        border-radius: 18px;
+    }
+
+    .post-card {
+        border-radius: 17px;
+        margin-bottom: 18px;
+    }
+
+    .post-header {
+        padding: 13px;
+    }
+
+    .post-caption {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .post-actions {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .like-summary {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .comment-box {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .comments-preview {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .post-image,
+    .post-carousel-item img {
+        max-height: 600px;
+    }
+
+    .post-username {
+        max-width: 140px;
+    }
+
+    .follow-button {
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+
+    .post-menu-button {
+        width: 34px;
+        height: 34px;
+    }
+
+    .post-carousel .carousel-control-prev,
+    .post-carousel .carousel-control-next {
+        width: 38px;
+        height: 38px;
+        margin: 0 8px;
+    }
+
+    .double-tap-heart {
+        font-size: 85px;
+    }
+
+    .action-btn {
+        padding: 7px 6px;
+    }
+}
+
+/* =========================
+   SMALL MOBILE SCREENS
+========================= */
+
+@media (max-width: 380px) {
+    .post-header {
+        gap: 6px;
+    }
+
+    .post-user-info {
+        gap: 8px;
+    }
+
+    .post-username {
+        max-width: 105px;
+    }
+
+    .post-actions {
+        gap: 3px;
+    }
+
+    .action-btn {
+        gap: 4px;
+        padding: 6px 4px;
+        font-size: 12px;
+    }
+
+    .action-btn i {
+        font-size: 18px;
+    }
+}
+
+
+
+</style>
+
+
+<div class="feed-container">
+
+{% for post in posts %}
+<div class="post-card"
+    data-post-id="{{ post.id }}"
+    data-track-url="{% url 'track_post_view' post.id %}"
+    >
+
+    <!-- =====================================================
+         POST HEADER
+    ====================================================== -->
+
+    <div class="post-header">
+
+       
+<div class="post-user-info">
+
+    <a href="{% url 'public_profile' post.user.id %}"
+       style="display:flex; flex-shrink:0; text-decoration:none;">
+
+        {% if post.user.profile_picture %}
+            <img
+                src="{{ post.user.profile_picture.url }}"
+                alt="{{ post.user.username }}"
+                class="post-avatar post-profile-picture"
+            >
+        {% else %}
+            <div class="post-avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+        {% endif %}
+
+    </a>
+
+    <div class="post-user-details">
+
+        <a href="{% url 'public_profile' post.user.id %}"
+           class="post-username">
+            {{ post.user.username }}
+        </a>
+
+        <span class="post-time">
+            {{ post.created_at|timesince }} ago
+        </span>
+
+    </div>
+
+</div>
+
+
+
+        <!-- =================================================
+             HEADER RIGHT SIDE
+        ================================================== -->
+
+        <div class="post-header-right">
+
+            <!-- FOLLOW OTHER USERS -->
+
+            {% if user.is_authenticated and post.user != user %}
+
+            <button
+                type="button"
+                class="follow-button {% if post.user.id in following_ids %}following{% endif %}"
+                data-url="{% url 'follow_user' post.user.id %}"
+                data-user-id="{{ post.user.id }}"
+            >
+
+                {% if post.user.id in following_ids %}
+                    Following
+                {% else %}
+                    Follow
+                {% endif %}
+
+            </button>
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 THREE DOTS - ONLY FOR OWN POST
+            ================================================== -->
+
+            {% if user.is_authenticated and post.user == user %}
+
+            <div class="post-menu-wrapper">
+
+                <button
+                    type="button"
+                    class="post-menu-button"
+                    title="More options"
+                    onclick="togglePostMenu(this)"
+                >
+
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                </button>
+
+
+                <div class="post-menu">
+
+                    <button
+                        type="button"
+                        class="delete-post-button"
+                        data-delete-url="{% url 'delete_post' post.id %}"
+                        onclick="deletePost(this)"
+                    >
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        Delete
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CAPTION
+    ====================================================== -->
+
+    {% if post.caption %}
+
+    <div class="post-caption">
+
+        <strong>
+            {{ post.user.username }}
+        </strong>
+
+        {{ post.caption }}
+
+    </div>
+
+    {% endif %}
+
+
+   <!-- =====================================================
+     MULTIPLE IMAGE CAROUSEL
+===================================================== -->
+
+<div class="post-carousel">
+
+    <div
+        id="postCarousel{{ post.id }}"
+        class="carousel slide"
+        data-bs-interval="false"
+        data-bs-wrap="false"
+    >
+
+        <!-- =================================================
+             CAROUSEL IMAGES
+        ================================================== -->
+
+        <div class="carousel-inner post-carousel-inner">
+
+            <!-- =============================================
+                 FIRST / MAIN IMAGE
+            ============================================== -->
+
+            {% if post.image %}
+
+            <div class="carousel-item post-carousel-item active">
+
+                <img
+                    src="{{ post.image.url }}"
+                    alt="Post by {{ post.user.username }}"
+                    class="post-image"
+                >
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- =============================================
+                 ADDITIONAL IMAGES
+            ============================================== -->
+
+            {% for post_image in post.images.all %}
+
+            <div class="carousel-item post-carousel-item">
+
+                <img
+                    src="{{ post_image.image.url }}"
+                    alt="Post by {{ post.user.username }}"
+                >
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- =================================================
+             CAROUSEL DOT INDICATORS
+        ================================================== -->
+
+        {% if post.image and post.images.count > 0 %}
+
+        <div class="carousel-indicators">
+
+            <!-- FIRST IMAGE -->
+
+            <button
+                type="button"
+                data-bs-target="#postCarousel{{ post.id }}"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Image 1"
+            ></button>
+
+
+            <!-- ADDITIONAL IMAGES -->
+
+            {% for post_image in post.images.all %}
+
+            <button
+                type="button"
+                data-bs-target="#postCarousel{{ post.id }}"
+                data-bs-slide-to="{{ forloop.counter }}"
+                aria-label="Image {{ forloop.counter|add:1 }}"
+            ></button>
+
+            {% endfor %}
+
+        </div>
+
+        {% elif post.images.count > 1 %}
+
+        <!-- Legacy posts without post.image -->
+
+        <div class="carousel-indicators">
+
+            {% for post_image in post.images.all %}
+
+            <button
+                type="button"
+                data-bs-target="#postCarousel{{ post.id }}"
+                data-bs-slide-to="{{ forloop.counter0 }}"
+                class="{% if forloop.first %}active{% endif %}"
+                {% if forloop.first %}aria-current="true"{% endif %}
+                aria-label="Image {{ forloop.counter }}"
+            ></button>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             PREVIOUS BUTTON
+        ================================================== -->
+
+        {% if post.image and post.images.count > 0 %}
+
+        <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#postCarousel{{ post.id }}"
+            data-bs-slide="prev"
+        >
+
+            <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+            ></span>
+
+            <span class="visually-hidden">
+                Previous
+            </span>
+
+        </button>
+
+
+        <!-- =================================================
+             NEXT BUTTON
+        ================================================== -->
+
+        <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#postCarousel{{ post.id }}"
+            data-bs-slide="next"
+        >
+
+            <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+            ></span>
+
+            <span class="visually-hidden">
+                Next
+            </span>
+
+        </button>
+
+        {% elif post.images.count > 1 %}
+
+        <!-- Legacy posts without post.image -->
+
+        <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#postCarousel{{ post.id }}"
+            data-bs-slide="prev"
+        >
+
+            <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+            ></span>
+
+            <span class="visually-hidden">
+                Previous
+            </span>
+
+        </button>
+
+        <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#postCarousel{{ post.id }}"
+            data-bs-slide="next"
+        >
+
+            <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+            ></span>
+
+            <span class="visually-hidden">
+                Next
+            </span>
+
+        </button>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+    <!-- =====================================================
+         ACTIONS
+    ====================================================== -->
+
+    <div class="post-actions">
+
+        <div class="post-actions-left">
+
+            <!-- LIKE -->
+
+            {% if user.is_authenticated %}
+
+            <button
+                type="button"
+                class="action-btn like-button {% if post.id in liked_posts %}liked{% endif %}"
+                data-url="{% url 'like_post' post.id %}"
+                title="{% if post.id in liked_posts %}Unlike{% else %}Like{% endif %}"
+            >
+
+                {% if post.id in liked_posts %}
+
+                    <i class="fa-solid fa-heart"></i>
+
+                {% else %}
+
+                    <i class="fa-regular fa-heart"></i>
+
+                {% endif %}
+
+                <span class="like-count">
+                    {{ post.likes.count }}
+                </span>
+
+            </button>
+
+            {% else %}
+
+            <div class="action-btn">
+
+                <i class="fa-regular fa-heart"></i>
+
+                <span>
+                    {{ post.likes.count }}
+                </span>
+
+            </div>
+
+            {% endif %}
+ {% if post.user_id == request.user.id %}
+    <span class="post-view-count">
+        <i class="fa-regular fa-eye"></i>
+        {{ post.insights_views|default:0 }} views
+    </span>
+{% endif %}
+
+
+
+            <!-- COMMENT -->
+
+            <button
+                type="button"
+                class="action-btn"
+                onclick="focusCommentBox(this)"
+                title="Comment"
+            >
+
+                <i class="fa-regular fa-comment"></i>
+
+                <span>
+                    {{ post.comments.count }}
+                </span>
+
+            </button>
+
+
+            <!-- SHARE -->
+
+            <button
+                type="button"
+                class="action-btn share-button"
+                data-share-url="{{ request.scheme }}://{{ request.get_host }}{% url 'index' %}"
+                data-share-text="{{ post.user.username }} shared a post on InstaLite"
+                title="Share"
+            >
+
+                <i class="fa-solid fa-share"></i>
+
+            </button>
+
+        </div>
+ 
+
+        <!-- SAVE -->
+
+        {% if user.is_authenticated %}
+
+        <button
+            type="button"
+            class="action-btn save-button {% if post.id in saved_post_ids %}saved{% endif %}"
+            data-url="{% url 'save_post' post.id %}"
+            title="{% if post.id in saved_post_ids %}Remove from Saved Posts{% else %}Save Post{% endif %}"
+        >
+
+            {% if post.id in saved_post_ids %}
+
+                <i class="fa-solid fa-bookmark"></i>
+
+            {% else %}
+
+                <i class="fa-regular fa-bookmark"></i>
+
+            {% endif %}
+
+        </button>
+
+        {% endif %}
+
+    </div>
+ 
+    <!-- =====================================================
+         COMMENTS
+    ====================================================== -->
+
+    {% if post.comments.exists %}
+
+    <div class="comments-preview">
+
+        {% for comment in post.comments.all|slice:":3" %}
+
+        <div class="comment-item">
+
+            <strong>
+                {{ comment.user.username }}
+            </strong>
+
+            {{ comment.text }}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+ 
+  
+
+
+    <!-- =====================================================
+         ADD COMMENT
+    ====================================================== -->
+
+    {% if user.is_authenticated %}
+
+    <div class="comment-box">
+
+        <form
+            method="POST"
+            action="{% url 'add_comment' post.id %}"
+            class="comment-form"
+        >
+
+            {% csrf_token %}
+
+            <input
+                type="text"
+                name="text"
+                class="comment-input"
+                placeholder="Add a comment..."
+                autocomplete="off"
+                required
+            >
+
+            <button
+                type="submit"
+                class="comment-submit"
+            >
+                Send
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% empty %}
+
+<div class="feed-empty">
+
+    <i class="fa-regular fa-images"></i>
+
+    <h3>
+        No posts yet
+    </h3>
+
+    <p>
+        Be the first person to share something on InstaLite.
+    </p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    id="instaliteToast"
+    class="instalite-toast"
+></div>
+
+
+
+<!-- =========================================================
+     REELS IN MAIN FEED
+========================================================= -->
+
+{% for reel in feed_reels %}
+<article class="post-card feed-reel-card"
+         id="reel-{{ reel.id }}"
+         data-reel-id="{{ reel.id }}"
+         data-track-url="{% url 'track_reel_view' reel.id %}"
+         ></article>
+         
+
+    <!-- Reel user header -->
+    
+<div class="post-header">
+
+    <div class="post-user-info">
+
+        <a href="{% url 'public_profile' reel.user.id %}"
+           style="display:flex; flex-shrink:0; text-decoration:none;">
+
+            {% if reel.user.profile_picture %}
+                <img
+                    src="{{ reel.user.profile_picture.url }}"
+                    alt="{{ reel.user.username }}"
+                    class="post-avatar post-profile-picture"
+                >
+            {% else %}
+                <div class="post-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            {% endif %}
+
+        </a>
+
+        <div class="post-user-details">
+
+            <a href="{% url 'public_profile' reel.user.id %}"
+               class="post-username">
+                {{ reel.user.username }}
+            </a>
+
+            <span class="post-time">
+                {{ reel.created_at|timesince }} ago · Reel
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- Reel video -->
+    <div class="feed-reel-video-wrapper">
+
+        <video
+            class="feed-reel-video feed-auto-reel"
+            src="{{ reel.video.url }}"
+            muted
+            playsinline
+            loop
+            preload="metadata"
+            aria-label="Reel by {{ reel.user.username }}"
+        ></video>
+
+        <button
+            type="button"
+            class="feed-reel-mute"
+            aria-label="Unmute Reel"
+            title="Unmute or mute"
+        >
+            <i class="fa-solid fa-volume-xmark"></i>
+        </button>
+
+    </div>
+   
+
+    <!-- Reel caption -->
+    {% if reel.caption %}
+        <div class="post-caption">
+            <strong>{{ reel.user.username }}</strong>
+            {{ reel.caption }}
+        </div>
+    {% endif %}
+
+    <!-- Reel actions -->
+    <div class="post-actions">
+
+        <div class="post-actions-left">
+
+            {% if user.is_authenticated %}
+                <button
+                    type="button"
+                    class="action-btn feed-reel-like {% if reel.id in liked_reel_ids %}liked{% endif %}"
+                    data-url="{% url 'toggle_reel_like' reel.id %}"
+                    aria-label="Like Reel"
+                >
+                    <i class="{% if reel.id in liked_reel_ids %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
+                    <span class="feed-reel-like-count">
+                        {{ reel.likes.count }}
+                    </span>
+                </button>
+            {% else %}
+                <div class="action-btn">
+                    <i class="fa-regular fa-heart"></i>
+                    {{ reel.likes.count }}
+                </div>
+            {% endif %}
+ {% if reel.user_id == request.user.id %}
+    <span class="post-view-count">
+        <i class="fa-regular fa-eye"></i>
+        {{ reel.insights_views|default:0 }} views
+    </span>
+{% endif %}
+
+
+            <button
+                type="button"
+                class="action-btn feed-reel-focus-comment"
+                aria-label="Comment on Reel"
+                title="Comment"
+            >
+                <i class="fa-regular fa-comment"></i>
+                <span class="feed-reel-comment-count">
+                    {{ reel.comments.count }}
+                </span>
+            </button>
+
+            <button
+                type="button"
+                class="action-btn feed-reel-share"
+                data-share-url="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}#reel-{{ reel.id }}"
+                data-share-text="{{ reel.user.username }} shared a Reel on InstaLite"
+                aria-label="Share Reel"
+                title="Share Reel"
+            >
+                <i class="fa-solid fa-share"></i>
+            </button>
+
+        </div>
+
+        {% if user.is_authenticated %}
+        <button
+            type="button"
+            class="action-btn feed-reel-save {% if reel.id in saved_reel_ids %}saved{% endif %}"
+            data-url="{% url 'toggle_reel_save' reel.id %}"
+            aria-label="Save Reel"
+            title="{% if reel.id in saved_reel_ids %}Remove from Saved Reels{% else %}Save Reel{% endif %}"
+        >
+            <i class="{% if reel.id in saved_reel_ids %}fa-solid{% else %}fa-regular{% endif %} fa-bookmark"></i>
+        </button>
+        {% endif %}
+
+    </div>
+
+    <!-- Existing Reel comments -->
+    {% if reel.comments.all %}
+        <div class="comments-preview feed-reel-comments">
+            {% for comment in reel.comments.all|slice:":3" %}
+                <div class="comment-item">
+                    <strong>{{ comment.user.username }}</strong>
+                    {{ comment.text }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Add Reel comment -->
+    {% if user.is_authenticated %}
+        <form
+            class="feed-reel-comment-form comment-box"
+            data-url="{% url 'add_reel_comment' reel.id %}"
+        >
+            {% csrf_token %}
+
+            <div class="comment-form">
+                <input
+                    type="text"
+                    name="text"
+                    class="comment-input feed-reel-comment-input"
+                    placeholder="Add a comment..."
+                    maxlength="500"
+                    autocomplete="off"
+                    required
+                >
+
+                <button type="submit" class="comment-submit">
+                    Send
+                </button>
+            </div>
+        </form>
+    {% endif %}
+
+</article>
+
+{% endfor %}
+
+<!-- Bootstrap is loaded by base.html; feed handlers are consolidated below. -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    console.log("InstaLite feed JavaScript loaded.");
+
+    /* =====================================================
+       TOAST MESSAGE
+    ===================================================== */
+
+    window.showMessage = function (message) {
+        const toast = document.getElementById("instaliteToast");
+
+        if (!toast) {
+            alert(message);
+            return;
+        }
+
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(window.toastTimer);
+
+        window.toastTimer = setTimeout(function () {
+            toast.classList.remove("show");
+        }, 2500);
+    };
+
+    /* =====================================================
+       CSRF AND AJAX REQUEST
+    ===================================================== */
+
+    function getCSRFToken() {
+        const cookie = document.cookie.split(";")
+            .map(item => item.trim())
+            .find(item => item.startsWith("csrftoken="));
+
+        if (cookie) {
+            return decodeURIComponent(
+                cookie.substring("csrftoken=".length)
+            );
+        }
+
+        const input = document.querySelector(
+            'input[name="csrfmiddlewaretoken"]'
+        );
+
+        return input ? input.value : "";
+    }
+
+    async function sendPostRequest(url, options = {}) {
+        const response = await fetch(url, {
+            ...options,
+            method: options.method || "POST",
+            credentials: "same-origin",
+            headers: {
+                "X-CSRFToken": getCSRFToken(),
+                "X-Requested-With": "XMLHttpRequest",
+                "Accept": "application/json",
+                ...(options.headers || {})
+            }
+        });
+
+        const responseText = await response.text();
+        let data;
+
+        try {
+            data = JSON.parse(responseText);
+        } catch {
+            throw new Error(
+                "The server did not return JSON. Check the Django view."
+            );
+        }
+
+        if (!response.ok || data.success === false) {
+            throw new Error(
+                data.message || data.error || "Something went wrong."
+            );
+        }
+
+        return data;
+    }
+    
+    /* =====================================================
+       INSIGHTS: TRACK POST AND REEL VIEWS
+    ===================================================== */
+
+    const viewCards = document.querySelectorAll(
+        ".post-card[data-track-url]"
+    );
+
+    if ("IntersectionObserver" in window) {
+        const viewObserver = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(async function (entry) {
+                    if (!entry.isIntersecting || entry.intersectionRatio < 0.5) {
+                        return;
+                    }
+
+                    const card = entry.target;
+
+                    // Avoid repeated requests for the same card.
+                    if (
+                        card.dataset.viewTracked === "true" ||
+                        card.dataset.viewTracking === "true"
+                    ) {
+                        return;
+                    }
+
+                    card.dataset.viewTracking = "true";
+
+                    try {
+                        await sendPostRequest(card.dataset.trackUrl);
+
+                        card.dataset.viewTracked = "true";
+                        console.log(
+                            "InstaLite view tracked:",
+                            card.dataset.postId
+                                ? "Post " + card.dataset.postId
+                                : "Reel " + card.dataset.reelId
+                        );
+                    } catch (error) {
+                        console.error("View tracking failed:", error);
+                    } finally {
+                        card.dataset.viewTracking = "false";
+                    }
+                });
+            },
+            {
+                threshold: [0.5]
+            }
+        );
+
+        viewCards.forEach(function (card) {
+            viewObserver.observe(card);
+        });
+    } else {
+        console.warn(
+            "IntersectionObserver is not supported in this browser."
+        );
+    }
+
+
+    /* =====================================================
+       UPDATE POST LIKE UI
+    ===================================================== */
+
+    function updatePostLikeUI(button, data) {
+        const liked = !!data.liked;
+        const count = data.likes_count;
+
+        button.classList.toggle("liked", liked);
+        button.title = liked ? "Unlike" : "Like";
+
+        const icon = button.querySelector("i");
+        const countElement = button.querySelector(".like-count");
+
+        if (icon) {
+            icon.classList.toggle("fa-solid", liked);
+            icon.classList.toggle("fa-regular", !liked);
+        }
+
+        if (countElement && count !== undefined) {
+            countElement.textContent = count;
+        }
+
+        const card = button.closest(".post-card");
+        if (!card || count === undefined) return;
+
+        const summary = card.querySelector(".like-summary");
+
+        if (summary) {
+            summary.innerHTML =
+                '<span class="like-summary-count">' +
+                count +
+                '</span> ' +
+                (Number(count) === 1 ? "like" : "likes");
+        }
+    }
+
+    /* =====================================================
+       LIKE / UNLIKE POSTS
+    ===================================================== */
+
+    document.querySelectorAll(".like-button").forEach(function (button) {
+        button.addEventListener("click", async function () {
+            if (button.dataset.loading === "true") return;
+
+            button.dataset.loading = "true";
+
+            try {
+                const data = await sendPostRequest(button.dataset.url);
+                updatePostLikeUI(button, data);
+
+                window.showMessage(
+                    data.liked ? "Post liked." : "Like removed."
+                );
+            } catch (error) {
+                window.showMessage(error.message);
+            } finally {
+                button.dataset.loading = "false";
+            }
+        });
+    });
+
+    /* =====================================================
+       DOUBLE-TAP / DOUBLE-CLICK TO LIKE POSTS
+    ===================================================== */
+
+    function showDoubleTapHeart(image) {
+        const container = image.closest(".post-carousel");
+        if (!container) return;
+
+        const oldHeart = container.querySelector(".double-tap-heart");
+        if (oldHeart) oldHeart.remove();
+
+        const heart = document.createElement("i");
+        heart.className = "fa-solid fa-heart double-tap-heart";
+        container.appendChild(heart);
+
+        requestAnimationFrame(function () {
+            heart.classList.add("show");
+        });
+
+        setTimeout(function () {
+            heart.remove();
+        }, 800);
+    }
+
+    document.querySelectorAll(
+        ".post-carousel img, .post-image"
+    ).forEach(function (image) {
+        let lastTap = 0;
+
+        image.addEventListener("click", async function (event) {
+            const now = Date.now();
+            const elapsed = now - lastTap;
+            lastTap = now;
+
+            if (elapsed <= 0 || elapsed >= 350) return;
+
+            event.preventDefault();
+
+            const card = image.closest(".post-card");
+            const button = card?.querySelector(".like-button");
+
+            if (!button) return;
+
+            showDoubleTapHeart(image);
+
+            if (button.classList.contains("liked")) return;
+            if (button.dataset.loading === "true") return;
+
+            button.dataset.loading = "true";
+
+            try {
+                const data = await sendPostRequest(button.dataset.url);
+
+                if (data.liked) {
+                    updatePostLikeUI(button, data);
+                }
+            } catch (error) {
+                window.showMessage(error.message);
+            } finally {
+                button.dataset.loading = "false";
+            }
+        });
+    });
+
+    /* =====================================================
+       FOLLOW / UNFOLLOW
+    ===================================================== */
+
+    document.querySelectorAll(".follow-button").forEach(function (button) {
+        button.addEventListener("click", async function () {
+            if (button.dataset.loading === "true") return;
+
+            const userId = button.dataset.userId;
+            button.dataset.loading = "true";
+
+            try {
+                const data = await sendPostRequest(button.dataset.url);
+
+                document.querySelectorAll(
+                    '.follow-button[data-user-id="' + userId + '"]'
+                ).forEach(function (item) {
+                    item.classList.toggle("following", !!data.following);
+                    item.textContent = data.following ? "Following" : "Follow";
+                });
+
+                window.showMessage(
+                    data.following
+                        ? "You are now following this user."
+                        : "You unfollowed this user."
+                );
+            } catch (error) {
+                window.showMessage(error.message);
+            } finally {
+                document.querySelectorAll(
+                    '.follow-button[data-user-id="' + userId + '"]'
+                ).forEach(function (item) {
+                    item.dataset.loading = "false";
+                });
+            }
+        });
+    });
+
+    /* =====================================================
+       SAVE / UNSAVE POSTS
+    ===================================================== */
+
+    document.querySelectorAll(".save-button").forEach(function (button) {
+        button.addEventListener("click", async function () {
+            if (button.dataset.loading === "true") return;
+
+            button.dataset.loading = "true";
+
+            try {
+                const data = await sendPostRequest(button.dataset.url);
+                const saved = !!data.saved;
+                const icon = button.querySelector("i");
+
+                button.classList.toggle("saved", saved);
+                button.title = saved
+                    ? "Remove from Saved Posts"
+                    : "Save Post";
+
+                if (icon) {
+                    icon.classList.toggle("fa-solid", saved);
+                    icon.classList.toggle("fa-regular", !saved);
+                }
+
+                window.showMessage(
+                    saved ? "Post saved." : "Post removed from Saved Posts."
+                );
+            } catch (error) {
+                window.showMessage(error.message);
+            } finally {
+                button.dataset.loading = "false";
+            }
+        });
+    });
+
+    /* =====================================================
+       SHARE POSTS
+    ===================================================== */
+
+    document.querySelectorAll(".share-button").forEach(function (button) {
+        button.addEventListener("click", async function () {
+            const url = button.dataset.shareUrl;
+            const text = button.dataset.shareText;
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: "InstaLite",
+                        text: text,
+                        url: url
+                    });
+                    return;
+                } catch (error) {
+                    if (error.name === "AbortError") return;
+                }
+            }
+
+            try {
+                await navigator.clipboard.writeText(url);
+                window.showMessage("Post link copied.");
+            } catch {
+                window.showMessage("Unable to copy post link.");
+            }
+        });
+    });
+
+    /* =====================================================
+       COMMENT BOX FOCUS
+    ===================================================== */
+
+    window.focusCommentBox = function (button) {
+        const card = button.closest(".post-card");
+        const input = card?.querySelector(
+            ".comment-box .comment-input:not(.feed-reel-comment-input)"
+        );
+
+        if (input) {
+            input.focus();
+            input.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
+    };
+
+    /* =====================================================
+       VALIDATE REGULAR POST COMMENTS
+    ===================================================== */
+
+    document.querySelectorAll(".comment-form:not(.feed-reel-comment-form)")
+        .forEach(function (form) {
+            form.addEventListener("submit", function (event) {
+                const input = form.querySelector(".comment-input");
+
+                if (input && !input.value.trim()) {
+                    event.preventDefault();
+                    window.showMessage("Please write a comment.");
+                }
+            });
+        });
+
+    /* =====================================================
+       POST THREE-DOT MENU
+    ===================================================== */
+
+    window.togglePostMenu = function (button) {
+        const menu = button.closest(".post-menu-wrapper")
+            ?.querySelector(".post-menu");
+
+        if (!menu) return;
+
+        document.querySelectorAll(".post-menu.show").forEach(function (item) {
+            if (item !== menu) item.classList.remove("show");
+        });
+
+        menu.classList.toggle("show");
+    };
+
+    document.addEventListener("click", function (event) {
+        if (!event.target.closest(".post-menu-wrapper")) {
+            document.querySelectorAll(".post-menu.show").forEach(function (menu) {
+                menu.classList.remove("show");
+            });
+        }
+    });
+
+    /* =====================================================
+       DELETE POSTS
+    ===================================================== */
+
+    window.deletePost = async function (button) {
+        const url = button.dataset.deleteUrl;
+        if (!url) {
+            window.showMessage("Delete URL not found.");
+            return;
+        }
+
+        if (!confirm("Are you sure you want to delete this post?")) return;
+        if (button.dataset.loading === "true") return;
+
+        button.dataset.loading = "true";
+
+        try {
+            await sendPostRequest(url);
+
+            const card = button.closest(".post-card");
+
+            if (card) {
+                card.style.transition = "opacity .25s ease, transform .25s ease";
+                card.style.opacity = "0";
+                card.style.transform = "scale(.98)";
+
+                setTimeout(function () {
+                    card.remove();
+
+                    if (!document.querySelector(".post-card")) {
+                        window.location.reload();
+                    }
+                }, 250);
+            }
+
+            window.showMessage("Post deleted successfully.");
+        } catch (error) {
+            window.showMessage(error.message);
+        } finally {
+            button.dataset.loading = "false";
+        }
+    };
+
+    /* =====================================================
+       BOOTSTRAP CAROUSEL ARROWS
+    ===================================================== */
+
+    document.querySelectorAll(".post-carousel .carousel").forEach(
+        function (carousel) {
+            function updateCarouselButtons() {
+                const items = carousel.querySelectorAll(".carousel-item");
+                const active = carousel.querySelector(".carousel-item.active");
+                const next = carousel.querySelector(".carousel-control-next");
+                const previous = carousel.querySelector(".carousel-control-prev");
+
+                if (!active) return;
+
+                const index = Array.from(items).indexOf(active);
+
+                if (next) {
+                    next.style.display =
+                        index === items.length - 1 ? "none" : "";
+                }
+
+                if (previous) {
+                    previous.style.display = index === 0 ? "none" : "";
+                }
+            }
+
+            carousel.addEventListener(
+                "slid.bs.carousel",
+                updateCarouselButtons
+            );
+
+            updateCarouselButtons();
+        }
+    );
+
+    /* =====================================================
+       REEL AUTOPLAY / PAUSE WHEN SCROLLING
+    ===================================================== */
+
+    const videos = Array.from(
+        document.querySelectorAll(".feed-auto-reel")
+    );
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                const video = entry.target;
+
+                if (
+                    entry.isIntersecting &&
+                    entry.intersectionRatio >= 0.65
+                ) {
+                    videos.forEach(function (other) {
+                        if (other !== video) other.pause();
+                    });
+
+                    video.play().catch(function () {});
+                } else {
+                    video.pause();
+                }
+            });
+        }, {
+            threshold: [0, 0.65, 1]
+        });
+
+        videos.forEach(function (video) {
+            observer.observe(video);
+        });
+    }
+
+    /* =====================================================
+       REEL MUTE / UNMUTE
+    ===================================================== */
+
+    document.querySelectorAll(".feed-reel-mute").forEach(
+        function (button) {
+            button.addEventListener("click", function () {
+                const video = button.closest(".feed-reel-video-wrapper")
+                    ?.querySelector("video");
+
+                if (!video) return;
+
+                video.muted = !video.muted;
+
+                button.innerHTML = video.muted
+                    ? '<i class="fa-solid fa-volume-xmark"></i>'
+                    : '<i class="fa-solid fa-volume-high"></i>';
+
+                button.setAttribute(
+                    "aria-label",
+                    video.muted ? "Unmute Reel" : "Mute Reel"
+                );
+            });
+        }
+    );
+
+    /* =====================================================
+       LIKE / UNLIKE REELS
+    ===================================================== */
+
+    document.querySelectorAll(".feed-reel-like").forEach(
+        function (button) {
+            button.addEventListener("click", async function () {
+                if (button.dataset.loading === "true") return;
+
+                button.dataset.loading = "true";
+
+                try {
+                    const data = await sendPostRequest(button.dataset.url);
+                    const liked = !!data.liked;
+                    const icon = button.querySelector("i");
+                    const count = button.querySelector(
+                        ".feed-reel-like-count"
+                    );
+
+                    button.classList.toggle("liked", liked);
+
+                    if (icon) {
+                        icon.className =
+                            (liked ? "fa-solid" : "fa-regular") + " fa-heart";
+                    }
+
+                    if (count && data.likes_count !== undefined) {
+                        count.textContent = data.likes_count;
+                    }
+                } catch (error) {
+                    window.showMessage(error.message);
+                } finally {
+                    button.dataset.loading = "false";
+                }
+            });
+        }
+    );
+
+    /* =====================================================
+       FOCUS REEL COMMENT INPUT
+    ===================================================== */
+
+    document.querySelectorAll(".feed-reel-focus-comment").forEach(
+        function (button) {
+            button.addEventListener("click", function () {
+                const card = button.closest(".feed-reel-card");
+                const input = card?.querySelector(".feed-reel-comment-input");
+
+                if (input) {
+                    input.focus();
+                    input.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+                }
+            });
+        }
+    );
+
+    /* =====================================================
+       SUBMIT REEL COMMENTS WITHOUT PAGE RELOAD
+    ===================================================== */
+
+    document.querySelectorAll(".feed-reel-comment-form").forEach(
+        function (form) {
+            form.addEventListener("submit", async function (event) {
+                event.preventDefault();
+
+                const input = form.querySelector("input[name='text']");
+                const submit = form.querySelector("button[type='submit']");
+                const text = input?.value.trim();
+
+                if (!text) {
+                    window.showMessage("Please write a comment.");
+                    return;
+                }
+
+                if (submit.disabled) return;
+                submit.disabled = true;
+
+                try {
+                    const data = await sendPostRequest(form.dataset.url, {
+                        headers: {
+                            "Content-Type":
+                                "application/x-www-form-urlencoded"
+                        },
+                        body: new URLSearchParams({ text: text })
+                    });
+
+                    input.value = "";
+
+                    const card = form.closest(".feed-reel-card");
+                    const count = card?.querySelector(
+                        ".feed-reel-comment-count"
+                    );
+
+                    if (count && data.comments_count !== undefined) {
+                        count.textContent = data.comments_count;
+                    }
+
+                    let preview = card?.querySelector(".feed-reel-comments");
+
+                    if (card && !preview) {
+                        preview = document.createElement("div");
+                        preview.className =
+                            "comments-preview feed-reel-comments";
+                        form.before(preview);
+                    }
+
+                    if (preview) {
+                        const item = document.createElement("div");
+                        item.className = "comment-item";
+
+                        const username = document.createElement("strong");
+                        username.textContent = data.username || "You";
+
+                        item.appendChild(username);
+                        item.appendChild(
+                            document.createTextNode(" " + (data.text || text))
+                        );
+
+                        preview.prepend(item);
+                    }
+
+                    window.showMessage("Comment added.");
+                } catch (error) {
+                    window.showMessage(error.message);
+                } finally {
+                    submit.disabled = false;
+                }
+            });
+        }
+    );
+
+    /* =====================================================
+       SAVE / UNSAVE REELS
+    ===================================================== */
+
+    document.querySelectorAll(".feed-reel-save").forEach(function (button) {
+        button.addEventListener("click", async function () {
+            if (button.dataset.loading === "true") return;
+            button.dataset.loading = "true";
+
+            try {
+                const data = await sendPostRequest(button.dataset.url);
+                const saved = !!data.saved;
+                const icon = button.querySelector("i");
+
+                button.classList.toggle("saved", saved);
+                button.title = saved ? "Remove from Saved Reels" : "Save Reel";
+                button.setAttribute("aria-label", saved ? "Unsave Reel" : "Save Reel");
+
+                if (icon) {
+                    icon.classList.toggle("fa-solid", saved);
+                    icon.classList.toggle("fa-regular", !saved);
+                }
+
+                window.showMessage(saved ? "Reel saved." : "Reel removed from Saved Reels.");
+            } catch (error) {
+                window.showMessage(error.message);
+            } finally {
+                button.dataset.loading = "false";
+            }
+        });
+    });
+
+    /* =====================================================
+       SHARE REELS
+    ===================================================== */
+
+    document.querySelectorAll(".feed-reel-share").forEach(function (button) {
+        button.addEventListener("click", async function () {
+            const url = button.dataset.shareUrl;
+            const text = button.dataset.shareText || "Shared a Reel on InstaLite";
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({ title: "InstaLite Reel", text: text, url: url });
+                    return;
+                } catch (error) {
+                    if (error.name === "AbortError") return;
+                }
+            }
+
+            try {
+                await navigator.clipboard.writeText(url);
+                window.showMessage("Reel link copied.");
+            } catch (error) {
+                window.showMessage("Unable to copy Reel link.");
+            }
+        });
+    });
+
+/* =====================================================
+   DOUBLE-TAP / DOUBLE-CLICK REEL TO LIKE
+===================================================== */
+
+function showReelDoubleTapHeart(wrapper) {
+    if (!wrapper) return;
+
+    const previous = wrapper.querySelector(".double-tap-heart");
+    if (previous) previous.remove();
+
+    const heart = document.createElement("i");
+    heart.className = "fa-solid fa-heart double-tap-heart";
+    wrapper.appendChild(heart);
+
+    requestAnimationFrame(function () {
+        heart.classList.add("show");
+    });
+
+    setTimeout(function () {
+        heart.remove();
+    }, 800);
+}
+
+async function likeReelFromDoubleTap(button) {
+    if (!button || button.dataset.loading === "true") return;
+
+    // Do not unlike a Reel that is already liked.
+    if (button.classList.contains("liked")) return;
+
+    button.dataset.loading = "true";
+
+    try {
+        const data = await sendPostRequest(button.dataset.url);
+
+        const liked = !!data.liked;
+        const icon = button.querySelector("i");
+        const count = button.querySelector(".feed-reel-like-count");
+
+        button.classList.toggle("liked", liked);
+
+        if (icon) {
+            icon.className =
+                (liked ? "fa-solid" : "fa-regular") + " fa-heart";
+        }
+
+        if (count && data.likes_count !== undefined) {
+            count.textContent = data.likes_count;
+        }
+    } catch (error) {
+        window.showMessage(error.message);
+    } finally {
+        button.dataset.loading = "false";
+    }
+}
+
+document.querySelectorAll(".feed-reel-video").forEach(function (video) {
+    let lastTapTime = 0;
+    let tapTimer = null;
+
+    function handleReelTap(event) {
+        const now = Date.now();
+        const elapsed = now - lastTapTime;
+
+        if (elapsed > 0 && elapsed < 400) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            clearTimeout(tapTimer);
+            tapTimer = null;
+            lastTapTime = 0;
+
+            const card = video.closest(".feed-reel-card");
+            const likeButton = card?.querySelector(".feed-reel-like");
+            const wrapper = video.closest(".feed-reel-video-wrapper");
+
+            showReelDoubleTapHeart(wrapper);
+
+            if (likeButton) {
+                likeReelFromDoubleTap(likeButton);
+            }
+
+            return;
+        }
+
+        lastTapTime = now;
+
+        clearTimeout(tapTimer);
+
+        // A single tap toggles playback only after the double-tap window.
+        tapTimer = setTimeout(function () {
+            lastTapTime = 0;
+            tapTimer = null;
+
+            if (video.paused) {
+                video.play().catch(function () {});
+            } else {
+                video.pause();
+            }
+        }, 400);
+    }
+
+    video.addEventListener("click", handleReelTap);
+
+    video.addEventListener("dblclick", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    });
+});
+
+
+    console.log("Post and Reel handlers initialized.");
+
+});
+</script>

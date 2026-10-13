@@ -1,0 +1,588 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create Post - InstaLite
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   INSTALITE CREATE POST — PREMIUM GRADIENT THEME
+========================================================= */
+
+.create-page,
+.create-page * {
+    box-sizing: border-box;
+}
+
+.create-page {
+    width: 100%;
+    max-width: 750px;
+
+    margin: 40px auto;
+
+    padding: 20px;
+
+    background:
+        radial-gradient(
+            ellipse at 5% 5%,
+            rgba(219, 39, 119, 0.10),
+            transparent 42%
+        ),
+        radial-gradient(
+            ellipse at 95% 20%,
+            rgba(124, 58, 237, 0.12),
+            transparent 42%
+        ),
+        linear-gradient(
+            145deg,
+            #f3edff 0%,
+            #eef5ff 50%,
+            #fff0f8 100%
+        );
+
+    border-radius: 24px;
+}
+
+
+/* =========================================================
+   CREATE POST CARD
+========================================================= */
+
+.create-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.97),
+            rgba(243, 232, 255, 0.96),
+            rgba(230, 243, 255, 0.96)
+        );
+
+    border: 1px solid rgba(124, 58, 237, 0.16);
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 12px 35px rgba(91, 33, 182, 0.10),
+        0 4px 12px rgba(219, 39, 119, 0.05);
+}
+
+
+/* =========================================================
+   CREATE POST HEADER
+========================================================= */
+
+.create-header {
+    margin-bottom: 25px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid rgba(124, 58, 237, 0.12);
+}
+
+.create-header h2 {
+    margin: 0 0 8px;
+
+    color: #4c1d72;
+
+    font-size: 26px;
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+.create-header p {
+    margin: 0;
+
+    color: #806b94;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FORM GROUPS
+========================================================= */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: 700;
+
+    color: #55336f;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   CAPTION TEXTAREA
+========================================================= */
+
+.form-group textarea {
+    display: block;
+
+    width: 100%;
+    min-height: 130px;
+
+    resize: vertical;
+
+    border: 1px solid rgba(124, 58, 237, 0.20);
+
+    border-radius: 14px;
+
+    padding: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.98),
+            rgba(243, 232, 255, 0.78),
+            rgba(230, 243, 255, 0.70)
+        );
+
+    color: #4c1d72;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.form-group textarea::placeholder {
+    color: #a091b2;
+}
+
+.form-group textarea:focus {
+    border-color: #a855f7;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f5edff,
+            #edf6ff
+        );
+
+    box-shadow:
+        0 0 0 4px rgba(168, 85, 247, 0.11);
+}
+
+
+/* =========================================================
+   IMAGE / VIDEO FILE INPUT
+========================================================= */
+
+.form-group input[type="file"] {
+    display: block;
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px dashed rgba(124, 58, 237, 0.35);
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(243, 232, 255, 0.88),
+            rgba(255, 240, 248, 0.82),
+            rgba(224, 242, 254, 0.88)
+        );
+
+    color: #654780;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group input[type="file"]:hover {
+    border-color: #c026d3;
+
+    box-shadow:
+        0 4px 12px rgba(124, 58, 237, 0.08);
+}
+
+.form-group input[type="file"]:focus {
+    outline: 2px solid rgba(168, 85, 247, 0.22);
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   POST BUTTON
+========================================================= */
+
+.post-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border: none;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #c026d3,
+            #db2777
+        );
+
+    color: #ffffff;
+
+    padding: 12px 25px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    box-shadow:
+        0 6px 16px rgba(124, 58, 237, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.post-button:hover {
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 22px rgba(124, 58, 237, 0.27);
+
+    filter: saturate(1.08);
+}
+
+.post-button:active {
+    transform: translateY(0);
+}
+
+.post-button:focus-visible {
+    outline: 3px solid rgba(168, 85, 247, 0.35);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   SELECTED IMAGES / FILES
+========================================================= */
+
+.selected-images {
+    margin-top: 10px;
+
+    padding: 9px 12px;
+
+    border-radius: 10px;
+
+    background: rgba(243, 232, 255, 0.70);
+
+    color: #76558f;
+
+    font-size: 13px;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   OPTIONAL FORM HELPERS
+========================================================= */
+
+.create-card input:not([type="file"]):focus {
+    border-color: #a855f7;
+
+    box-shadow:
+        0 0 0 3px rgba(168, 85, 247, 0.10);
+}
+
+.create-card input:not([type="file"]) {
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN — TABLETS
+========================================================= */
+
+@media (max-width: 768px) {
+    .create-page {
+        margin: 20px auto;
+
+        padding: 12px;
+
+        border-radius: 18px;
+    }
+
+    .create-card {
+        padding: 22px;
+
+        border-radius: 18px;
+    }
+
+    .create-header h2 {
+        font-size: 24px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN — MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+    .create-page {
+        margin: 12px auto;
+
+        padding: 8px;
+    }
+
+    .create-card {
+        padding: 17px;
+
+        border-radius: 16px;
+    }
+
+    .create-header {
+        margin-bottom: 20px;
+
+        padding-bottom: 14px;
+    }
+
+    .create-header h2 {
+        font-size: 22px;
+    }
+
+    .form-group {
+        margin-bottom: 19px;
+    }
+
+    .form-group textarea {
+        min-height: 115px;
+
+        padding: 12px;
+
+        font-size: 14px;
+    }
+
+    .form-group input[type="file"] {
+        padding: 10px;
+
+        font-size: 12px;
+    }
+
+    .post-button {
+        width: 100%;
+
+        padding: 13px 18px;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY — REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .post-button,
+    .form-group textarea,
+    .form-group input[type="file"] {
+        transition: none;
+    }
+}
+
+
+</style>
+
+
+<div class="create-page">
+
+    <div class="create-card">
+
+        <div class="create-header">
+
+            <h2>
+                Create Post
+            </h2>
+
+            <p>
+                Share something with your InstaLite community.
+            </p>
+
+        </div>
+
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            {% csrf_token %}
+
+
+            <!-- ================= CAPTION ================= -->
+
+            <div class="form-group">
+
+                <label for="caption">
+                    Caption
+                </label>
+
+                <textarea
+                    id="caption"
+                    name="caption"
+                    placeholder="What's on your mind?"
+                ></textarea>
+
+            </div>
+
+
+            <!-- ================= IMAGES ================= -->
+
+            <div class="form-group">
+
+                <label for="images">
+                    Select Photo(s)
+                </label>
+
+                <input
+                    type="file"
+                    id="images"
+                    name="images"
+                    accept="image/*"
+                    multiple
+                    onchange="showSelectedImages(this)"
+                >
+
+                <div
+                    id="selectedImages"
+                    class="selected-images"
+                ></div>
+
+            </div>
+
+
+            <!-- ================= PUBLISH ================= -->
+
+            <button
+                type="submit"
+                class="post-button"
+            >
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+                Publish Post
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let selectedFiles = [];
+
+function showSelectedImages(input) {
+
+    const selectedImages =
+        document.getElementById('selectedImages');
+
+    const newFiles = Array.from(input.files);
+
+    if (newFiles.length === 0) {
+        return;
+    }
+
+    /*
+        Add newly selected files
+        WITHOUT a 3-image limit
+    */
+    for (let i = 0; i < newFiles.length; i++) {
+
+        const alreadySelected = selectedFiles.some(
+            file =>
+                file.name === newFiles[i].name &&
+                file.size === newFiles[i].size &&
+                file.lastModified === newFiles[i].lastModified
+        );
+
+        if (!alreadySelected) {
+            selectedFiles.push(newFiles[i]);
+        }
+    }
+
+    /*
+        Put ALL selected files back
+        into the input.
+    */
+    const dataTransfer = new DataTransfer();
+
+    selectedFiles.forEach(function(file) {
+        dataTransfer.items.add(file);
+    });
+
+    input.files = dataTransfer.files;
+
+    /*
+        Display selected images
+    */
+    let html =
+        '<strong>' +
+        selectedFiles.length +
+        ' image(s) selected</strong><br>';
+
+    for (let i = 0; i < selectedFiles.length; i++) {
+
+        html +=
+            '<span>' +
+            selectedFiles[i].name +
+            '</span><br>';
+    }
+
+    selectedImages.innerHTML = html;
+}
+
+</script>
+
+{% endblock %}

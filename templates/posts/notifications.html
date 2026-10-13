@@ -1,0 +1,369 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Notifications - InstaLite
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   INSTALITE NOTIFICATIONS — PREMIUM GRADIENT THEME
+========================================================= */
+
+.notification-page {
+    width: 100%;
+    max-width: 850px;
+    margin: 35px auto;
+    padding: 25px;
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(243, 237, 255, 0.88),
+            rgba(238, 245, 255, 0.90),
+            rgba(255, 240, 248, 0.88)
+        );
+
+    box-shadow: 0 14px 40px rgba(99, 65, 160, 0.08);
+}
+
+/* =========================
+   NOTIFICATION CARD
+========================= */
+
+.notification-card {
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.96),
+            rgba(250, 246, 255, 0.97),
+            rgba(239, 249, 255, 0.96)
+        );
+
+    border: 1px solid rgba(196, 181, 253, 0.30);
+    border-radius: 20px;
+
+    padding: 18px 22px;
+    margin-bottom: 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    box-shadow: 0 7px 22px rgba(91, 70, 145, 0.07);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.notification-card:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(192, 132, 252, 0.55);
+
+    box-shadow: 0 12px 28px rgba(124, 58, 237, 0.12);
+}
+
+/* =========================
+   NOTIFICATION AVATAR
+========================= */
+
+.notification-avatar {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #db2777,
+            #0891b2
+        );
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    box-shadow: 0 5px 14px rgba(124, 58, 237, 0.20);
+
+    flex-shrink: 0;
+}
+
+/* If the avatar contains a profile image */
+.notification-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* =========================
+   NOTIFICATION TEXT
+========================= */
+
+.notification-text {
+    flex: 1;
+    min-width: 0;
+
+    color: #4b4561;
+    font-size: 14px;
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+}
+
+.notification-text strong {
+    color: #4c1d95;
+    font-weight: 700;
+}
+
+/* Links inside notification text */
+.notification-text a {
+    color: #7c3aed;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.notification-text a:hover {
+    color: #db2777;
+    text-decoration: underline;
+}
+
+/* =========================
+   NOTIFICATION TIME
+========================= */
+
+.notification-time {
+    color: #9288aa;
+    font-size: 12px;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+/* =========================
+   NOTIFICATION PAGE TITLE
+========================= */
+
+.notification-title {
+    margin-bottom: 24px;
+    padding: 0 4px;
+
+    color: #4c1d95;
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* =========================
+   EMPTY NOTIFICATIONS
+========================= */
+
+.empty-notifications {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.96),
+            rgba(243, 237, 255, 0.96),
+            rgba(238, 245, 255, 0.96)
+        );
+
+    border: 1px solid rgba(196, 181, 253, 0.35);
+    border-radius: 24px;
+
+    padding: 60px 25px;
+    text-align: center;
+
+    color: #817694;
+    font-size: 15px;
+    line-height: 1.7;
+
+    box-shadow: 0 10px 28px rgba(91, 70, 145, 0.07);
+}
+
+.empty-notifications strong {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #6d28d9;
+    font-size: 20px;
+    font-weight: 750;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 768px) {
+    .notification-page {
+        margin: 20px auto;
+        padding: 16px;
+        border-radius: 22px;
+    }
+
+    .notification-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .notification-card {
+        padding: 15px;
+        gap: 12px;
+        border-radius: 17px;
+    }
+
+    .notification-avatar {
+        width: 43px;
+        height: 43px;
+        min-width: 43px;
+        font-size: 16px;
+    }
+
+    .notification-text {
+        font-size: 13px;
+    }
+
+    .notification-time {
+        font-size: 11px;
+    }
+
+    .empty-notifications {
+        padding: 45px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .notification-page {
+        margin: 12px auto;
+        padding: 12px;
+    }
+
+    .notification-title {
+        font-size: 22px;
+    }
+
+    .notification-card {
+        padding: 13px;
+        gap: 10px;
+    }
+
+    .notification-avatar {
+        width: 39px;
+        height: 39px;
+        min-width: 39px;
+    }
+
+    .empty-notifications {
+        padding: 35px 15px;
+    }
+}
+
+
+</style>
+
+
+<div class="notification-page">
+
+    <h2 class="notification-title">
+        Notifications
+    </h2>
+
+
+    {% for notification in notifications %}
+
+    <div class="notification-card">
+
+       
+<div class="notification-avatar">
+
+    {% if notification.actor.profile_picture %}
+        <img
+            src="{{ notification.actor.profile_picture.url }}"
+            alt="{{ notification.actor.username }}'s profile picture"
+        >
+    {% else %}
+        <i class="fa-solid fa-user"></i>
+    {% endif %}
+
+</div>
+
+
+
+        <div class="notification-text">
+
+            {% if notification.notification_type == 'follow' %}
+
+                <strong>
+                    {{ notification.actor.username }}
+                </strong>
+
+                started following you.
+
+            {% elif notification.notification_type == 'like' %}
+
+                <strong>
+                    {{ notification.actor.username }}
+                </strong>
+
+                liked your post.
+
+            {% elif notification.notification_type == 'comment' %}
+
+                <strong>
+                    {{ notification.actor.username }}
+                </strong>
+
+                commented on your post.
+
+            {% endif %}
+
+
+            <div class="notification-time">
+                {{ notification.created_at|timesince }} ago
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="empty-notifications">
+
+        <i
+            class="fa-regular fa-bell"
+            style="font-size:40px;margin-bottom:15px;"
+        ></i>
+
+        <h3>
+            No notifications
+        </h3>
+
+        <p>
+            You're all caught up!
+        </p>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

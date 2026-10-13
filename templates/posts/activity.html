@@ -1,0 +1,354 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+{{ page_title }} - InstaLite
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.saved-switcher {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.saved-switcher button {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #e5dcfa;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fff, #f3efff);
+    color: #66527f;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.saved-switcher button.active {
+    color: white;
+    background: linear-gradient(135deg, #7c3aed, #6366f1, #0891b2);
+    border-color: transparent;
+}
+
+.saved-panel {
+    display: none;
+}
+
+.saved-panel.active {
+    display: block;
+}
+
+.saved-reels-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.saved-reel-card {
+    overflow: hidden;
+    min-width: 0;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #fff, #f5f0ff, #edfbff);
+    border: 1px solid #e5dcfa;
+    box-shadow: 0 8px 24px rgba(65, 50, 120, .09);
+}
+
+.saved-reel-video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    object-fit: contain;
+    background: #171323;
+}
+
+.saved-reel-info {
+    padding: 12px;
+}
+
+.saved-reel-user {
+    color: #30204f;
+    font-size: 13px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.saved-reel-caption {
+    margin-top: 6px;
+    color: #777087;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.saved-reel-remove {
+    width: 100%;
+    margin-top: 12px;
+    padding: 9px;
+    border: 1px solid #e5dcfa;
+    border-radius: 9px;
+    background: #f1eaff;
+    color: #7137d8;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.saved-reel-remove:hover {
+    background: #e8dcff;
+}
+
+.saved-empty-state {
+    padding: 42px 20px;
+    text-align: center;
+    border-radius: 18px;
+    border: 1px solid #e5dcfa;
+    background: linear-gradient(135deg, #fff, #f5f0ff, #edfbff);
+    color: #858096;
+}
+
+.saved-empty-state i {
+    display: block;
+    font-size: 34px;
+    color: #8b5cf6;
+    margin-bottom: 12px;
+}
+
+.saved-empty-state h3 {
+    font-size: 18px;
+    color: #30204f;
+    font-weight: 800;
+}
+
+@media (max-width: 600px) {
+    .saved-reels-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .saved-switcher button {
+        padding: 10px 5px;
+        font-size: 12px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div style="
+    background:white;
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:22px;
+    box-shadow:0 10px 30px rgba(65,70,130,.08);
+">
+
+    <h2 style="
+        margin:0;
+        color:#292b40;
+        font-size:24px;
+    ">
+        {{ page_title }}
+    </h2>
+
+    <p style="
+        margin:6px 0 0;
+        color:#8c90a1;
+    ">
+        {% if page_title == "Saved Posts" or page_title == "Saved" %}
+            Your saved posts and Reels are collected here.
+        {% else %}
+            All posts you have liked are shown here.
+        {% endif %}
+    </p>
+
+</div>
+
+{% if page_title == "Saved Posts" or page_title == "Saved" %}
+
+    <div class="saved-switcher">
+        <button type="button"
+                class="active"
+                data-saved-tab="posts">
+            <i class="fa-regular fa-bookmark"></i>
+            Saved Posts ({{ posts|length }})
+        </button>
+
+        <button type="button"
+                data-saved-tab="reels">
+            <i class="fa-solid fa-clapperboard"></i>
+            Saved Reels ({{ saved_reels|length }})
+        </button>
+    </div>
+
+    <!-- SAVED POSTS: KEEP YOUR EXISTING FEED -->
+    <section class="saved-panel active" id="saved-posts-panel">
+        {% include "feed.html" %}
+    </section>
+
+    <!-- SAVED REELS -->
+    <section class="saved-panel" id="saved-reels-panel">
+
+        {% if saved_reels %}
+            <div class="saved-reels-grid">
+
+                {% for item in saved_reels %}
+                    {% with reel=item.reel %}
+
+                    <article class="saved-reel-card"
+                             data-saved-reel="{{ reel.id }}">
+
+                        {% if reel.video %}
+                            <video class="saved-reel-video"
+                                   controls
+                                   playsinline
+                                   preload="metadata">
+                                <source src="{{ reel.video.url }}">
+                                Your browser does not support this video.
+                            </video>
+                        {% endif %}
+
+                        <div class="saved-reel-info">
+
+                            <div class="saved-reel-user">
+                                @{{ reel.user.username }}
+                            </div>
+
+                            {% if reel.caption %}
+                                <div class="saved-reel-caption">
+                                    {{ reel.caption|truncatechars:120 }}
+                                </div>
+                            {% endif %}
+
+                            <button type="button"
+                                    class="saved-reel-remove"
+                                    data-url="{% url 'toggle_reel_save' reel.id %}">
+                                <i class="fa-solid fa-bookmark"></i>
+                                Remove from Saved
+                            </button>
+
+                        </div>
+                    </article>
+
+                    {% endwith %}
+                {% endfor %}
+
+            </div>
+        {% else %}
+            <div class="saved-empty-state">
+                <i class="fa-solid fa-clapperboard"></i>
+                <h3>No saved Reels yet</h3>
+                <p>Save a Reel from your feed or Reels page to see it here.</p>
+            </div>
+        {% endif %}
+
+    </section>
+
+{% else %}
+
+    <!-- LIKED POSTS PAGE: PRESERVE EXISTING BEHAVIOR -->
+    {% include "feed.html" %}
+
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const tabs = document.querySelectorAll("[data-saved-tab]");
+    const postsPanel = document.getElementById("saved-posts-panel");
+    const reelsPanel = document.getElementById("saved-reels-panel");
+
+    tabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+
+            tabs.forEach(function (button) {
+                button.classList.remove("active");
+            });
+
+            tab.classList.add("active");
+
+            if (tab.dataset.savedTab === "posts") {
+                postsPanel.classList.add("active");
+                reelsPanel.classList.remove("active");
+            } else {
+                reelsPanel.classList.add("active");
+                postsPanel.classList.remove("active");
+            }
+        });
+    });
+
+    document.querySelectorAll(".saved-reel-remove").forEach(function (button) {
+
+        button.addEventListener("click", async function () {
+
+            if (button.disabled) return;
+
+            button.disabled = true;
+
+            try {
+                const response = await fetch(button.dataset.url, {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": getCookie("csrftoken"),
+                        "X-Requested-With": "XMLHttpRequest"
+                    }
+                });
+
+                const data = await response.json();
+
+                if (!response.ok || !data.success) {
+                    throw new Error("Could not update saved Reel.");
+                }
+
+                if (data.saved === false) {
+                    const card = button.closest("[data-saved-reel]");
+                    if (card) card.remove();
+
+                    const remaining = reelsPanel.querySelectorAll("[data-saved-reel]").length;
+                    const reelsTab = document.querySelector('[data-saved-tab="reels"]');
+
+                    if (reelsTab) {
+                        reelsTab.innerHTML =
+                            '<i class="fa-solid fa-clapperboard"></i> Saved Reels (' +
+                            remaining + ')';
+                    }
+
+                    if (remaining === 0) {
+                        reelsPanel.innerHTML = `
+                            <div class="saved-empty-state">
+                                <i class="fa-solid fa-clapperboard"></i>
+                                <h3>No saved Reels yet</h3>
+                                <p>Save a Reel from your feed or Reels page to see it here.</p>
+                            </div>
+                        `;
+                    }
+                } else {
+                    button.disabled = false;
+                }
+
+            } catch (error) {
+                console.error("Saved Reel error:", error);
+                alert("Unable to remove this Reel. Please refresh and try again.");
+                button.disabled = false;
+            }
+        });
+    });
+
+    function getCookie(name) {
+        const cookies = document.cookie ? document.cookie.split(";") : [];
+
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+
+            if (cookie.startsWith(name + "=")) {
+                return decodeURIComponent(cookie.substring(name.length + 1));
+            }
+        }
+
+        return "";
+    }
+});
+</script>
+{% endblock %}

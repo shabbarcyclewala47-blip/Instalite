@@ -1,0 +1,3197 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}InstaLite{% endblock %}
+    </title>
+
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+<style>
+/* =========================================================
+   INSTALITE BASE.HTML
+   PREMIUM PASTEL THEME
+   Lavender + Mist Blue + Blush Pink
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --lavender: #e9e0f7;
+    --lavender-soft: #e3daf3;
+    --blue-soft: #dceaf6;
+    --pink-soft: #f3dfea;
+    --teal-soft: #d9eee9;
+
+    --surface: #eae3f5;
+    --surface-hover: #ddd4ef;
+    --border: #d2c5e7;
+
+    --text: #403354;
+    --text-secondary: #665b79;
+    --text-muted: #837892;
+
+    --purple: #8064bd;
+    --purple-dark: #6549a4;
+    --blue: #699dc1;
+    --pink: #ce789f;
+
+    --gradient-soft:
+        linear-gradient(
+            135deg,
+            #e9e0f7 0%,
+            #dceaf6 52%,
+            #f3dfea 100%
+        );
+
+    --gradient-button:
+        linear-gradient(
+            135deg,
+            #9278cb,
+            #789fc8,
+            #c783a5
+        );
+
+    --shadow-soft:
+        0 9px 28px rgba(91, 70, 126, 0.11);
+}
+
+html {
+    min-height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+
+    background:
+        radial-gradient(
+            ellipse at 5% 5%,
+            rgba(181, 157, 224, 0.36) 0%,
+            transparent 42%
+        ),
+        radial-gradient(
+            ellipse at 95% 8%,
+            rgba(147, 196, 222, 0.34) 0%,
+            transparent 43%
+        ),
+        radial-gradient(
+            ellipse at 88% 75%,
+            rgba(224, 165, 194, 0.27) 0%,
+            transparent 44%
+        ),
+        radial-gradient(
+            ellipse at 10% 90%,
+            rgba(151, 208, 194, 0.23) 0%,
+            transparent 42%
+        ),
+        linear-gradient(
+            135deg,
+            #e8e0f5 0%,
+            #dce7f4 30%,
+            #dceef1 55%,
+            #eee1f4 78%,
+            #f3e0ea 100%
+        );
+
+    background-attachment: fixed;
+    color: var(--text);
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+/* =========================================================
+   TOP NAVBAR
+========================================================= */
+
+.top-navbar {
+    min-height: 72px;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(225, 215, 242, 0.97),
+            rgba(213, 230, 244, 0.97),
+            rgba(241, 218, 233, 0.97)
+        );
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid #cfc0e4;
+
+    display: flex;
+    align-items: center;
+    padding: 0 35px;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    box-shadow:
+        0 5px 22px rgba(86, 66, 120, 0.12);
+}
+
+.brand {
+    width: 235px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 24px;
+    font-weight: 800;
+    color: #403052;
+}
+
+.brand-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9278cb,
+            #c783a5,
+            #699fc3
+        );
+
+    box-shadow:
+        0 6px 16px rgba(113, 87, 160, 0.25);
+}
+
+.brand span span {
+    color: #7658b2;
+}
+
+/* =========================================================
+   SEARCH BOX
+========================================================= */
+
+.search-container {
+    position: relative;
+    width: 420px;
+    z-index: 1100;
+}
+
+.search-box {
+    width: 100%;
+    height: 42px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e2d9f1,
+            #d9eaf4
+        );
+
+    border: 1px solid #d0c1e6;
+    border-radius: 13px;
+
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+
+    transition: 0.2s ease;
+}
+
+.search-box:focus-within {
+    border-color: #a38bcc;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8e0f5,
+            #e0edf5
+        );
+
+    box-shadow:
+        0 0 0 4px rgba(128, 100, 189, 0.12);
+}
+
+.search-box i {
+    color: #76668f;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    background: transparent;
+    color: #443653;
+    font-size: 14px;
+}
+
+.search-box input::placeholder {
+    color: #857995;
+}
+
+/* =========================================================
+   SEARCH RESULTS
+========================================================= */
+
+.search-results {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e8e0f5,
+            #dceaf5,
+            #f1dfea
+        );
+
+    border: 1px solid #d0c1e6;
+    border-radius: 17px;
+
+    box-shadow:
+        0 16px 38px rgba(67, 49, 100, 0.18);
+
+    overflow: hidden;
+    display: none;
+    max-height: 430px;
+    overflow-y: auto;
+}
+
+.search-results.show {
+    display: block;
+}
+
+.search-results::-webkit-scrollbar {
+    width: 5px;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+    background: #b9a8d8;
+    border-radius: 20px;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: 0.2s;
+
+    border-bottom: 1px solid rgba(128, 100, 189, 0.12);
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #dcd0ef,
+            #d1e7f3
+        );
+}
+
+.search-result-avatar {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9278cb,
+            #699fc3,
+            #ce86a9
+        );
+
+    box-shadow:
+        0 4px 12px rgba(112, 85, 157, 0.17);
+}
+
+.search-result-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.search-result-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.search-result-name {
+    display: block;
+    color: #443454;
+    font-size: 13px;
+    font-weight: 750;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.search-result-username {
+    display: block;
+    color: #81758e;
+    font-size: 11px;
+    margin-top: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.search-result-arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #7055a8;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dcd2ef,
+            #d3e9f4
+        );
+
+    flex-shrink: 0;
+}
+
+.search-message {
+    padding: 25px 15px;
+    text-align: center;
+    color: #80748d;
+    font-size: 12px;
+}
+
+.search-message i {
+    display: block;
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: #8d75c1;
+}
+
+/* =========================================================
+   TOP ACTIONS
+========================================================= */
+
+.top-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.top-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #685b7b;
+    font-size: 18px;
+    transition: 0.2s;
+    position: relative;
+}
+
+.top-icon:hover,
+.top-icon.active {
+    background:
+        linear-gradient(
+            135deg,
+            #dcd1ef,
+            #d2e8f4
+        );
+
+    color: #7052a8;
+}
+
+.top-notification-badge {
+    position: absolute;
+    top: 3px;
+    right: 2px;
+
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    border-radius: 20px;
+
+    background: linear-gradient(135deg, #c96f9c, #d77e87);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #e5dcef;
+}
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-mini {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 8px;
+    color: #766a87;
+    max-width: 190px;
+}
+
+.profile-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9278cb,
+            #699fc3,
+            #ce86a9
+        );
+
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-details {
+    min-width: 0;
+}
+
+.profile-details strong {
+    display: block;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #443454;
+    font-size: 12px;
+}
+
+.profile-details small {
+    display: block;
+    color: #837991;
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+/* =========================================================
+   MAIN PAGE LAYOUT
+========================================================= */
+
+.page-wrapper {
+    max-width: 1500px;
+    margin: auto;
+    padding: 28px 30px 50px;
+
+    display: grid;
+
+    grid-template-columns:
+        235px
+        minmax(450px, 1fr)
+        300px;
+
+    gap: 25px;
+    align-items: start;
+}
+
+.left-sidebar {
+    position: sticky;
+    top: 100px;
+}
+
+.main-content {
+    min-width: 0;
+}
+
+/* =========================================================
+   LEFT SIDEBAR
+========================================================= */
+
+.side-menu {
+    background:
+        linear-gradient(
+            145deg,
+            #e7def4,
+            #dce9f4,
+            #f0dfed
+        );
+
+    border-radius: 20px;
+    padding: 12px;
+    border: 1px solid #d0c1e3;
+
+    box-shadow: var(--shadow-soft);
+}
+
+.side-link {
+    min-height: 48px;
+    padding: 0 15px;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    border-radius: 12px;
+    color: #655a79;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s;
+    margin-bottom: 3px;
+    position: relative;
+}
+
+.side-link i {
+    width: 22px;
+    font-size: 17px;
+    text-align: center;
+}
+
+.side-link:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #dcd1ef,
+            #d1e8f3
+        );
+
+    color: #7052a8;
+}
+
+.side-link.active {
+    color: #fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8970c2,
+            #7797c5,
+            #bd7fa5
+        );
+
+    box-shadow:
+        0 7px 18px rgba(108, 81, 155, 0.22);
+}
+
+.notification-number {
+    margin-left: auto;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c96f9c,
+            #d77e87
+        );
+
+    color: #fff;
+    min-width: 21px;
+    height: 21px;
+    padding: 0 5px;
+    border-radius: 20px;
+    font-size: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-line {
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #c3b2e1,
+            #a6cedd,
+            transparent
+        );
+
+    margin: 22px 8px;
+}
+
+.shortcuts {
+    padding: 0 10px;
+}
+
+.shortcuts h6 {
+    color: #83758f;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-size: 10px;
+    margin-bottom: 12px;
+}
+
+.shortcuts a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #625772;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.shortcut-image {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ddd2f0,
+            #d2eaf4
+        );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(128, 100, 189, 0.10);
+}
+
+/* =========================================================
+   SHARE CARD
+========================================================= */
+
+.share-card {
+    margin-top: 22px;
+    padding: 20px;
+    border-radius: 20px;
+    color: #fff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #7961ad,
+            #8872bf,
+            #6398b8
+        );
+
+    box-shadow:
+        0 12px 28px rgba(91, 71, 130, 0.22);
+
+    text-align: center;
+}
+
+.share-illustration {
+    width: 55px;
+    height: 55px;
+    margin: auto auto 13px;
+    border-radius: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(235, 228, 248, 0.20);
+    font-size: 24px;
+}
+
+.share-card h5 {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.share-card p {
+    color: #f0eaf8;
+    font-size: 11px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.share-btn {
+    display: block;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e5dcf4,
+            #d9eaf4
+        );
+
+    color: #594781;
+    padding: 10px;
+    border-radius: 11px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.share-btn:hover {
+    color: #453360;
+    filter: brightness(0.97);
+}
+
+/* =========================================================
+   SHARED CONTENT CARDS
+========================================================= */
+
+.stories-card,
+.create-box,
+.post-card,
+.right-card,
+.empty-post {
+    background:
+        linear-gradient(
+            145deg,
+            #e9e1f5 0%,
+            #dce9f5 52%,
+            #f2e0ed 100%
+        );
+
+    border: 1px solid #d2c4e6;
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-soft);
+}
+
+.stories-card,
+.create-box,
+.post-card {
+    margin-bottom: 20px;
+}
+
+/* =========================================================
+   STORIES
+========================================================= */
+
+.stories-card {
+    padding: 22px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-heading h3 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 800;
+    color: #443454;
+}
+
+.section-heading a {
+    color: #7658b2;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.stories {
+    display: flex;
+    gap: 17px;
+    overflow-x: auto;
+    padding-bottom: 3px;
+}
+
+.stories::-webkit-scrollbar {
+    display: none;
+}
+
+.story {
+    min-width: 72px;
+    text-align: center;
+}
+
+.story-image {
+    width: 62px;
+    height: 62px;
+    margin: auto;
+    border-radius: 50%;
+    padding: 3px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9a80ce,
+            #ce86a9,
+            #d6b080,
+            #78b1c9
+        );
+
+    position: relative;
+}
+
+.story-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e5dcf2;
+}
+
+.your-story {
+    background:
+        linear-gradient(
+            135deg,
+            #dcd1ef,
+            #d1e8f3
+        );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #706384;
+    font-size: 20px;
+}
+
+.story-plus {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+
+    background: var(--gradient-button);
+    color: #fff;
+    border: 2px solid #e5dcf2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+}
+
+.story > span:last-child {
+    display: block;
+    margin-top: 7px;
+    font-size: 10px;
+    color: #6f647f;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* =========================================================
+   CREATE POST
+========================================================= */
+
+.create-box {
+    padding: 17px 20px;
+}
+
+.create-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.create-avatar {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 50%;
+
+    background: var(--gradient-button);
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.create-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.create-input {
+    flex: 1;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ded5ef,
+            #d5e8f3
+        );
+
+    border: 1px solid #d0c2e5;
+    border-radius: 13px;
+    padding: 12px 15px;
+    color: #6e627f;
+    font-size: 13px;
+}
+
+.create-options {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 13px;
+    padding-top: 13px;
+    border-top: 1px solid #d5c9e6;
+}
+
+.create-options a {
+    color: #6c607c;
+    font-size: 12px;
+    padding: 8px 11px;
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.create-options a:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #dcd1ef,
+            #d1e8f3
+        );
+
+    color: #7052a8;
+}
+
+.photo-icon {
+    color: #548e7b;
+}
+
+.video-icon {
+    color: #bc7099;
+}
+
+.location-icon {
+    color: #bd9064;
+}
+
+.post-button {
+    margin-left: auto;
+
+    background: var(--gradient-button) !important;
+    color: #fff !important;
+    padding: 9px 18px !important;
+    font-weight: 700;
+
+    box-shadow:
+        0 5px 14px rgba(106, 83, 151, 0.20);
+}
+
+/* =========================================================
+   POST CARDS
+========================================================= */
+
+.post-card {
+    overflow: hidden;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 17px 20px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #e5dcf2,
+            #dce9f4,
+            #f0dfeb
+        );
+}
+
+.post-user {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.post-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+
+    background: var(--gradient-button);
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.post-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-user strong {
+    display: block;
+    font-size: 13px;
+    color: #443454;
+}
+
+.post-user small {
+    display: block;
+    margin-top: 3px;
+    font-size: 10px;
+    color: #827790;
+}
+
+.post-menu {
+    border: none;
+    background: transparent;
+    color: #776b87;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.post-caption {
+    padding: 0 20px 15px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #e9e1f5,
+            #dce9f5,
+            #f2e0ed
+        );
+}
+
+.post-caption p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #594e69;
+}
+
+.post-image {
+    width: 100%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d9d0ed,
+            #cfe4f0,
+            #edd5e4
+        );
+
+    max-height: 650px;
+    overflow: hidden;
+}
+
+.post-image img {
+    display: block;
+    width: 100%;
+    max-height: 650px;
+    object-fit: cover;
+}
+
+.post-actions {
+    padding: 13px 20px;
+    display: flex;
+    justify-content: space-between;
+
+    background:
+        linear-gradient(
+            110deg,
+            #e5dcf2,
+            #dce9f4,
+            #f0dfeb
+        );
+
+    border-bottom: 1px solid #d5c8e5;
+}
+
+.left-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.action-btn {
+    border: none;
+    background: transparent;
+    color: #685c7b;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+}
+
+.action-btn span {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.action-btn:hover {
+    color: #7658b2;
+}
+
+.comments-preview {
+    padding: 12px 20px 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8e0f4,
+            #dce9f4,
+            #f1e0eb
+        );
+}
+
+.comments-preview p {
+    font-size: 12px;
+    color: #675b77;
+    margin: 5px 0;
+}
+
+.comments-preview strong {
+    color: #443454;
+    margin-right: 5px;
+}
+
+/* =========================================================
+   EMPTY POSTS
+========================================================= */
+
+.empty-post {
+    padding: 60px 25px;
+    text-align: center;
+}
+
+.empty-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ddd2ef,
+            #d1e8f3
+        );
+
+    color: #7d64b4;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+    margin: auto auto 15px;
+}
+
+.empty-post h3 {
+    font-size: 18px;
+    color: #443454;
+}
+
+.empty-post p {
+    color: #80758f;
+    font-size: 13px;
+    margin: 8px 0 20px;
+}
+
+.empty-post a {
+    display: inline-block;
+
+    background: var(--gradient-button);
+    color: #fff;
+
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   RIGHT SIDEBAR
+========================================================= */
+
+.right-sidebar {
+    position: sticky;
+    top: 100px;
+}
+
+.right-card {
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.right-card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 17px;
+}
+
+.right-card-title h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+    color: #443454;
+}
+
+.right-card-title a {
+    color: #7658b2;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.person {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 14px;
+}
+
+.person:last-child {
+    margin-bottom: 0;
+}
+
+.person-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ddd2ef,
+            #d2e8f3
+        );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.person-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.person-info strong {
+    display: block;
+    font-size: 11px;
+    color: #443454;
+}
+
+.person-info small {
+    display: block;
+    font-size: 9px;
+    color: #837991;
+    margin-top: 2px;
+}
+
+.person button {
+    border: 1px solid #cbbbe2;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ded4f0,
+            #d4e8f3
+        );
+
+    color: #7052a8;
+    border-radius: 8px;
+    padding: 5px 8px;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   PEOPLE YOU MAY KNOW
+========================================================= */
+
+.people-card .right-card-title {
+    gap: 8px;
+}
+
+.people-card .right-card-title h4 {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.suggestion-person {
+    min-width: 0;
+    gap: 9px;
+}
+
+.suggestion-profile-link {
+    text-decoration: none;
+}
+
+.suggestion-person .person-avatar {
+    overflow: hidden;
+    color: #7658b2;
+    text-decoration: none;
+}
+
+.suggestion-avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
+}
+
+.suggestion-name {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #443454;
+    font-size: 11px;
+    font-weight: 750;
+}
+
+.suggestion-name:hover {
+    color: #7658b2;
+}
+
+.suggestion-follow-form {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.suggestion-follow-button {
+    border: 1px solid #cbbbe2;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ded4f0,
+            #d4e8f3
+        );
+
+    color: #7052a8;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.suggestion-follow-button:hover {
+    color: #fff;
+    background: var(--gradient-button);
+}
+
+.suggestion-follow-button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.suggestions-empty {
+    text-align: center;
+    padding: 18px 5px 10px;
+    color: #81758f;
+}
+
+.suggestions-empty i {
+    display: block;
+    font-size: 23px;
+    color: #8d75c1;
+    margin-bottom: 9px;
+}
+
+.suggestions-empty p {
+    font-size: 11px;
+    margin: 0;
+}
+
+/* =========================================================
+   TRENDING
+========================================================= */
+
+.trending-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.trending-title i {
+    color: #bd8b66;
+}
+
+.trending-title h4 {
+    margin: 0;
+    font-size: 14px;
+    color: #443454;
+}
+
+.trend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 0;
+
+    border-bottom: 1px solid #d8cce7;
+    color: #625772;
+}
+
+.trend:last-child {
+    border-bottom: none;
+}
+
+.trend strong {
+    display: block;
+    font-size: 11px;
+    color: #4a3b5b;
+}
+
+.trend small {
+    display: block;
+    font-size: 9px;
+    color: #837991;
+    margin-top: 3px;
+}
+
+.trend > i {
+    color: #8b7c9d;
+    font-size: 10px;
+}
+
+/* =========================================================
+   QUOTE CARD
+========================================================= */
+
+.quote-card {
+    height: 190px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    position: relative;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7760a9,
+            #9378c3,
+            #679dbd,
+            #bf7e9e
+        );
+}
+
+.quote-card::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+
+    background: rgba(237, 227, 249, 0.14);
+
+    right: -50px;
+    top: -50px;
+}
+
+.quote-overlay {
+    position: relative;
+    height: 100%;
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+}
+
+.quote-overlay h3 {
+    font-size: 17px;
+    line-height: 1.45;
+    margin-bottom: 17px;
+}
+
+.quote-logo {
+    font-size: 11px;
+    font-weight: 700;
+    opacity: 0.9;
+}
+
+.quote-logo i {
+    margin-right: 5px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer {
+    padding: 5px 5px 25px;
+    color: #80758f;
+    font-size: 9px;
+    line-height: 1.8;
+}
+
+.site-footer a {
+    color: #6f6186;
+    margin-right: 8px;
+}
+
+.site-footer p {
+    margin-top: 7px;
+}
+
+/* =========================================================
+   INSIGHTS NAVBAR LINK
+========================================================= */
+
+.navbar-insights-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 15px;
+    margin-right: 12px;
+
+    border: 1px solid #d0c0e7;
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ded4f0,
+            #d4e8f3
+        );
+
+    color: #7052a8;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.navbar-insights-link:hover {
+    color: #fff;
+    background: var(--gradient-button);
+    box-shadow: 0 6px 16px rgba(106, 83, 151, 0.20);
+    transform: translateY(-1px);
+}
+
+.navbar-insights-link i {
+    font-size: 16px;
+}
+
+/* =========================================================
+   RESPONSIVE LAYOUT
+========================================================= */
+
+@media (max-width: 1100px) {
+    .suggestion-follow-button {
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .page-wrapper {
+        grid-template-columns:
+            180px
+            minmax(0, 1fr)
+            250px;
+
+        gap: 15px;
+        padding: 20px 15px 40px;
+    }
+
+    .right-sidebar {
+        display: block;
+        position: sticky;
+        top: 90px;
+        min-width: 0;
+    }
+
+    .left-sidebar {
+        position: sticky;
+        top: 90px;
+        min-width: 0;
+    }
+
+    .search-container {
+        width: 280px;
+    }
+
+    .brand {
+        width: 190px;
+    }
+
+    .top-navbar {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 760px) {
+    .page-wrapper {
+        display: block;
+        padding: 15px;
+    }
+
+    .left-sidebar,
+    .right-sidebar {
+        display: none;
+    }
+
+    .main-content {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .create-options a:nth-child(3) {
+        display: none;
+    }
+
+    .stories-card,
+    .create-box,
+    .post-card,
+    .right-card {
+        border-radius: 16px;
+    }
+
+    .search-results {
+        top: 48px;
+    }
+
+    .top-navbar {
+        min-height: 64px;
+        padding: 0 12px;
+        gap: 10px;
+    }
+
+    .brand {
+        width: auto;
+        font-size: 20px;
+    }
+
+    .brand-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .search-container {
+        width: auto;
+        flex: 1;
+        min-width: 80px;
+    }
+
+    .top-actions {
+        gap: 3px;
+    }
+
+    .top-icon {
+        width: 34px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .profile-mini {
+        margin-left: 2px;
+    }
+
+    .profile-details {
+        display: none;
+    }
+
+    .navbar-insights-link {
+        gap: 5px;
+        padding: 8px 10px;
+        margin-right: 3px;
+        font-size: 12px;
+    }
+
+    .stories-card {
+        padding: 16px;
+    }
+
+    .create-box {
+        padding: 15px;
+    }
+
+    .post-header {
+        padding: 14px;
+    }
+
+    .post-caption {
+        padding: 0 14px 13px;
+    }
+
+    .post-actions {
+        padding: 12px 14px;
+    }
+
+    .comments-preview {
+        padding: 12px 14px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-navbar {
+        padding: 0 8px;
+        gap: 7px;
+    }
+
+    .brand {
+        gap: 6px;
+        font-size: 18px;
+    }
+
+    .brand-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+    }
+
+    .search-box {
+        height: 36px;
+        padding: 0 9px;
+        border-radius: 10px;
+    }
+
+    .search-box i {
+        margin-right: 6px;
+        font-size: 12px;
+    }
+
+    .search-box input {
+        font-size: 12px;
+    }
+
+    .top-actions {
+        gap: 1px;
+    }
+
+    .top-icon {
+        width: 30px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .profile-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .page-wrapper {
+        padding: 10px;
+    }
+
+    .section-heading h3 {
+        font-size: 16px;
+    }
+
+    .create-options {
+        flex-wrap: wrap;
+        gap: 3px;
+    }
+
+    .create-options a {
+        padding: 7px;
+        font-size: 11px;
+    }
+
+    .post-button {
+        padding: 8px 12px !important;
+    }
+
+    .left-actions {
+        gap: 12px;
+    }
+
+    .action-btn {
+        font-size: 15px;
+    }
+
+    .navbar-insights-link {
+        padding: 7px;
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid #9278cb;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+</style>
+
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+                         HEADER
+===================================================== -->
+
+<header class="top-navbar">
+
+
+    <!-- BRAND -->
+
+    <div class="brand">
+
+        <div class="brand-icon">
+
+            <i class="fa-brands fa-instagram"></i>
+
+        </div>
+
+        <span>
+            Insta<span>Lite</span>
+        </span>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-container">
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="userSearchInput"
+                autocomplete="off"
+                placeholder="Search users, posts, or hashtags..."
+            >
+
+        </div>
+
+
+        <!-- SEARCH RESULTS -->
+
+        <div
+            id="searchResults"
+            class="search-results"
+        ></div>
+
+    </div>
+
+
+    <!-- TOP ACTIONS -->
+
+    <div class="top-actions">
+
+
+        <!-- HOME -->
+
+        <a
+            href="{% url 'index' %}"
+            class="top-icon active"
+            title="Home"
+        >
+
+            <i class="fa-solid fa-house"></i>
+
+        </a>
+
+
+        <!-- EXPLORE -->
+
+        <a
+            href="{% url 'explore' %}"
+            class="top-icon active"
+            title="Explore"
+        >
+
+            <i class="fa-regular fa-compass"></i>
+
+        </a>
+
+
+        <!-- NOTIFICATIONS -->
+
+        {% if request.user.is_authenticated %}
+
+        <a
+            href="{% url 'notifications' %}"
+            class="top-icon active"
+            title="Notifications"
+        >
+
+            <i class="fa-regular fa-bell"></i>
+
+
+            {% if request.user.unread_notifications_count > 0 %}
+
+            <span class="top-notification-badge">
+                {{ request.user.unread_notifications_count }}
+            </span>
+
+            {% endif %}
+
+        </a>
+
+
+        <!-- MESSAGES -->
+
+        <a
+            href="{% url 'messages' %}"
+            class="top-icon active"
+        >
+
+            <i class="fa-regular fa-comment"></i>
+
+            <span>
+                
+            </span>
+
+            {% if unread_messages_count > 0 %}
+
+            <b class="notification-number">
+                {{ unread_messages_count }}
+            </b>
+
+            {% endif %}
+
+        </a>
+    <a href="{% url 'insights:insights_dashboard' %}"
+   class="navbar-insights-link">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>Insights</span>
+</a>
+
+
+        <!-- PROFILE -->
+
+        <a
+            href="{% url 'profile' %}"
+            class="profile-mini"
+            title="My Profile"
+        >
+
+            <div class="profile-avatar">
+
+                {% if request.user.profile_picture %}
+
+                    <img
+                        src="{{ request.user.profile_picture.url }}"
+                        alt="Profile Picture"
+                    >
+
+                {% else %}
+
+                    <i class="fa-solid fa-user"></i>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="profile-details">
+
+                <strong>
+                    {{ request.user.username }}
+                </strong>
+
+                <small>
+                    @{{ request.user.username }}
+                </small>
+
+            </div>
+
+
+            <i
+                class="fa-solid fa-chevron-down"
+                style="font-size:10px;"
+            ></i>
+
+        </a>
+
+        {% else %}
+
+        <!-- GUEST -->
+
+        <a
+            href="{% url 'loggedin' %}"
+            class="top-icon"
+            title="Login"
+        >
+
+            <i class="fa-solid fa-right-to-bracket"></i>
+
+        </a>
+
+
+        <a
+            href="{% url 'register' %}"
+            class="top-icon"
+            title="Register"
+        >
+
+            <i class="fa-solid fa-user-plus"></i>
+
+        </a>
+
+        {% endif %}
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+                         PAGE
+===================================================== -->
+
+<div class="page-wrapper">
+
+
+    <!-- ================= LEFT ================= -->
+
+    <aside class="left-sidebar">
+
+        <nav class="side-menu">
+
+
+            <!-- HOME -->
+
+            <a
+                href="{% url 'index' %}"
+                class="side-link active"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>
+                    Home
+                </span>
+
+            </a>
+
+
+            <!-- EXPLORE -->
+
+            <a
+                href="{% url 'explore' %}"
+                class="side-link"
+            >
+
+                <i class="fa-regular fa-compass"></i>
+
+                <span>
+                    Explore
+                </span>
+
+            </a>
+
+
+            {% if request.user.is_authenticated %}
+
+
+            <!-- CREATE POST -->
+
+            <a
+                href="{% url 'create_post' %}"
+                class="side-link"
+            >
+
+                <i class="fa-regular fa-square-plus"></i>
+
+                <span>
+                    Create Post
+                </span>
+
+            </a>
+
+
+            <!-- PROFILE -->
+
+            <a
+                href="{% url 'profile' %}"
+                class="side-link"
+            >
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+            <!-- NOTIFICATIONS -->
+
+            <a
+                href="{% url 'notifications' %}"
+                class="side-link"
+            >
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span>
+                    Notifications
+                </span>
+
+
+                {% if request.user.unread_notifications_count > 0 %}
+
+                <b class="notification-number">
+
+                    {{ request.user.unread_notifications_count }}
+
+                </b>
+
+                {% endif %}
+
+            </a>
+
+
+            <!-- SAVED POSTS -->
+
+            <a
+                href="{% url 'saved_posts' %}"
+                class="side-link"
+            >
+
+                <i class="fa-regular fa-bookmark"></i>
+
+                <span>
+                    Saved Posts
+                </span>
+
+            </a>
+
+
+            <!-- LIKE ACTIVITY -->
+
+            <a
+                href="{% url 'liked_posts' %}"
+                class="side-link"
+            >
+
+                <i class="fa-regular fa-heart"></i>
+
+                <span>
+                    Like Activity
+                </span>
+
+            </a>
+
+
+            <!-- MESSAGES -->
+
+            <a
+                href="{% url 'messages' %}"
+                class="side-link"
+            >
+
+                <i class="fa-regular fa-comment"></i>
+
+                <span>
+                    Messages
+                </span>
+
+                {% if unread_messages_count > 0 %}
+
+                <b class="notification-number">
+                    {{ unread_messages_count }}
+                </b>
+
+                {% endif %}
+
+            </a>
+            
+<!-- REELS -->
+<a href="{% url 'reels' %}" class="side-link">
+    <i class="fa-solid fa-clapperboard"></i>
+    <span>Reels</span>
+</a>
+
+<!-- CREATE REEL -->
+<a href="{% url 'create_reel' %}" class="side-link">
+    <i class="fa-solid fa-circle-plus"></i>
+    <span>Create Reel</span>
+</a>
+
+
+
+            <!-- LOGOUT -->
+
+            <a
+                href="{% url 'logout' %}"
+                class="side-link active"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+
+            {% else %}
+
+
+            <!-- REGISTER -->
+
+            <a
+                href="{% url 'register' %}"
+                class="side-link"
+            >
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                <span>
+                    Register
+                </span>
+
+            </a>
+
+
+            <!-- LOGIN -->
+
+            <a
+                href="{% url 'loggedin' %}"
+                class="side-link"
+            >
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                <span>
+                    Login
+                </span>
+
+            </a>
+
+
+            {% endif %}
+
+        </nav>
+
+
+        <!-- SIDEBAR LINE -->
+
+        <div class="sidebar-line"></div>
+
+
+        <!-- SHORTCUTS -->
+
+        <div class="shortcuts">
+
+            <h6>
+                Your Shortcuts
+            </h6>
+
+
+            <a href="#">
+
+                <div class="shortcut-image">
+                    🏔️
+                </div>
+
+                <span>
+                    Travel Vibes
+                </span>
+
+            </a>
+
+
+            <a href="#">
+
+                <div class="shortcut-image">
+                    💻
+                </div>
+
+                <span>
+                    Tech & Coding
+                </span>
+
+            </a>
+
+
+            <a href="#">
+
+                <div class="shortcut-image">
+                    🌲
+                </div>
+
+                <span>
+                    Nature Lovers
+                </span>
+
+            </a>
+
+
+            <a href="#">
+
+                <div class="shortcut-image">
+                    🍕
+                </div>
+
+                <span>
+                    Foodies
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- SHARE CARD -->
+
+        <div class="share-card">
+
+            <div class="share-illustration">
+
+                <i class="fa-solid fa-camera"></i>
+
+            </div>
+
+
+            <h5>
+                Share Your World
+            </h5>
+
+
+            <p>
+                Post your moments, connect with friends
+                and be a part of something bigger.
+            </p>
+
+
+            {% if request.user.is_authenticated %}
+
+            <a
+                href="{% url 'create_post' %}"
+                class="share-btn"
+            >
+
+                Create Post
+
+            </a>
+
+            {% else %}
+
+            <a
+                href="{% url 'loggedin' %}"
+                class="share-btn"
+            >
+
+                Login to Post
+
+            </a>
+
+            {% endif %}
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- ================= CENTER ================= -->
+
+    <main class="main-content">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- ================= RIGHT ================= -->
+     <aside class="right-sidebar">
+
+    
+<!-- PEOPLE YOU MAY KNOW -->
+
+{% if request.user.is_authenticated %}
+
+<div class="right-card people-card" id="peopleSuggestionsCard">
+
+    <div class="right-card-title">
+        <h4>People You May Know</h4>
+
+        <a href="{% url 'people_you_may_know' %}">
+            See All
+        </a>
+    </div>
+
+    <div id="peopleSuggestionsList">
+
+        {% for person in sidebar_suggested_users %}
+
+        <div class="person suggestion-person"
+             data-user-id="{{ person.id }}">
+
+            <a class="person-avatar suggestion-profile-link"
+               href="{% url 'public_profile' person.id %}"
+               aria-label="View {{ person.username }} profile">
+
+                {% if person.profile_picture %}
+                    <img src="{{ person.profile_picture.url }}"
+                         alt="{{ person.username }}"
+                         class="suggestion-avatar-image">
+                {% else %}
+                    <i class="fa-solid fa-user"></i>
+                {% endif %}
+
+            </a>
+
+            <div class="person-info">
+
+                <a class="suggestion-name suggestion-profile-link"
+                   href="{% url 'public_profile' person.id %}">
+                    {{ person.username }}
+                </a>
+
+                <small>Suggested for you</small>
+
+            </div>
+
+            <form method="post"
+                  action="{% url 'follow_user' person.id %}"
+                  class="suggestion-follow-form">
+
+                {% csrf_token %}
+
+                <button type="submit" class="suggestion-follow-button">
+                    Follow
+                </button>
+
+            </form>
+
+        </div>
+
+        {% empty %}
+
+        <div class="suggestions-empty">
+            <i class="fa-solid fa-user-group"></i>
+            <p>No new people to suggest right now.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endif %}
+
+        <!-- TRENDING -->
+
+        <div class="right-card">
+
+            <div class="trending-title">
+
+                <i class="fa-solid fa-fire"></i>
+
+                <h4>
+                    Trending
+                </h4>
+
+            </div>
+
+
+            <a href="#" class="trend">
+
+                <div>
+
+                    <strong>
+                        #InstaLite
+                    </strong>
+
+                    <small>
+                        12.4K posts
+                    </small>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="#" class="trend">
+
+                <div>
+
+                    <strong>
+                        #GoodVibes
+                    </strong>
+
+                    <small>
+                        8.7K posts
+                    </small>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="#" class="trend">
+
+                <div>
+
+                    <strong>
+                        #TravelDiaries
+                    </strong>
+
+                    <small>
+                        6.3K posts
+                    </small>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="#" class="trend">
+
+                <div>
+
+                    <strong>
+                        #CodingLife
+                    </strong>
+
+                    <small>
+                        5.1K posts
+                    </small>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+        </div>
+
+
+        <!-- QUOTE -->
+
+        <div class="quote-card">
+
+            <div class="quote-overlay">
+
+                <h3>
+                    “Better Connections,<br>
+                    Brighter Moments.”
+                </h3>
+
+                <div class="quote-logo">
+
+                    <i class="fa-brands fa-instagram"></i>
+
+                    InstaLite
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <footer class="site-footer">
+
+            <div>
+
+                <a href="#">
+                    About
+                </a>
+
+                <a href="#">
+                    Help
+                </a>
+
+                <a href="#">
+                    Privacy
+                </a>
+
+                <a href="#">
+                    Terms
+                </a>
+
+                <a href="#">
+                    Contact
+                </a>
+
+            </div>
+
+
+            <p>
+                © 2026 InstaLite. All rights reserved.
+            </p>
+
+        </footer>
+
+
+    </aside>
+
+</div>
+
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- =====================================================
+                    USER SEARCH JAVASCRIPT
+===================================================== -->
+
+<script>
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        const searchInput =
+            document.getElementById(
+                'userSearchInput'
+            );
+
+        const searchResults =
+            document.getElementById(
+                'searchResults'
+            );
+
+
+        if (!searchInput || !searchResults) {
+            return;
+        }
+
+
+        let searchTimer = null;
+
+
+        /*
+        =====================================================
+        SEARCH USERS
+        =====================================================
+        */
+
+        searchInput.addEventListener(
+            'input',
+            function () {
+
+                const query =
+                    this.value.trim();
+
+
+                clearTimeout(
+                    searchTimer
+                );
+
+
+                if (!query) {
+
+                    searchResults.innerHTML = '';
+
+                    searchResults.classList.remove(
+                        'show'
+                    );
+
+                    return;
+                }
+
+
+                /*
+                Small delay prevents a request
+                on every single keyboard press.
+                */
+
+                searchTimer = setTimeout(
+                    function () {
+
+                        fetch(
+                            "{% url 'search_users' %}?q="
+                            + encodeURIComponent(query),
+                            {
+                                method: 'GET',
+                                headers: {
+                                    'X-Requested-With':
+                                        'XMLHttpRequest'
+                                }
+                            }
+                        )
+
+                        .then(
+                            response => {
+
+                                if (!response.ok) {
+
+                                    throw new Error(
+                                        'Search request failed'
+                                    );
+                                }
+
+                                return response.json();
+                            }
+                        )
+
+                        .then(
+                            data => {
+
+                                searchResults.innerHTML = '';
+
+
+                                if (
+                                    !data.users ||
+                                    data.users.length === 0
+                                ) {
+
+                                    searchResults.innerHTML = `
+
+                                        <div class="search-message">
+
+                                            <i class="fa-regular fa-face-frown"></i>
+
+                                            No users found
+
+                                        </div>
+
+                                    `;
+
+                                    searchResults.classList.add(
+                                        'show'
+                                    );
+
+                                    return;
+                                }
+
+
+                                data.users.forEach(
+                                    function (user) {
+
+                                        const item =
+                                            document.createElement(
+                                                'div'
+                                            );
+
+
+                                        item.className =
+                                            'search-result-item';
+
+
+                                        /*
+                                        Profile picture
+                                        */
+
+                                        let avatarHTML = `
+
+                                            <i class="fa-solid fa-user"></i>
+
+                                        `;
+
+
+                                        if (
+                                            user.profile_picture
+                                        ) {
+
+                                            avatarHTML = `
+
+                                                <img
+                                                    src="${user.profile_picture}"
+                                                    alt="Profile Picture"
+                                                >
+
+                                            `;
+                                        }
+
+
+                                        /*
+                                        Search result
+
+                                        IMPORTANT:
+                                        No @ symbol before
+                                        username/name.
+                                        */
+
+                                        item.innerHTML = `
+
+                                            <div class="search-result-avatar">
+
+                                                ${avatarHTML}
+
+                                            </div>
+
+
+                                            <div class="search-result-info">
+
+                                                <span class="search-result-name">
+
+                                                    ${escapeHTML(
+                                                        user.name
+                                                    )}
+
+                                                </span>
+
+
+                                                <span class="search-result-username">
+
+                                                    ${escapeHTML(
+                                                        user.username
+                                                    )}
+
+                                                </span>
+
+                                            </div>
+
+
+                                            <div class="search-result-arrow">
+
+                                                <i class="fa-solid fa-chevron-right"></i>
+
+                                            </div>
+
+                                        `;
+
+
+                                        /*
+                                        Open profile
+                                        */
+
+                                        item.addEventListener(
+                                            'click',
+                                            function () {
+
+                                                window.location.href =
+                                                    user.profile_url;
+
+                                            }
+                                        );
+
+
+                                        searchResults.appendChild(
+                                            item
+                                        );
+
+                                    }
+                                );
+
+
+                                searchResults.classList.add(
+                                    'show'
+                                );
+
+                            }
+                        )
+
+                        .catch(
+                            function (error) {
+
+                                console.error(
+                                    'Search error:',
+                                    error
+                                );
+
+                                searchResults.innerHTML = `
+
+                                    <div class="search-message">
+
+                                        <i class="fa-solid fa-circle-exclamation"></i>
+
+                                        Unable to search right now
+
+                                    </div>
+
+                                `;
+
+                                searchResults.classList.add(
+                                    'show'
+                                );
+
+                            }
+                        );
+
+                    },
+                    250
+                );
+
+            }
+        );
+
+
+        /*
+        =====================================================
+        ESCAPE SEARCH
+        =====================================================
+        */
+
+        searchInput.addEventListener(
+            'keydown',
+            function (event) {
+
+                if (
+                    event.key === 'Escape'
+                ) {
+
+                    searchInput.value = '';
+
+                    searchResults.innerHTML = '';
+
+                    searchResults.classList.remove(
+                        'show'
+                    );
+
+                    searchInput.blur();
+
+                }
+
+            }
+        );
+
+
+        /*
+        =====================================================
+        CLICK OUTSIDE
+        =====================================================
+        */
+
+        document.addEventListener(
+            'click',
+            function (event) {
+
+                const container =
+                    document.querySelector(
+                        '.search-container'
+                    );
+
+
+                if (
+                    container &&
+                    !container.contains(
+                        event.target
+                    )
+                ) {
+
+                    searchResults.classList.remove(
+                        'show'
+                    );
+
+                }
+
+            }
+        );
+
+
+        /*
+        =====================================================
+        ESCAPE HTML
+        Prevents user data from being inserted
+        directly as HTML.
+        =====================================================
+        */
+
+        function escapeHTML(value) {
+
+            const div =
+                document.createElement(
+                    'div'
+                );
+
+            div.textContent =
+                value || '';
+
+            return div.innerHTML;
+        }
+
+    }
+);
+
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const suggestionsList = document.getElementById(
+        'peopleSuggestionsList'
+    );
+
+    if (!suggestionsList) return;
+
+    suggestionsList.addEventListener('submit', async function (event) {
+        const form = event.target.closest('.suggestion-follow-form');
+
+        if (!form) return;
+
+        event.preventDefault();
+
+        const button = form.querySelector('button[type="submit"]');
+        const personRow = form.closest('.suggestion-person');
+        const csrfInput = form.querySelector(
+            '[name="csrfmiddlewaretoken"]'
+        );
+
+        if (!button || !personRow || !csrfInput) return;
+
+        button.disabled = true;
+        button.textContent = 'Please wait...';
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfInput.value,
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: new FormData(form),
+                credentials: 'same-origin'
+            });
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(
+                    data.message || 'Unable to follow this user.'
+                );
+            }
+
+            if (
+                data.status === 'following' ||
+                data.status === 'requested'
+            ) {
+                personRow.remove();
+            } else {
+                button.disabled = false;
+                button.textContent = 'Follow';
+            }
+
+            if (
+                !suggestionsList.querySelector('.suggestion-person')
+            ) {
+                suggestionsList.innerHTML = `
+                    <div class="suggestions-empty">
+                        <i class="fa-solid fa-user-group"></i>
+                        <p>No more suggestions in this list.</p>
+                    </div>
+                `;
+            }
+        } catch (error) {
+            button.disabled = false;
+            button.textContent = 'Follow';
+            alert(error.message || 'Something went wrong. Please try again.');
+        }
+    });
+});
+</script>
+
+
+
+{% block scripts %}
+{% endblock %}
+
+
+</body>
+
+</html>

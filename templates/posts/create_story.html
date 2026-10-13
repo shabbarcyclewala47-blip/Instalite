@@ -1,0 +1,264 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add Story - InstaLite
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+
+.story-create-page {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.story-create-card {
+    background: rgba(255,255,255,0.97);
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 12px 35px rgba(65,70,130,0.10);
+}
+
+.story-create-title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #292b40;
+}
+
+.story-upload-area {
+    border: 2px dashed #cfd2e6;
+    border-radius: 18px;
+    padding: 45px 25px;
+    text-align: center;
+    background: #f8f9fd;
+    cursor: pointer;
+}
+
+.story-upload-area:hover {
+    background: #f1f2fa;
+}
+
+.story-upload-icon {
+    font-size: 45px;
+    color: #635bff;
+    margin-bottom: 15px;
+}
+
+.story-upload-text {
+    color: #55596c;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.story-file-input {
+    margin-top: 15px;
+}
+
+.story-preview {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.story-preview img {
+    max-width: 100%;
+    max-height: 450px;
+    border-radius: 16px;
+    object-fit: contain;
+}
+
+.story-submit {
+    width: 100%;
+    margin-top: 25px;
+    border: none;
+    border-radius: 12px;
+    padding: 13px;
+    background: linear-gradient(
+        135deg,
+        #6757e8,
+        #5146d9
+    );
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.story-submit:hover {
+    transform: translateY(-1px);
+}
+
+.story-back {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #5b55e8;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+</style>
+
+
+<div class="story-create-page">
+
+    <div class="story-create-card">
+
+        <h2 class="story-create-title">
+            <i class="fa-regular fa-circle-play"></i>
+            Add Story
+        </h2>
+
+
+        <!-- IMPORTANT:
+             enctype="multipart/form-data"
+             is required for image upload.
+        -->
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            {% csrf_token %}
+
+
+            <label
+                for="storyImage"
+                class="story-upload-area"
+            >
+
+                <div class="story-upload-icon">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                </div>
+
+
+                <div class="story-upload-text">
+
+                    Click here to select an image
+
+                </div>
+
+
+                <small style="color:#9296a8;">
+
+                    JPG, JPEG, PNG, WEBP
+
+                </small>
+
+
+                <input
+                    type="file"
+                    name="image"
+                    id="storyImage"
+                    class="story-file-input"
+                    accept="image/*"
+                    required
+                >
+
+            </label>
+
+
+            <!-- IMAGE PREVIEW -->
+
+            <div
+                class="story-preview"
+                id="storyPreview"
+            >
+
+                <img
+                    id="storyPreviewImage"
+                    src=""
+                    alt="Story Preview"
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="story-submit"
+            >
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+                Add Story
+
+            </button>
+
+        </form>
+
+
+        <a
+            href="{% url 'index' %}"
+            class="story-back"
+        >
+
+            ← Back to Home
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const storyImage =
+    document.getElementById('storyImage');
+
+const storyPreview =
+    document.getElementById('storyPreview');
+
+const storyPreviewImage =
+    document.getElementById('storyPreviewImage');
+
+
+storyImage.addEventListener(
+    'change',
+    function() {
+
+        const file =
+            this.files[0];
+
+        if (!file) {
+
+            storyPreview.style.display = 'none';
+
+            storyPreviewImage.src = '';
+
+            return;
+        }
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function(event) {
+
+                storyPreviewImage.src =
+                    event.target.result;
+
+                storyPreview.style.display =
+                    'block';
+
+            };
+
+
+        reader.readAsDataURL(file);
+
+    }
+);
+
+</script>
+
+
+{% endblock %}

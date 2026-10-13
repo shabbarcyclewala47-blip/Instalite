@@ -1,0 +1,8 @@
+{% autoescape off %}
+
+please follow this link for resetting your password
+
+http://{{domain}}{% url 'activate' uid=uid token=token %}
+
+
+{% endautoescape %}

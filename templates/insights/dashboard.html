@@ -1,0 +1,172 @@
+
+{% extends "base.html" %}
+
+{% block title %}Insights | InstaLite{% endblock %}
+
+{% block content %}
+<style>
+.insights-page {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 24px;
+    color: #25153c;
+}
+.insights-hero {
+    padding: 28px;
+    border-radius: 24px;
+    color: white;
+    background: linear-gradient(120deg, #7c3aed, #db2777, #0891b2);
+    margin-bottom: 24px;
+}
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.insight-card {
+    padding: 22px;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #f3edff, #fff0f8, #effcff);
+    border: 1px solid #e9dff8;
+    box-shadow: 0 8px 24px #4c1d9510;
+}
+.insight-label {
+    color: #705c87;
+    font-size: 14px;
+}
+.insight-number {
+    display: block;
+    margin-top: 9px;
+    font-size: 29px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+.insight-section {
+    background: #fff;
+    border: 1px solid #eee4f7;
+    padding: 22px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+}
+.insight-section h3 {
+    margin-bottom: 16px;
+    font-size: 19px;
+}
+.insight-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid #f0e8f7;
+}
+.insight-row:last-child { border-bottom: 0; }
+.insight-filter {
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-weight: 600;
+}
+.insight-button {
+    color: white;
+    background: #7c3aed;
+    border: 0;
+    padding: 10px 16px;
+    border-radius: 10px;
+}
+.insight-muted { color: #766783; }
+@media(max-width: 850px) {
+    .insights-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media(max-width: 480px) {
+    .insights-page { padding: 12px; }
+    .insights-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .insight-card { padding: 15px; }
+    .insight-number { font-size: 23px; }
+}
+</style>
+
+<div class="insights-page">
+    <div class="insights-hero">
+        <h1>📊 Creator Insights</h1>
+        <p style="margin:8px 0 0;">
+            Understand how your posts and reels perform.
+        </p>
+    </div>
+
+    <form method="get" style="margin-bottom:22px; display:flex; gap:10px; align-items:center;">
+        <label for="period">Reporting period</label>
+        <select class="insight-filter" name="period" id="period">
+            <option value="7" {% if period == "7" %}selected{% endif %}>Last 7 days</option>
+            <option value="30" {% if period == "30" %}selected{% endif %}>Last 30 days</option>
+            <option value="90" {% if period == "90" %}selected{% endif %}>Last 90 days</option>
+        </select>
+        <button class="insight-button" type="submit">Apply</button>
+    </form>
+
+    <div class="insights-grid">
+        <div class="insight-card">
+            <span class="insight-label">Total views</span>
+            <span class="insight-number">{{ total_views }}</span>
+        </div>
+        <div class="insight-card">
+            <span class="insight-label">Estimated reach</span>
+            <span class="insight-number">{{ total_reach }}</span>
+        </div>
+        <div class="insight-card">
+            <span class="insight-label">Likes</span>
+            <span class="insight-number">{{ total_likes }}</span>
+        </div>
+        <div class="insight-card">
+            <span class="insight-label">Comments</span>
+            <span class="insight-number">{{ total_comments }}</span>
+        </div>
+        <div class="insight-card">
+            <span class="insight-label">Post views</span>
+            <span class="insight-number">{{ total_post_views }}</span>
+        </div>
+        <div class="insight-card">
+            <span class="insight-label">Reel views</span>
+            <span class="insight-number">{{ total_reel_views }}</span>
+        </div>
+        <div class="insight-card">
+            <span class="insight-label">Engagement rate</span>
+            <span class="insight-number">{{ engagement_rate }}%</span>
+        </div>
+        <div class="insight-card">
+            <span class="insight-label">Published content</span>
+            <span class="insight-number">{{ total_posts|add:total_reels }}</span>
+        </div>
+    </div>
+
+    <div class="insight-section">
+        <h3>🏆 Top-performing posts</h3>
+        {% for item in top_posts %}
+            <div class="insight-row">
+                <span>Post #{{ item.object.pk }}</span>
+                <strong>{{ item.views }} views</strong>
+            </div>
+        {% empty %}
+            <p class="insight-muted">No post views recorded in this period yet.</p>
+        {% endfor %}
+    </div>
+
+    <div class="insight-section">
+        <h3>🎬 Top-performing reels</h3>
+        {% for item in top_reels %}
+            <div class="insight-row">
+                <span>Reel #{{ item.object.pk }}</span>
+                <strong>{{ item.views }} views</strong>
+            </div>
+        {% empty %}
+            <p class="insight-muted">No reel views recorded in this period yet.</p>
+        {% endfor %}
+    </div>
+
+    <p class="insight-muted">
+        Reach is an estimate based on distinct viewer/session identifiers.
+        Engagement rate here is likes plus comments divided by recorded views.
+    </p>
+</div>
+{% endblock %}

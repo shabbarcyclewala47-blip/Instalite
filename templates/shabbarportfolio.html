@@ -1,0 +1,321 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shabbar Cyclewala — Full Stack Developer portfolio showcasing projects and technical skills.">
+    <title>Shabbar Cyclewala | Full Stack Developer</title>
+
+   
+
+<link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="{% static 'portfolio/js/script.js' %}" defer></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <a class="logo" href="#home">SC<span>.</span></a>
+
+        <button class="menu-toggle" id="menuToggle"
+                aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="navLinks" type="button">
+            ☰
+        </button>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact" class="nav-contact">Contact Me ↗</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HOME -->
+        <section class="hero section" id="home">
+            <div class="hero-content">
+                <div class="availability">
+                    <span class="status-dot"></span>
+                    Open to Full Stack opportunities
+                </div>
+
+                <p class="eyebrow">HELLO, I'M</p>
+
+                <h1>Shabbar<br><span>Cyclewala.</span></h1>
+                <h2>Full Stack Developer</h2>
+
+                <p class="hero-description">
+                    I build modern, responsive web applications with
+                    thoughtful design, reliable functionality and clean code.
+                    I enjoy turning ideas into useful digital experiences.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#projects">
+                        Explore My Work ↗
+                    </a>
+                    <a class="btn btn-outline" href="#contact">
+                        Let's Connect
+                    </a>
+                </div>
+
+                <div class="hero-socials">
+                    <!-- Replace these with your real profile URLs -->
+                    <a href="https://github.com/" target="_blank"
+                       rel="noopener noreferrer">GitHub ↗</a>
+                    <a href="https://www.linkedin.com/in/shabbar-cyclewala-4419782b4/"
+                       target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                </div>
+            </div>
+
+            <div class="hero-art" aria-label="Developer introduction graphic">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-dots"><i></i><i></i><i></i></div>
+                        <span>developer.py</span>
+                    </div>
+
+                    <div class="code-content">
+                        <p><span class="code-purple">class</span>
+                            <span class="code-blue">Developer</span>:</p>
+                        <p class="indent"><span class="code-purple">def</span>
+                            <span class="code-yellow">__init__</span>(self):</p>
+                        <p class="indent double">self.name =
+                            <span class="code-green">"Shabbar"</span></p>
+                        <p class="indent double">self.role =
+                            <span class="code-green">"Full Stack Developer"</span></p>
+                        <p class="indent double">self.passion =
+                            <span class="code-green">"Building for the web"</span></p>
+                        <br>
+                        <p class="code-comment"># Turning ideas into reality</p>
+                        <p><span class="code-purple">return</span>
+                            <span class="code-yellow">create_something_great()</span>
+                        </p>
+                    </div>
+
+                    <div class="code-footer">
+                        <span><i class="status-dot"></i> Ready to build</span>
+                        <span>Python · Web</span>
+                    </div>
+                </div>
+
+                <div class="floating-chip chip-top">{"</>"} Web Development</div>
+                <div class="floating-chip chip-bottom">✦ Always Learning</div>
+            </div>
+
+            <a href="#about" class="scroll-indicator">SCROLL TO EXPLORE ↓</a>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="section about-section" id="about">
+            <div class="section-heading">
+                <p class="eyebrow">GET TO KNOW ME</p>
+                <h2>A little about <span>me.</span></h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-card glass-card">
+                    <div class="card-icon">✳</div>
+                    <h3>Who I Am</h3>
+                    <p>
+                        I'm a Computer Science engineering student focused on
+                        Full Stack Development. I enjoy creating practical web
+                        applications and continuously improving my coding skills.
+                    </p>
+                </div>
+
+                <div class="about-card glass-card">
+                    <div class="card-icon">⌘</div>
+                    <h3>What I Do</h3>
+                    <p>
+                        I practise building frontend interfaces, backend
+                        functionality, databases, authentication and complete
+                        web application workflows.
+                    </p>
+                </div>
+
+                <div class="about-card glass-card">
+                    <div class="card-icon">↗</div>
+                    <h3>My Goal</h3>
+                    <p>
+                        I'm looking for opportunities to contribute to real
+                        projects, learn from experienced developers and grow
+                        as a Full Stack Developer.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section class="section" id="skills">
+            <div class="section-heading">
+                <p class="eyebrow">MY TOOLKIT</p>
+                <h2>Skills & <span>technologies.</span></h2>
+                <p class="section-description">
+                    Technologies I use and practise while building projects.
+                </p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card"><span>Py</span><div><h3>Python</h3><p>Programming</p></div></div>
+                <div class="skill-card"><span>D</span><div><h3>Django</h3><p>Backend development</p></div></div>
+                <div class="skill-card"><span>API</span><div><h3>REST APIs</h3><p>API development</p></div></div>
+                <div class="skill-card"><span>H5</span><div><h3>HTML5</h3><p>Web structure</p></div></div>
+                <div class="skill-card"><span>C3</span><div><h3>CSS3</h3><p>Responsive styling</p></div></div>
+                <div class="skill-card"><span>JS</span><div><h3>JavaScript</h3><p>Frontend functionality</p></div></div>
+                <div class="skill-card"><span>DB</span><div><h3>SQL</h3><p>Database fundamentals</p></div></div>
+                <div class="skill-card"><span>Git</span><div><h3>Git & GitHub</h3><p>Version control</p></div></div>
+            </div>
+
+            <p class="skills-note">
+                Keep only technologies you can confidently explain and demonstrate.
+            </p>
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="section projects-section" id="projects">
+            <div class="section-heading">
+                <p class="eyebrow">SELECTED WORK</p>
+                <h2>Projects I've <span>built.</span></h2>
+                <p class="section-description">
+                    A selection of my development work and learning projects.
+                </p>
+            </div>
+
+            <article class="project-card glass-card">
+                <div class="project-visual instalite-visual">
+                    <div class="mock-social">
+                        <div class="mock-top"><span>◎ InstaLite</span><span>＋</span></div>
+                        <div class="mock-story-row">
+                            <i>SC</i><i>JD</i><i>AM</i><i>RK</i>
+                        </div>
+                        <div class="mock-post">
+                            <div class="mock-post-head"><b>developer_diary</b><span>•••</span></div>
+                            <div class="mock-post-art">Create.<br>Connect.<br><strong>Share.</strong></div>
+                            <div class="mock-post-actions">♡　◯　↗</div>
+                            <div class="mock-post-caption">Building a community, one post at a time.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-info">
+                    <span class="project-label">01 / SOCIAL PLATFORM</span>
+                    <h3>InstaLite</h3>
+                    <p>
+                        An Instagram-inspired social media web application
+                        featuring user profiles, posts, likes, comments,
+                        stories, following and messaging.
+                    </p>
+                    <div class="tech-tags">
+                        <span>Python</span>
+                        <span>Django</span>
+                        <span>JavaScript</span>
+                        <span>Bootstrap</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#contact">Project details ↗</a>
+                        <!-- Replace with your actual InstaLite repository -->
+                        <a href="https://github.com/YOUR_USERNAME/instalite"
+   target="_blank"
+   rel="noopener noreferrer">
+    View Source Code ↗
+</a>
+                    </div>
+                </div>
+            </article>
+
+            <div class="coming-soon glass-card">
+                <span>✳</span>
+                <div>
+                    <h3>More projects coming soon</h3>
+                    <p>I'll add more completed projects as I build and document them.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESUME -->
+        <section class="section" id="resume">
+            <div class="resume-card">
+                <div>
+                    <p class="eyebrow">MY BACKGROUND</p>
+                    <h2>Want to know more?</h2>
+                    <p>
+                        View my resume for details about my education,
+                        technical skills and projects.
+                    </p>
+                </div>
+                <!-- Replace with the actual resume PDF URL when available -->
+                <a class="btn btn-primary" href="#contact">Request My Resume ↗</a>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="section contact-section" id="contact">
+            <div class="section-heading">
+                <p class="eyebrow">GET IN TOUCH</p>
+                <h2>Let's build something <span>great.</span></h2>
+                <p class="section-description">
+                    Open to suitable Full Stack Developer opportunities.
+                    Feel free to reach out.
+                </p>
+            </div>
+
+            <div class="contact-card glass-card">
+                <div>
+                    <span class="contact-icon">✉</span>
+                    <div>
+                        <small>EMAIL</small>
+                        <a href="mailto:your-email@gmail.com">
+    shabbarcyclewala47@gmail.com
+</a>
+                    </div>
+                </div>
+               
+<div>
+    <span class="contact-icon">in</span>
+    <div>
+        <small>LINKEDIN</small>
+        <p>
+            <a href="https://www.linkedin.com/in/shabbar-cyclewala-4419782b/"
+   target="_blank"
+   rel="noopener noreferrer">LinkedIn ↗</a>
+                View My LinkedIn Profile ↗
+            </a>
+        </p>
+    </div>
+</div>
+
+                    <span class="contact-icon">⌘</span>
+                    <div>
+                        <small>GITHUB</small>
+                        <a href="https://github.com/YOUR_USERNAME"
+   target="_blank"
+   rel="noopener noreferrer">
+    GitHub ↗
+</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <a class="logo" href="#home">SC<span>.</span></a>
+        <p>Designed and built by Shabbar Cyclewala.</p>
+        <a href="#home">Back to top ↑</a>
+        <p class="copyright">© <span id="year"></span> Shabbar Cyclewala</p>
+    </footer>
+
+</body>
+</html>

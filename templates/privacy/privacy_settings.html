@@ -1,0 +1,97 @@
+
+{% extends "base.html" %}
+
+{% block title %}Privacy Settings | InstaLite{% endblock %}
+
+{% block content %}
+<style>
+.privacy-wrap {
+    max-width: 680px;
+    margin: 35px auto;
+    padding: 26px;
+    border-radius: 24px;
+    background: linear-gradient(140deg, #f3edff, #fff0f8, #eef5ff);
+    box-shadow: 0 14px 40px rgba(89, 49, 140, .12);
+}
+.privacy-card {
+    background: rgba(255,255,255,.8);
+    border: 1px solid rgba(124,58,237,.14);
+    border-radius: 18px;
+    padding: 22px;
+    margin-top: 20px;
+}
+.privacy-title { color: #5422a5; font-weight: 800; }
+.privacy-description { color: #696078; line-height: 1.7; }
+.privacy-toggle {
+    width: 22px;
+    height: 22px;
+    accent-color: #9333ea;
+}
+.privacy-button {
+    border: 0;
+    border-radius: 12px;
+    padding: 12px 20px;
+    color: white;
+    font-weight: 700;
+    background: linear-gradient(110deg, #7c3aed, #db2777);
+}
+.privacy-link {
+    display: inline-block;
+    color: #7c3aed;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 15px;
+}
+</style>
+
+<div class="privacy-wrap">
+    <h2 class="privacy-title">🔒 Privacy Settings</h2>
+    <p class="privacy-description">
+        Choose who can follow you and access your private content.
+    </p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p role="status">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" class="privacy-card">
+        {% csrf_token %}
+
+        <label style="display:flex; gap:14px; align-items:flex-start;">
+            <input
+                class="privacy-toggle"
+                type="checkbox"
+                name="private_account"
+                {% if request.user.private_account %}checked{% endif %}
+            >
+
+            <span>
+                <strong>Private Account</strong>
+                <br>
+                <span class="privacy-description">
+                    When enabled, follow requests must be approved.
+                    Posts, Reels and stories are restricted until the
+                    approved follower also follows you back.
+                </span>
+            </span>
+        </label>
+
+        <button class="privacy-button" type="submit"
+                style="margin-top:22px;">
+            Save Privacy Settings
+        </button>
+    </form>
+
+    <div class="privacy-card">
+        <h3>Follow Requests</h3>
+        <p class="privacy-description">
+            Review people who want to follow your account.
+        </p>
+        <a class="privacy-link" href="{% url 'follow_requests' %}">
+            Manage Follow Requests →
+        </a>
+    </div>
+</div>
+{% endblock %}

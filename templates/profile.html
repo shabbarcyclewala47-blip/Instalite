@@ -1,0 +1,1490 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ profile_user.full_name|default:profile_user.username }} • InstaLite</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        rel="stylesheet">
+
+    <style>
+/* =========================================================
+   INSTALITE PROFILE — PREMIUM SHADED THEME
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --profile-lavender: #eee5fa;
+    --profile-lavender-deep: #ded0f3;
+    --profile-blue: #e0ebfa;
+    --profile-mint: #dcefeb;
+    --profile-rose: #f4e0ed;
+    --profile-mauve: #e9ddec;
+
+    --profile-text: #302746;
+    --profile-muted: #746b88;
+    --profile-border: #d5c9e8;
+
+    --profile-purple: #7c3aed;
+    --profile-pink: #db2777;
+    --profile-cyan: #0891b2;
+
+    --profile-surface: linear-gradient(
+        135deg,
+        #eee5fa 0%,
+        #e0ebfa 50%,
+        #dcefeb 100%
+    );
+
+    --profile-surface-soft: linear-gradient(
+        135deg,
+        #f0e7fa 0%,
+        #e6e6fa 50%,
+        #e1eff7 100%
+    );
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(221, 194, 246, 0.75),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at top right,
+            rgba(185, 214, 248, 0.78),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at bottom left,
+            rgba(191, 232, 221, 0.55),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #e9e0f6,
+            #e1e8f8,
+            #f0e1ee
+        );
+
+    background-attachment: fixed;
+    color: var(--profile-text);
+}
+
+
+/* =========================================
+   PROFILE CONTAINER
+========================================= */
+
+.profile-container {
+    max-width: 1000px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
+
+
+/* =========================================
+   PROFILE CARD
+========================================= */
+
+.profile-card {
+    background: linear-gradient(
+        135deg,
+        rgba(238, 229, 250, 0.97),
+        rgba(224, 235, 250, 0.97) 52%,
+        rgba(220, 239, 235, 0.97)
+    );
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(153, 125, 190, 0.28);
+    border-radius: 28px;
+    padding: 40px 45px;
+
+    box-shadow:
+        0 20px 50px rgba(76, 55, 116, 0.12),
+        0 5px 18px rgba(79, 111, 148, 0.07);
+
+    transition: box-shadow 0.25s ease;
+}
+
+.profile-card:hover {
+    box-shadow:
+        0 24px 58px rgba(76, 55, 116, 0.15),
+        0 7px 20px rgba(79, 111, 148, 0.09);
+}
+
+
+/* =========================================
+   PROFILE TOP
+========================================= */
+
+.profile-top {
+    display: flex;
+    align-items: center;
+    gap: 55px;
+}
+
+
+/* =========================================
+   PROFILE PHOTO
+========================================= */
+
+.profile-photo-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+
+    border: 5px solid #e5daf4;
+
+    box-shadow:
+        0 8px 25px rgba(76, 55, 116, 0.20),
+        0 0 0 3px rgba(124, 58, 237, 0.12);
+
+    background: linear-gradient(
+        135deg,
+        #ded0f3,
+        #d5e2f5,
+        #d1e9e3
+    );
+}
+
+.profile-photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #ded0f3,
+        #d5e2f5,
+        #d1e9e3
+    );
+
+    color: #77638f;
+    font-size: 55px;
+}
+
+
+/* =========================================
+   PLUS BUTTON
+========================================= */
+
+.profile-photo-add {
+    position: absolute;
+    right: 5px;
+    bottom: 8px;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+    border: 4px solid #e5daf4;
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #db2777,
+        #0891b2
+    );
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    font-size: 17px;
+
+    box-shadow:
+        0 5px 15px rgba(76, 55, 116, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.profile-photo-add:hover {
+    transform: scale(1.08);
+
+    box-shadow:
+        0 7px 20px rgba(124, 58, 237, 0.30);
+}
+
+
+/* =========================================
+   PROFILE INFORMATION
+========================================= */
+
+.profile-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-name {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #302746;
+    overflow-wrap: anywhere;
+}
+
+.profile-username {
+    font-size: 15px;
+    color: #746b88;
+    margin-bottom: 18px;
+    overflow-wrap: anywhere;
+}
+
+.profile-bio {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 22px;
+    max-width: 600px;
+    color: #493d5d;
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+.profile-stats {
+    display: flex;
+    gap: 45px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 20px;
+    font-weight: 700;
+    color: #302746;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #746b88;
+    margin-top: 3px;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.profile-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.profile-btn {
+    border: 1px solid transparent;
+    padding: 10px 22px;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.profile-btn:hover {
+    transform: translateY(-2px);
+}
+
+.edit-btn {
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #6d28d9
+    );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 14px rgba(124, 58, 237, 0.20);
+}
+
+.edit-btn:hover {
+    background: linear-gradient(
+        135deg,
+        #6d28d9,
+        #5b21b6
+    );
+
+    box-shadow:
+        0 7px 18px rgba(124, 58, 237, 0.28);
+}
+
+.share-btn {
+    background: linear-gradient(
+        135deg,
+        #ded3f0,
+        #d7e2f5,
+        #d2e9e5
+    );
+
+    border-color: rgba(153, 125, 190, 0.25);
+    color: #433653;
+}
+
+.share-btn:hover {
+    background: linear-gradient(
+        135deg,
+        #d4c5eb,
+        #cbdcf3,
+        #c5e3dd
+    );
+
+    box-shadow:
+        0 5px 14px rgba(76, 55, 116, 0.12);
+}
+
+
+/* =========================================
+   POSTS SECTION
+========================================= */
+
+.posts-section {
+    margin-top: 35px;
+}
+
+.posts-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #302746;
+
+    margin-bottom: 18px;
+    padding-left: 5px;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.post-item {
+    aspect-ratio: 1 / 1;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #ded0f3,
+        #d5e2f5,
+        #d1e9e3
+    );
+
+    box-shadow:
+        0 4px 15px rgba(76, 55, 116, 0.10);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.post-item:hover {
+    box-shadow:
+        0 8px 22px rgba(76, 55, 116, 0.17);
+}
+
+.post-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+
+    transition: transform 0.3s ease;
+}
+
+.post-item:hover img {
+    transform: scale(1.04);
+}
+
+
+/* =========================================
+   NO POSTS
+========================================= */
+
+.no-posts {
+    background: linear-gradient(
+        135deg,
+        #eee5fa,
+        #e0ebfa,
+        #dcefeb
+    );
+
+    border: 1px solid rgba(153, 125, 190, 0.23);
+    border-radius: 18px;
+    padding: 45px;
+
+    text-align: center;
+    color: #746b88;
+
+    box-shadow:
+        0 8px 25px rgba(76, 55, 116, 0.09);
+}
+
+
+/* =========================================
+   PROFILE POSTS / REELS TABS
+========================================= */
+
+.profile-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 55px;
+
+    border-top: 1px solid rgba(102, 78, 139, 0.22);
+
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.profile-tab {
+    border: none;
+    background: transparent;
+
+    padding: 16px 5px;
+
+    color: #746b88;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    border-top: 2px solid transparent;
+    margin-top: -1px;
+
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.profile-tab:hover {
+    color: #7c3aed;
+}
+
+.profile-tab.active {
+    color: #6d28d9;
+    border-top-color: #7c3aed;
+}
+
+.profile-tab i {
+    margin-right: 7px;
+}
+
+.profile-panel {
+    display: none;
+}
+
+.profile-panel.active {
+    display: block;
+}
+
+
+/* =========================================
+   POST / REEL GRID ITEMS
+========================================= */
+
+.profile-media-item {
+    position: relative;
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #ded0f3,
+        #d5e2f5,
+        #d1e9e3
+    );
+
+    box-shadow:
+        0 4px 15px rgba(76, 55, 116, 0.10);
+
+    transition: box-shadow 0.25s ease;
+}
+
+.profile-media-item:hover {
+    box-shadow:
+        0 8px 22px rgba(76, 55, 116, 0.18);
+}
+
+.profile-media-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-media-link img,
+.profile-media-link video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+
+    transition: transform 0.3s ease;
+}
+
+.profile-media-item:hover .profile-media-link img,
+.profile-media-item:hover .profile-media-link video {
+    transform: scale(1.04);
+}
+
+
+/* =========================================
+   THREE-DOT MENU BUTTON
+========================================= */
+
+.media-menu-trigger {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 5;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid rgba(220, 207, 244, 0.40);
+    border-radius: 50%;
+
+    background: rgba(42, 30, 62, 0.78);
+    color: #f9f5ff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.media-menu-trigger:hover {
+    background: rgba(80, 48, 115, 0.95);
+    transform: scale(1.05);
+}
+
+
+/* =========================================
+   MEDIA DROPDOWN
+========================================= */
+
+.media-dropdown {
+    display: none;
+    position: absolute;
+
+    top: 47px;
+    right: 8px;
+    z-index: 10;
+
+    min-width: 135px;
+    padding: 5px;
+
+    background: linear-gradient(
+        135deg,
+        #eee5fa,
+        #e0ebfa,
+        #dcefeb
+    );
+
+    border: 1px solid rgba(153, 125, 190, 0.30);
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 25px rgba(40, 28, 62, 0.22);
+}
+
+.media-dropdown.show {
+    display: block;
+}
+
+.media-delete-button {
+    display: block;
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #c3264d;
+
+    text-align: left;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.media-delete-button:hover {
+    background: linear-gradient(
+        135deg,
+        #f2d8e7,
+        #eadcf5
+    );
+}
+
+.media-delete-button i {
+    margin-right: 7px;
+}
+
+
+/* =========================================
+   TABLET AND MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .profile-container {
+        margin: 15px auto;
+        padding: 0 10px;
+    }
+
+    .profile-card {
+        padding: 25px 20px;
+        border-radius: 22px;
+    }
+
+    .profile-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .profile-info {
+        width: 100%;
+    }
+
+    .profile-name {
+        font-size: 25px;
+    }
+
+    .profile-stats {
+        justify-content: center;
+        gap: 25px;
+    }
+
+    .profile-actions {
+        justify-content: center;
+    }
+
+    .profile-bio {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .posts-grid {
+        gap: 5px;
+    }
+
+    .profile-tabs {
+        gap: 35px;
+    }
+
+    .profile-media-item {
+        border-radius: 7px;
+    }
+
+    .post-item {
+        border-radius: 7px;
+    }
+
+    .media-menu-trigger {
+        width: 30px;
+        height: 30px;
+        top: 5px;
+        right: 5px;
+    }
+
+    .media-dropdown {
+        top: 40px;
+        right: 5px;
+        min-width: 120px;
+    }
+
+    .no-posts {
+        padding: 35px 18px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+    .profile-container {
+        padding: 0 8px;
+    }
+
+    .profile-card {
+        padding: 22px 14px;
+        border-radius: 18px;
+    }
+
+    .profile-photo-wrapper,
+    .profile-photo {
+        width: 125px;
+        height: 125px;
+    }
+
+    .profile-name {
+        font-size: 22px;
+    }
+
+    .profile-username {
+        font-size: 14px;
+    }
+
+    .profile-stats {
+        gap: 18px;
+    }
+
+    .stat-number {
+        font-size: 18px;
+    }
+
+    .stat-label {
+        font-size: 12px;
+    }
+
+    .profile-btn {
+        padding: 9px 15px;
+        font-size: 13px;
+    }
+
+    .profile-tabs {
+        gap: 24px;
+    }
+
+    .profile-tab {
+        padding: 14px 3px;
+        font-size: 13px;
+    }
+
+    .profile-tab i {
+        margin-right: 4px;
+    }
+
+    .posts-grid {
+        gap: 4px;
+    }
+
+    .profile-media-item,
+    .post-item {
+        border-radius: 5px;
+    }
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="profile-container">
+
+
+    <!-- =========================================
+         PROFILE CARD
+    ========================================== -->
+
+    <div class="profile-card">
+
+        <div class="profile-top">
+
+
+            <!-- =================================
+                 PROFILE PHOTO
+            ================================== -->
+
+            <div class="profile-photo-wrapper">
+
+                {% if profile_user.profile_picture %}
+
+                    <img
+                        src="{{ profile_user.profile_picture.url }}"
+                        class="profile-photo"
+                        alt="{{ profile_user.full_name|default:profile_user.username }}">
+
+                {% else %}
+
+                    <div class="profile-photo profile-photo-placeholder">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- PLUS BUTTON -->
+
+                <label
+                    for="profilePictureInput"
+                    class="profile-photo-add"
+                    title="Change profile photo">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </label>
+
+
+                <!-- HIDDEN UPLOAD FORM -->
+
+                <form
+                    method="POST"
+                    enctype="multipart/form-data"
+                    action="{% url 'edit_profile' %}"
+                    id="profilePictureForm">
+
+                    {% csrf_token %}
+
+                    <input
+                        type="hidden"
+                        name="username"
+                        value="{{ profile_user.username }}">
+
+                    <input
+                        type="hidden"
+                        name="full_name"
+                        value="{{ profile_user.full_name }}">
+
+                    <input
+                        type="hidden"
+                        name="bio"
+                        value="{{ profile_user.bio }}">
+
+                    <input
+                        type="file"
+                        name="profile_picture"
+                        id="profilePictureInput"
+                        accept="image/*"
+                        hidden>
+
+                </form>
+
+            </div>
+
+
+            <!-- =================================
+                 PROFILE INFO
+            ================================== -->
+
+            <div class="profile-info">
+
+
+                <div class="profile-name">
+
+                    {{ profile_user.full_name|default:profile_user.username }}
+
+                </div>
+
+
+                <div class="profile-username">
+
+                    {{ profile_user.username }}
+
+                </div>
+
+
+                {% if profile_user.bio %}
+
+                    <div class="profile-bio">
+
+                        {{ profile_user.bio }}
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- =================================
+                     STATS
+                ================================== -->
+
+                <div class="profile-stats">
+
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            {{ posts_count }}
+                        </div>
+
+                        <div class="stat-label">
+                            Posts
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            {{ followers_count }}
+                        </div>
+
+                        <div class="stat-label">
+                            Followers
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            {{ following_count }}
+                        </div>
+
+                        <div class="stat-label">
+                            Following
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================
+                     BUTTONS
+                ================================== -->
+
+                <div class="profile-actions">
+
+
+                    <a
+                        href="{% url 'edit_profile' %}"
+                        class="profile-btn edit-btn text-decoration-none">
+
+                        <i class="fa-solid fa-pen me-1"></i>
+
+                        Edit Profile
+
+                    </a>
+
+
+                    <button
+                        type="button"
+                        class="profile-btn share-btn"
+                        onclick="shareProfile()">
+
+                        <i class="fa-solid fa-share-nodes me-1"></i>
+
+                        Share Profile
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<!-- =========================================
+     PROFILE POSTS AND REELS
+========================================== -->
+
+<div class="posts-section">
+
+    <!-- TABS -->
+
+    <div class="profile-tabs">
+
+        <button
+            type="button"
+            class="profile-tab active"
+            data-tab="postsPanel"
+            onclick="switchProfileTab('postsPanel', this)">
+
+            <i class="fa-solid fa-table-cells"></i>
+            POSTS
+
+        </button>
+
+        <button
+            type="button"
+            class="profile-tab"
+            data-tab="reelsPanel"
+            onclick="switchProfileTab('reelsPanel', this)">
+
+            <i class="fa-solid fa-clapperboard"></i>
+            REELS
+
+        </button>
+
+    </div>
+
+
+    <!-- POSTS PANEL -->
+
+    <div class="profile-panel active" id="postsPanel">
+
+        {% if posts %}
+
+            <div class="posts-grid">
+
+                {% for post in posts %}
+
+                    <div class="profile-media-item">
+
+                        <a
+                            href="{% url 'feed' %}"
+                            class="profile-media-link">
+
+                            {% if post.image %}
+                                <img
+                                    src="{{ post.image.url }}"
+                                    alt="Post by {{ profile_user.username }}">
+                            {% endif %}
+
+                        </a>
+
+                        <!-- THREE DOTS -->
+
+                        <button
+                            type="button"
+                            class="media-menu-trigger"
+                            aria-label="Post options"
+                            aria-expanded="false"
+                            onclick="toggleMediaMenu(event, this)">
+
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                        </button>
+
+                        <div class="media-dropdown">
+
+                            <form
+                                class="profile-delete-form"
+                                method="POST"
+                                action="{% url 'delete_post' post.id %}"
+                                data-item-type="post">
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="media-delete-button">
+
+                                    <i class="fa-solid fa-trash"></i>
+                                    Delete
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="no-posts">
+
+                <i
+                    class="fa-regular fa-images"
+                    style="font-size:40px; margin-bottom:15px;">
+                </i>
+
+                <div>No posts yet.</div>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- REELS PANEL -->
+
+    <div class="profile-panel" id="reelsPanel">
+
+        {% if reels %}
+
+            <div class="posts-grid">
+
+                {% for reel in reels %}
+
+                    <div class="profile-media-item">
+
+                        <a
+                            href="{% url 'reels' %}"
+                            class="profile-media-link">
+
+                            {% if reel.video %}
+
+                                <video
+                                    src="{{ reel.video.url }}"
+                                    muted
+                                    playsinline
+                                    preload="metadata">
+                                </video>
+
+                            {% endif %}
+
+                        </a>
+
+                        <!-- THREE DOTS -->
+
+                        <button
+                            type="button"
+                            class="media-menu-trigger"
+                            aria-label="Reel options"
+                            aria-expanded="false"
+                            onclick="toggleMediaMenu(event, this)">
+
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                        </button>
+
+                        <div class="media-dropdown">
+
+                            <form
+                                class="profile-delete-form"
+                                method="POST"
+                                action="{% url 'delete_reel' reel.id %}"
+                                data-item-type="reel">
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="media-delete-button">
+
+                                    <i class="fa-solid fa-trash"></i>
+                                    Delete
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="no-posts">
+
+                <i
+                    class="fa-solid fa-clapperboard"
+                    style="font-size:40px; margin-bottom:15px;">
+                </i>
+
+                <div>No reels yet.</div>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+    /* =========================================
+       CHANGE PROFILE PHOTO
+    ========================================== */
+
+    document
+        .getElementById("profilePictureInput")
+        .addEventListener("change", function () {
+
+            if (this.files.length > 0) {
+
+                document
+                    .getElementById("profilePictureForm")
+                    .submit();
+
+            }
+
+        });
+
+
+    /* =========================================
+       SHARE PROFILE
+    ========================================== */
+
+    function shareProfile() {
+
+        const profileUrl = window.location.href;
+
+        if (navigator.share) {
+
+            navigator.share({
+
+                title: "{{ profile_user.full_name|default:profile_user.username }}",
+                text: "Check out this InstaLite profile",
+                url: profileUrl
+
+            });
+
+        } else {
+
+            navigator.clipboard
+                .writeText(profileUrl)
+                .then(function () {
+
+                    alert("Profile link copied!");
+
+                });
+
+        }
+
+    }
+    
+/* =========================================
+   SWITCH POSTS / REELS TABS
+========================================= */
+
+function switchProfileTab(panelId, button) {
+
+    document.querySelectorAll('.profile-panel').forEach(panel => {
+        panel.classList.remove('active');
+    });
+
+    document.querySelectorAll('.profile-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+
+    const selectedPanel = document.getElementById(panelId);
+
+    if (selectedPanel) {
+        selectedPanel.classList.add('active');
+    }
+
+    button.classList.add('active');
+}
+
+
+/* =========================================
+   THREE-DOT MENU
+========================================= */
+
+function toggleMediaMenu(event, button) {
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const currentMenu = button.nextElementSibling;
+    const wasOpen = currentMenu.classList.contains('show');
+
+    document.querySelectorAll('.media-dropdown').forEach(menu => {
+        menu.classList.remove('show');
+    });
+
+    document.querySelectorAll('.media-menu-trigger').forEach(trigger => {
+        trigger.setAttribute('aria-expanded', 'false');
+    });
+
+    if (!wasOpen) {
+        currentMenu.classList.add('show');
+        button.setAttribute('aria-expanded', 'true');
+    }
+}
+
+
+/* Close dropdown when clicking outside */
+
+document.addEventListener('click', function(event) {
+
+    if (!event.target.closest('.profile-media-item')) {
+
+        document.querySelectorAll('.media-dropdown').forEach(menu => {
+            menu.classList.remove('show');
+        });
+
+        document.querySelectorAll('.media-menu-trigger').forEach(button => {
+            button.setAttribute('aria-expanded', 'false');
+        });
+    }
+});
+
+
+/* =========================================
+   DELETE POST / REEL
+========================================= */
+
+document.querySelectorAll('.profile-delete-form').forEach(form => {
+
+    form.addEventListener('submit', async function(event) {
+
+        event.preventDefault();
+
+        const itemType = form.dataset.itemType;
+        const itemName = itemType === 'reel' ? 'this reel' : 'this post';
+
+        if (!confirm(`Are you sure you want to delete ${itemName}?`)) {
+            return;
+        }
+
+        const deleteButton = form.querySelector('button[type="submit"]');
+        deleteButton.disabled = true;
+
+        try {
+
+            const csrfInput = form.querySelector(
+                '[name="csrfmiddlewaretoken"]'
+            );
+
+            const response = await fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfInput.value,
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                credentials: 'same-origin'
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(
+                    result.message || 'Unable to delete this item.'
+                );
+            }
+
+            const mediaItem = form.closest('.profile-media-item');
+            mediaItem.remove();
+
+            const panel = form.closest('.profile-panel');
+            const remainingItems = panel.querySelectorAll(
+                '.profile-media-item'
+            );
+
+            if (remainingItems.length === 0) {
+
+                const emptyMessage = document.createElement('div');
+                emptyMessage.className = 'no-posts';
+
+                const icon = document.createElement('i');
+                icon.className = itemType === 'reel'
+                    ? 'fa-solid fa-clapperboard'
+                    : 'fa-regular fa-images';
+
+                icon.style.fontSize = '40px';
+                icon.style.marginBottom = '15px';
+
+                const message = document.createElement('div');
+                message.textContent = itemType === 'reel'
+                    ? 'No reels yet.'
+                    : 'No posts yet.';
+
+                emptyMessage.append(icon, message);
+                panel.appendChild(emptyMessage);
+            }
+
+            if (itemType === 'post') {
+
+                const postsCount = document.querySelector(
+                    '.profile-stats .stat .stat-number'
+                );
+
+                if (postsCount) {
+                    const count = parseInt(postsCount.textContent.trim(), 10);
+                    if (!Number.isNaN(count) && count > 0) {
+                        postsCount.textContent = count - 1;
+                    }
+                }
+            }
+
+            alert(result.message || 'Deleted successfully.');
+
+        } catch (error) {
+
+            alert(error.message || 'Something went wrong.');
+
+        } finally {
+
+            if (deleteButton.isConnected) {
+                deleteButton.disabled = false;
+            }
+        }
+
+    });
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>

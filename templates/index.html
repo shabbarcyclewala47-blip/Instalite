@@ -1,0 +1,4037 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+InstaLite - Home
+{% endblock %}
+
+{% block content %}
+
+<style>
+/* =========================================================
+   INSTALITE HOME PAGE — PREMIUM SHADED THEME
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --insta-lavender: #eee5fa;
+    --insta-lavender-deep: #ded0f3;
+    --insta-blue: #e0ebfa;
+    --insta-mint: #dcefeb;
+    --insta-rose: #f4e0ed;
+    --insta-mauve: #e9ddec;
+
+    --insta-surface:
+        linear-gradient(
+            135deg,
+            #eee5fa 0%,
+            #e0ebfa 48%,
+            #dcefeb 100%
+        );
+
+    --insta-surface-soft:
+        linear-gradient(
+            135deg,
+            #f0e7fa 0%,
+            #e6e6fa 50%,
+            #e1eff7 100%
+        );
+
+    --insta-text: #302746;
+    --insta-muted: #746b88;
+    --insta-border: #d5c9e8;
+
+    --insta-purple: #7c3aed;
+    --insta-pink: #db2777;
+    --insta-cyan: #0891b2;
+}
+
+.insta-home {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+}
+
+
+/* =========================================================
+   STORIES CARD
+========================================================= */
+
+.stories-card {
+    background: linear-gradient(
+        135deg,
+        #eee4fa 0%,
+        #e5e8fa 48%,
+        #dcefeb 100%
+    );
+
+    border: 1px solid rgba(153, 125, 190, 0.22);
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin-bottom: 15px;
+
+    box-shadow:
+        0 8px 30px rgba(93, 67, 135, 0.10),
+        0 2px 8px rgba(79, 111, 148, 0.06);
+}
+
+.stories-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.stories-header h3 {
+    margin: 0;
+    color: var(--insta-text);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.stories-see-all {
+    text-decoration: none;
+    color: #7043c5;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.stories-see-all:hover {
+    color: #bd267a;
+}
+
+.stories-row {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 5px 2px 8px;
+    scrollbar-width: thin;
+    scrollbar-color: #b9a6dc #e4def1;
+}
+
+.stories-row::-webkit-scrollbar {
+    height: 5px;
+}
+
+.stories-row::-webkit-scrollbar-track {
+    background: #e4def1;
+    border-radius: 10px;
+}
+
+.stories-row::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        90deg,
+        #a78bfa,
+        #8b9de8,
+        #78c9c4
+    );
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   STORY ITEM
+========================================================= */
+
+.story,
+.add-story {
+    flex: 0 0 82px;
+    width: 82px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.story-image,
+.add-story-image {
+    width: 72px;
+    height: 72px;
+    padding: 3px;
+    margin: 0 auto 7px;
+    border-radius: 50%;
+    position: relative;
+
+    background: linear-gradient(
+        135deg,
+        #f58529,
+        #dd2a7b,
+        #8134af,
+        #515bd4
+    );
+
+    box-shadow: 0 4px 12px rgba(113, 67, 160, 0.18);
+}
+
+.story-image.seen-story {
+    background: linear-gradient(
+        135deg,
+        #b6acc9,
+        #8e91aa,
+        #a4b4c7
+    );
+}
+
+.story-image img,
+.add-story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+
+    border: 3px solid #e8e0f3;
+    display: block;
+}
+
+.story-default-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #e8e0f3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #8b5cf6,
+        #0891b2
+    );
+
+    color: #f9f5ff;
+    font-size: 25px;
+}
+
+.story span,
+.add-story span {
+    display: block;
+    color: #413653;
+    font-size: 12px;
+    font-weight: 600;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.my-story-text {
+    color: #7043c5 !important;
+}
+
+
+/* =========================================================
+   YOUR STORY + BUTTON
+========================================================= */
+
+.my-story-wrapper {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 7px;
+}
+
+.my-story-wrapper .add-story-image {
+    width: 72px;
+    height: 72px;
+    margin: 0;
+}
+
+.story-add-small {
+    position: absolute;
+    right: -3px;
+    bottom: -2px;
+
+    width: 24px;
+    height: 24px;
+
+    border: 3px solid #e6def4;
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #0891b2
+    );
+
+    color: #f9f5ff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+    cursor: pointer;
+    z-index: 10;
+
+    box-shadow: 0 3px 10px rgba(49, 35, 77, 0.28);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.story-add-small:hover {
+    background: linear-gradient(
+        135deg,
+        #6d28d9,
+        #0e7490
+    );
+
+    transform: scale(1.08);
+
+    box-shadow: 0 5px 14px rgba(49, 35, 77, 0.30);
+}
+
+
+/* =========================================================
+   CREATE STORY MODAL
+========================================================= */
+
+.story-upload-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(30, 21, 48, 0.76);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 12000;
+
+    padding: 20px;
+}
+
+.story-upload-overlay.show {
+    display: flex;
+}
+
+.story-upload-box {
+    width: min(460px, 94vw);
+
+    background: linear-gradient(
+        145deg,
+        #eee5fa,
+        #e2e8fa 55%,
+        #dcefeb
+    );
+
+    border: 1px solid rgba(167, 139, 213, 0.32);
+    border-radius: 20px;
+    padding: 24px;
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.35),
+        0 0 35px rgba(124, 58, 237, 0.10);
+}
+
+.story-upload-box h3 {
+    margin: 0 0 8px;
+    color: var(--insta-text);
+}
+
+.story-upload-box p {
+    margin: 0 0 18px;
+    color: var(--insta-muted);
+    font-size: 13px;
+}
+
+.story-upload-input {
+    width: 100%;
+
+    border: 2px dashed #b9a5df;
+    border-radius: 15px;
+    padding: 20px;
+
+    background: linear-gradient(
+        135deg,
+        #e3d9f4,
+        #dce6f7
+    );
+
+    color: #493d60;
+}
+
+.story-upload-preview {
+    max-height: 180px;
+    overflow-y: auto;
+    margin-top: 12px;
+
+    font-size: 13px;
+    color: #514660;
+}
+
+.story-upload-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.story-upload-btn {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+.story-upload-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+}
+
+.story-upload-cancel {
+    background: linear-gradient(
+        135deg,
+        #ddd5eb,
+        #d6e0f0
+    );
+
+    color: #453951;
+}
+
+.story-upload-submit {
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #db2777,
+        #0891b2
+    );
+
+    color: #ffffff;
+
+    box-shadow: 0 5px 14px rgba(124, 58, 237, 0.20);
+}
+
+
+/* =========================================================
+   CREATE POST BOX
+========================================================= */
+
+.create-box {
+    background: linear-gradient(
+        135deg,
+        #eee5fa 0%,
+        #e4e7fa 48%,
+        #dcefeb 100%
+    );
+
+    border: 1px solid rgba(153, 125, 190, 0.22);
+    border-radius: 22px;
+    padding: 20px;
+    margin-bottom: 22px;
+
+    box-shadow:
+        0 8px 30px rgba(65, 49, 113, 0.10),
+        0 2px 8px rgba(79, 111, 148, 0.06);
+
+    transition:
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+.create-box:hover {
+    box-shadow:
+        0 12px 34px rgba(65, 49, 113, 0.14),
+        0 4px 12px rgba(79, 111, 148, 0.08);
+}
+
+.create-box a {
+    text-decoration: none;
+}
+
+.create-box-inner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.create-box-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #db2777,
+        #0891b2
+    );
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.18);
+}
+
+.create-box-text {
+    flex: 1;
+
+    background: linear-gradient(
+        135deg,
+        #e0d8f0,
+        #dce5f5,
+        #d9eeeb
+    );
+
+    border: 1px solid rgba(153, 125, 190, 0.18);
+    border-radius: 15px;
+    padding: 13px 17px;
+
+    color: #756b88;
+    font-size: 14px;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.create-box:hover .create-box-text {
+    background: linear-gradient(
+        135deg,
+        #dcd0ef,
+        #d4e0f4,
+        #cfe9e4
+    );
+
+    border-color: rgba(124, 58, 237, 0.25);
+}
+
+
+/* =========================================================
+   EMPTY POST
+========================================================= */
+
+.empty-post {
+    background: linear-gradient(
+        145deg,
+        #eee5fa 0%,
+        #e3e8fa 50%,
+        #dcefeb 100%
+    );
+
+    border: 1px solid rgba(153, 125, 190, 0.22);
+    border-radius: 22px;
+    padding: 60px 25px;
+
+    text-align: center;
+
+    color: #746b88;
+
+    box-shadow:
+        0 8px 30px rgba(65, 70, 130, 0.10);
+}
+
+.empty-post i {
+    font-size: 45px;
+    margin-bottom: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #db2777,
+        #0891b2
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.empty-post h3 {
+    color: #3d3153;
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   STORY VIEWER
+========================================================= */
+
+.story-viewer {
+    position: fixed;
+    inset: 0;
+
+    background: linear-gradient(
+        135deg,
+        rgba(91, 52, 150, 0.97),
+        rgba(8, 105, 140, 0.96),
+        rgba(169, 35, 112, 0.95)
+    );
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+}
+
+.story-viewer-content {
+    width: min(430px, 94vw);
+    height: min(760px, 92vh);
+
+    position: relative;
+
+    background: #201a32;
+
+    border: 1px solid rgba(202, 182, 235, 0.25);
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 70px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(124, 58, 237, 0.12);
+}
+
+
+/* =========================================================
+   STORY MEDIA
+========================================================= */
+
+.story-viewer-image,
+.story-viewer-video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    background: #201a32;
+
+    display: none;
+}
+
+.story-viewer-image.show,
+.story-viewer-video.show {
+    display: block;
+}
+
+
+/* =========================================================
+   STORY TOP
+========================================================= */
+
+.story-viewer-top {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    padding: 15px;
+
+    z-index: 20;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(15, 10, 28, 0.78),
+        transparent
+    );
+}
+
+.story-progress {
+    display: flex;
+    gap: 4px;
+
+    width: 100%;
+
+    margin-bottom: 12px;
+}
+
+.story-progress-item {
+    height: 3px;
+
+    flex: 1;
+
+    border-radius: 10px;
+
+    background: rgba(225, 213, 245, 0.35);
+
+    overflow: hidden;
+}
+
+.story-progress-fill {
+    width: 0%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #d8c6ff,
+        #f4b6dd,
+        #a5e4e1
+    );
+
+    transition: width 0.05s linear;
+}
+
+.story-progress-item.completed .story-progress-fill {
+    width: 100%;
+}
+
+.story-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #f9f5ff;
+}
+
+.story-user-avatar {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+    object-fit: cover;
+
+    border: 2px solid #d9c9f5;
+}
+
+.story-user-info strong {
+    display: block;
+    font-size: 14px;
+}
+
+.story-user-info span {
+    display: block;
+    font-size: 11px;
+    opacity: 0.78;
+}
+
+
+/* =========================================================
+   STORY THREE DOT MENU
+========================================================= */
+
+.story-more {
+    position: absolute;
+
+    top: 48px;
+    right: 62px;
+
+    z-index: 30;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid rgba(214, 196, 245, 0.16);
+    border-radius: 50%;
+
+    background: rgba(41, 29, 62, 0.72);
+
+    color: #f9f5ff;
+
+    cursor: pointer;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    backdrop-filter: blur(10px);
+}
+
+.story-more.show {
+    display: flex;
+}
+
+.story-more:hover {
+    background: rgba(64, 43, 94, 0.90);
+}
+
+.story-owner-menu {
+    position: absolute;
+
+    top: 90px;
+    right: 15px;
+
+    width: 150px;
+
+    background: linear-gradient(
+        145deg,
+        #e9def7,
+        #dce6f7,
+        #d9ece9
+    );
+
+    border: 1px solid rgba(153, 125, 190, 0.28);
+    border-radius: 12px;
+
+    padding: 5px;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+
+    display: none;
+
+    z-index: 40;
+}
+
+.story-owner-menu.show {
+    display: block;
+}
+
+.story-owner-menu button {
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 10px;
+
+    text-align: left;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    color: #3d3153;
+
+    font-size: 13px;
+
+    transition: background 0.2s ease;
+}
+
+.story-owner-menu button:hover {
+    background: linear-gradient(
+        135deg,
+        #d8c9ef,
+        #d3e0f4
+    );
+}
+
+.story-owner-menu button.delete-story-menu {
+    color: #c3264d;
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+.story-close {
+    position: absolute;
+
+    top: 48px;
+    right: 15px;
+
+    z-index: 30;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid rgba(214, 196, 245, 0.16);
+    border-radius: 50%;
+
+    background: rgba(41, 29, 62, 0.72);
+
+    color: #f9f5
+</style>
+
+
+<!-- =========================================================
+     MAIN HOME
+========================================================= -->
+
+<div class="insta-home">
+
+
+    <!-- =====================================================
+         STORIES
+    ====================================================== -->
+
+    <div class="stories-card">
+
+        <div class="stories-header">
+
+            <h3>
+                <i class="fa-regular fa-circle-play"></i>
+                Stories
+            </h3>
+
+            <a
+                href="{% url 'stories' %}"
+                class="stories-see-all"
+            >
+                See All
+            </a>
+
+        </div>
+
+
+        <div class="stories-row">
+
+
+            <!-- =================================================
+                 YOUR STORY
+            ================================================== -->
+
+            {% if request.user.is_authenticated %}
+
+                <div
+                    class="add-story"
+                    onclick="openMyStory(0)"
+                >
+
+                    <div class="my-story-wrapper">
+
+                        <div
+                            class="add-story-image"
+                            style="
+                                background:
+                                linear-gradient(
+                                    135deg,
+                                    #f58529,
+                                    #dd2a7b,
+                                    #8134af,
+                                    #515bd4
+                                );
+                            "
+                        >
+
+                            {% if request.user.profile_picture %}
+
+                                <img
+                                    src="{{ request.user.profile_picture.url }}"
+                                    alt="{{ request.user.username }}"
+                                >
+
+                            {% else %}
+
+                                <div class="story-default-avatar">
+
+                                    <i class="fa-solid fa-user"></i>
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- PLUS ICON -->
+
+                        <button
+                            type="button"
+                            class="story-add-small"
+                            onclick="openStoryUpload(event)"
+                            title="Add story"
+                        >
+
+                            <i class="fa-solid fa-plus"></i>
+
+                        </button>
+
+                    </div>
+
+
+                    <span class="my-story-text">
+                        Your Story
+                    </span>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 OTHER USERS
+            ================================================== -->
+
+            {% for group in other_story_groups %}
+
+                <div
+                    class="story"
+                    data-story-user-id="{{ group.user.id }}"
+                    data-story-seen="{% if group.has_unseen == False %}true{% else %}false{% endif %}"
+                    onclick="openOtherUserStory({{ group.user.id }})"
+                >
+
+                    <div
+                        class="story-image {% if group.has_unseen == False %}seen-story{% endif %}"
+                    >
+
+                        {% if group.user.profile_picture %}
+
+                            <img
+                                src="{{ group.user.profile_picture.url }}"
+                                alt="{{ group.user.username }}"
+                            >
+
+                        {% else %}
+
+                            <div class="story-default-avatar">
+
+                                <i class="fa-solid fa-user"></i>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <span>
+                        {{ group.user.username }}
+                    </span>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         POSTS
+    ====================================================== -->
+
+    {% if posts %}
+
+        {% include "feed.html" %}
+
+    {% else %}
+
+        <div class="empty-post">
+
+            <i class="fa-regular fa-images"></i>
+
+            <h3>
+                No posts yet
+            </h3>
+
+            <p>
+                Create the first post on InstaLite.
+            </p>
+
+            {% if request.user.is_authenticated %}
+
+                <a
+                    href="{% url 'create_post' %}"
+                    class="btn btn-primary"
+                >
+                    Create Post
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- =========================================================
+     STORY UPLOAD MODAL
+========================================================= -->
+
+<div
+    id="storyUploadOverlay"
+    class="story-upload-overlay"
+    onclick="closeStoryUploadOutside(event)"
+>
+
+    <div
+        class="story-upload-box"
+        onclick="event.stopPropagation()"
+    >
+
+        <h3>
+            Add to Your Story
+        </h3>
+
+        <p>
+            Select multiple images or videos. Each image stays for
+            5 seconds and videos play for their full duration.
+        </p>
+
+
+        <input
+            type="file"
+            id="storyUploadInput"
+            class="story-upload-input"
+            accept="image/*,video/*"
+            multiple
+        >
+
+
+        <div
+            id="storyUploadPreview"
+            class="story-upload-preview"
+        >
+        </div>
+
+
+        <div class="story-upload-actions">
+
+            <button
+                type="button"
+                class="story-upload-btn story-upload-cancel"
+                onclick="closeStoryUpload()"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="story-upload-btn story-upload-submit"
+                onclick="uploadStories()"
+            >
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                Upload
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     STORY VIEWER
+========================================================= -->
+
+<div
+    class="story-viewer"
+    id="storyViewer"
+>
+
+    <div
+        class="story-viewer-content"
+        onclick="event.stopPropagation()"
+    >
+
+
+        <!-- =================================================
+             IMAGE
+        ================================================== -->
+
+        <img
+            id="storyViewerImage"
+            class="story-viewer-image"
+            src=""
+            alt="Story"
+        >
+
+
+        <!-- =================================================
+             VIDEO
+        ================================================== -->
+
+        <video
+            id="storyViewerVideo"
+            class="story-viewer-video"
+            playsinline
+            preload="metadata"
+        >
+        </video>
+
+
+        <!-- =================================================
+             TOP
+        ================================================== -->
+
+        <div class="story-viewer-top">
+
+            <div
+                class="story-progress"
+                id="storyProgress"
+            ></div>
+
+
+            <div class="story-user">
+
+                <img
+                    id="storyViewerAvatar"
+                    class="story-user-avatar"
+                    src=""
+                    alt=""
+                >
+
+
+                <div class="story-user-info">
+
+                    <strong id="storyUsername"></strong>
+
+                    <span id="storyTime"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             THREE DOT
+        ================================================== -->
+
+        <button
+            type="button"
+            id="storyMoreButton"
+            class="story-more"
+            onclick="toggleStoryOwnerMenu(event)"
+        >
+
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+
+        </button>
+
+
+        <!-- =================================================
+             OWNER MENU
+        ================================================== -->
+
+        <div
+            id="storyOwnerMenu"
+            class="story-owner-menu"
+        >
+
+            <button
+                type="button"
+                class="delete-story-menu"
+                onclick="askDeleteStory(event)"
+            >
+
+                <i class="fa-solid fa-trash"></i>
+                Delete Story
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             CLOSE
+        ================================================== -->
+
+        <button
+            type="button"
+            class="story-close"
+            onclick="closeStory(event)"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <!-- =================================================
+             NAVIGATION
+        ================================================== -->
+
+        <div class="story-navigation">
+
+            <button
+                type="button"
+                id="storyPrevious"
+                class="story-nav-btn"
+                onclick="previousStory(event)"
+            >
+
+                <i class="fa-solid fa-chevron-left"></i>
+
+            </button>
+
+
+            <button
+                type="button"
+                id="storyNext"
+                class="story-nav-btn"
+                onclick="nextStory(event)"
+            >
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <div class="story-actions">
+
+            <button
+                type="button"
+                id="storyLikeButton"
+                class="story-action-button"
+                onclick="toggleStoryLike(event)"
+            >
+
+                <i class="fa-regular fa-heart"></i>
+
+                <span id="storyLikeCount">
+                    0
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="story-action-button"
+                onclick="focusStoryComment(event)"
+            >
+
+                <i class="fa-regular fa-comment"></i>
+
+                <span id="storyCommentCount">
+                    0
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="story-action-button"
+                onclick="toggleStoryShare(event)"
+            >
+
+                <i class="fa-solid fa-share"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             COMMENT
+        ================================================== -->
+
+        <div
+            id="storyCommentBox"
+            class="story-comment-box"
+        >
+
+            <input
+                type="text"
+                id="storyCommentInput"
+                placeholder="Reply to story..."
+                autocomplete="off"
+                onkeydown="storyCommentKeydown(event)"
+            >
+
+
+            <button
+                type="button"
+                onclick="submitStoryComment(event)"
+            >
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             SHARE
+        ================================================== -->
+
+        <div
+            id="storySharePanel"
+            class="story-share-panel"
+        >
+
+            <div class="story-share-title">
+                Share story
+            </div>
+
+
+            {% for share_user in story_share_users %}
+
+                <button
+                    type="button"
+                    class="story-share-user"
+                    onclick="shareStoryWithUser({{ share_user.id }}, event)"
+                >
+
+                    {% if share_user.profile_picture %}
+
+                        <img
+                            src="{{ share_user.profile_picture.url }}"
+                            alt="{{ share_user.username }}"
+                        >
+
+                    {% else %}
+
+                        <div class="story-share-avatar">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <span>
+                        {{ share_user.username }}
+                    </span>
+
+                </button>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- =================================================
+             DELETE CONFIRM
+        ================================================== -->
+
+        <div
+            id="storyDeleteConfirm"
+            class="story-delete-confirm"
+        >
+
+            <div class="story-delete-box">
+
+                <h4>
+                    Delete this story?
+                </h4>
+
+                <p>
+                    This story will be permanently deleted.
+                </p>
+
+
+                <div class="story-delete-buttons">
+
+                    <button
+                        type="button"
+                        class="story-delete-cancel"
+                        onclick="cancelDeleteStory(event)"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="story-delete-confirm-btn"
+                        onclick="deleteCurrentStory(event)"
+                    >
+                        Delete
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   STORY DATA
+========================================================= */
+
+const myStories = [
+
+    {% for story in my_stories %}
+
+    {
+        id: {{ story.id }},
+
+        type:
+            "{% if story.video %}video{% else %}image{% endif %}",
+
+        media:
+            "{% if story.video %}{{ story.video.url|escapejs }}{% else %}{{ story.image.url|escapejs }}{% endif %}",
+
+        username:
+            "{{ story.user.username|escapejs }}",
+
+        avatar:
+            "{% if request.user.profile_picture %}{{ request.user.profile_picture.url|escapejs }}{% endif %}",
+
+        time:
+            "{{ story.created_at|timesince|escapejs }}",
+
+        owner: true,
+
+        viewed: false
+
+    }
+
+    {% if not forloop.last %},{% endif %}
+
+    {% endfor %}
+
+];
+
+
+let otherStoryGroups = [
+
+    {% for group in other_story_groups %}
+
+    {
+
+        userId:
+            {{ group.user.id }},
+
+        username:
+            "{{ group.user.username|escapejs }}",
+
+        avatar:
+            "{% if group.user.profile_picture %}{{ group.user.profile_picture.url|escapejs }}{% endif %}",
+
+        hasUnseen:
+            {% if group.has_unseen %}true{% else %}false{% endif %},
+
+        stories: [
+
+            {% for story in group.stories %}
+
+            {
+
+                id: {{ story.id }},
+
+                type:
+                    "{% if story.video %}video{% else %}image{% endif %}",
+
+                media:
+                    "{% if story.video %}{{ story.video.url|escapejs }}{% else %}{{ story.image.url|escapejs }}{% endif %}",
+
+                username:
+                    "{{ story.user.username|escapejs }}",
+
+                avatar:
+                    "{% if group.user.profile_picture %}{{ group.user.profile_picture.url|escapejs }}{% endif %}",
+
+                time:
+                    "{{ story.created_at|timesince|escapejs }}",
+
+                owner: false,
+
+                viewed:
+                    {% if story.id in viewed_story_ids %}true{% else %}false{% endif %}
+
+            }
+
+            {% if not forloop.last %},{% endif %}
+
+            {% endfor %}
+
+        ]
+
+    }
+
+    {% if not forloop.last %},{% endif %}
+
+    {% endfor %}
+
+];
+
+
+/* =========================================================
+   CURRENT STORY
+========================================================= */
+
+let currentStories = [];
+
+let currentStoryIndex = 0;
+
+let currentStory = null;
+
+let storyTimer = null;
+
+let storyTimerStart = null;
+
+let storyDuration = 5000;
+
+let lastStoryTap = 0;
+
+
+/* =========================================================
+   PREPARE USERS
+   NO RANDOM SHUFFLE
+   UNSEEN USERS FIRST
+========================================================= */
+
+function prepareStoryGroups() {
+
+    otherStoryGroups.sort(function(a, b) {
+
+        if (
+            a.hasUnseen &&
+            !b.hasUnseen
+        ) {
+
+            return -1;
+
+        }
+
+        if (
+            !a.hasUnseen &&
+            b.hasUnseen
+        ) {
+
+            return 1;
+
+        }
+
+        return 0;
+
+    });
+
+
+    otherStoryGroups.forEach(
+        function(group) {
+
+            group.stories.sort(
+                function(a, b) {
+
+                    /*
+                     * Newest story first.
+                     * We do NOT shuffle stories.
+                     */
+
+                    return Number(b.id) -
+                           Number(a.id);
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   STORY UPLOAD
+========================================================= */
+
+function openStoryUpload(event) {
+
+    if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+    }
+
+    const overlay =
+        document.getElementById(
+            "storyUploadOverlay"
+        );
+
+    if (overlay) {
+        overlay.classList.add("show");
+    }
+
+}
+
+
+function closeStoryUpload() {
+
+    const overlay =
+        document.getElementById(
+            "storyUploadOverlay"
+        );
+
+    const input =
+        document.getElementById(
+            "storyUploadInput"
+        );
+
+    const preview =
+        document.getElementById(
+            "storyUploadPreview"
+        );
+
+    if (overlay) {
+        overlay.classList.remove("show");
+    }
+
+    if (input) {
+        input.value = "";
+    }
+
+    if (preview) {
+        preview.innerHTML = "";
+    }
+
+}
+
+
+function closeStoryUploadOutside(event) {
+
+    if (
+        event.target.id ===
+        "storyUploadOverlay"
+    ) {
+
+        closeStoryUpload();
+
+    }
+
+}
+
+
+/* =========================================================
+   UPLOAD PREVIEW
+========================================================= */
+
+document
+    .getElementById("storyUploadInput")
+    .addEventListener(
+        "change",
+        function() {
+
+            const preview =
+                document.getElementById(
+                    "storyUploadPreview"
+                );
+
+            preview.innerHTML = "";
+
+            const files =
+                Array.from(
+                    this.files || []
+                );
+
+            if (!files.length) {
+                return;
+            }
+
+            files.forEach(
+                function(file, index) {
+
+                    const row =
+                        document.createElement(
+                            "div"
+                        );
+
+                    row.style.marginBottom =
+                        "6px";
+
+                    row.innerHTML =
+                        "<i class='fa-solid " +
+                        (
+                            file.type.startsWith(
+                                "video/"
+                            )
+                                ? "fa-video"
+                                : "fa-image"
+                        ) +
+                        "'></i> " +
+                        (
+                            index + 1
+                        ) +
+                        ". " +
+                        file.name;
+
+                    preview.appendChild(
+                        row
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   UPLOAD STORIES
+========================================================= */
+
+async function uploadStories() {
+
+    const input =
+        document.getElementById(
+            "storyUploadInput"
+        );
+
+    if (
+        !input ||
+        !input.files.length
+    ) {
+
+        alert(
+            "Please select at least one image or video."
+        );
+
+        return;
+
+    }
+
+
+    const formData =
+        new FormData();
+
+
+    Array.from(
+        input.files
+    ).forEach(
+        function(file) {
+
+            formData.append(
+                "files",
+                file
+            );
+
+        }
+    );
+
+
+    try {
+
+        const response =
+            await fetch(
+                "{% url 'create_story' %}",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "X-CSRFToken":
+                            getStoryCSRFToken(),
+
+                        "X-Requested-With":
+                            "XMLHttpRequest"
+                    },
+
+                    body:
+                        formData,
+
+                    credentials:
+                        "same-origin"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            alert(
+                data.message ||
+                "Unable to upload story."
+            );
+
+            return;
+
+        }
+
+
+        closeStoryUpload();
+
+
+        /*
+         * Reload page so the newly created
+         * stories immediately appear.
+         */
+
+        window.location.reload();
+
+
+    } catch (error) {
+
+        console.error(
+            "Story upload error:",
+            error
+        );
+
+        alert(
+            "Something went wrong while uploading the story."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   OPEN MY STORY
+========================================================= */
+
+function openMyStory(index) {
+
+    if (!myStories.length) {
+
+        openStoryUpload();
+
+        return;
+
+    }
+
+
+    /*
+     * Your stories are never shuffled.
+     */
+
+    currentStories =
+        [...myStories];
+
+
+    currentStoryIndex =
+        Math.max(
+            0,
+            Math.min(
+                index || 0,
+                currentStories.length - 1
+            )
+        );
+
+
+    showCurrentStory();
+
+}
+
+
+/* =========================================================
+   OPEN OTHER USER STORY
+========================================================= */
+
+function openOtherUserStory(userId) {
+
+    const group =
+        otherStoryGroups.find(
+            function(group) {
+                return Number(group.userId) === Number(userId);
+            }
+        );
+
+    if (
+        !group ||
+        !group.stories ||
+        !group.stories.length
+    ) {
+        return;
+    }
+
+    currentStories = [...group.stories];
+
+    currentStoryIndex = 0;
+
+    showCurrentStory();
+}
+
+/* =========================================================
+   SHOW STORY
+========================================================= */
+
+function showCurrentStory() {
+
+    clearStoryTimer();
+
+
+    if (
+        !currentStories.length ||
+        !currentStories[
+            currentStoryIndex
+        ]
+    ) {
+
+        closeStory();
+
+        return;
+
+    }
+
+
+    currentStory =
+        currentStories[
+            currentStoryIndex
+        ];
+
+
+    const viewer =
+        document.getElementById(
+            "storyViewer"
+        );
+
+    const image =
+        document.getElementById(
+            "storyViewerImage"
+        );
+
+    const video =
+        document.getElementById(
+            "storyViewerVideo"
+        );
+
+    const username =
+        document.getElementById(
+            "storyUsername"
+        );
+
+    const time =
+        document.getElementById(
+            "storyTime"
+        );
+
+    const avatar =
+        document.getElementById(
+            "storyViewerAvatar"
+        );
+
+    const previousButton =
+        document.getElementById(
+            "storyPrevious"
+        );
+
+    const nextButton =
+        document.getElementById(
+            "storyNext"
+        );
+
+
+    /* =====================================================
+       RESET MEDIA
+    ====================================================== */
+
+    image.classList.remove("show");
+
+    video.classList.remove("show");
+
+    video.pause();
+
+    video.removeAttribute("src");
+
+    video.load();
+
+
+    /* =====================================================
+       IMAGE STORY
+    ====================================================== */
+
+    if (
+        currentStory.type ===
+        "image"
+    ) {
+
+        image.src =
+            currentStory.media;
+
+        image.classList.add(
+            "show"
+        );
+
+
+        storyDuration =
+            5000;
+
+
+        startImageTimer();
+
+    }
+
+
+    /* =====================================================
+       VIDEO STORY
+    ====================================================== */
+
+    else {
+
+        video.src =
+            currentStory.media;
+
+        video.classList.add(
+            "show"
+        );
+
+
+        video.currentTime = 0;
+
+
+        video.onloadedmetadata =
+            function() {
+
+                if (
+                    !isFinite(
+                        video.duration
+                    )
+                ) {
+
+                    storyDuration =
+                        5000;
+
+                } else {
+
+                    storyDuration =
+                        video.duration *
+                        1000;
+
+                }
+
+
+                startVideoProgress();
+
+
+                video.play()
+                    .catch(
+                        function(error) {
+
+                            console.log(
+                                "Video autoplay:",
+                                error
+                            );
+
+                        }
+                    );
+
+            };
+
+
+        video.onended =
+            function() {
+
+                nextStory();
+
+            };
+
+    }
+
+
+    /* =====================================================
+       USER INFO
+    ====================================================== */
+
+    username.textContent =
+        currentStory.username;
+
+
+    time.textContent =
+        currentStory.time +
+        " ago";
+
+
+    avatar.src =
+        currentStory.avatar ||
+        currentStory.media;
+
+
+    /* =====================================================
+       BUTTONS
+    ====================================================== */
+
+    previousButton.disabled =
+        currentStoryIndex === 0;
+
+
+    previousButton.style.opacity =
+        currentStoryIndex === 0
+            ? "0.25"
+            : "1";
+
+
+    nextButton.disabled =
+        currentStoryIndex ===
+        currentStories.length - 1;
+
+
+    nextButton.style.opacity =
+        currentStoryIndex ===
+        currentStories.length - 1
+            ? "0.25"
+            : "1";
+
+
+    /* =====================================================
+       PROGRESS
+    ====================================================== */
+
+    createStoryProgress();
+
+
+    /* =====================================================
+       OWNER DELETE BUTTON
+    ====================================================== */
+
+    const moreButton =
+        document.getElementById(
+            "storyMoreButton"
+        );
+
+    if (currentStory.owner) {
+
+        moreButton.classList.add(
+            "show"
+        );
+
+    } else {
+
+        moreButton.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    closeStoryOwnerMenu();
+
+
+    /* =====================================================
+       SHOW VIEWER
+    ====================================================== */
+
+    viewer.style.display =
+        "flex";
+
+    viewer.classList.add(
+        "active"
+    );
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    /* =====================================================
+       MARK VIEWED IN DATABASE
+    ====================================================== */
+
+    markStoryViewedServer(
+        currentStory.id
+    );
+
+
+    /* =====================================================
+       LOAD LIKE / COMMENT DATA
+    ====================================================== */
+
+    loadStoryInteractionData(
+        currentStory.id
+    );
+
+}
+
+
+/* =========================================================
+   STORY PROGRESS
+========================================================= */
+
+function createStoryProgress() {
+
+    const progress =
+        document.getElementById(
+            "storyProgress"
+        );
+
+
+    progress.innerHTML =
+        "";
+
+
+    currentStories.forEach(
+        function(story, index) {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "story-progress-item";
+
+
+            const fill =
+                document.createElement(
+                    "div"
+                );
+
+            fill.className =
+                "story-progress-fill";
+
+
+            if (
+                index <
+                currentStoryIndex
+            ) {
+
+                item.classList.add(
+                    "completed"
+                );
+
+            }
+
+
+            item.appendChild(
+                fill
+            );
+
+
+            progress.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   IMAGE TIMER
+========================================================= */
+
+function startImageTimer() {
+
+    storyTimerStart =
+        Date.now();
+
+
+    const progressFill =
+        getCurrentProgressFill();
+
+
+    function update() {
+
+        if (
+            !currentStory
+        ) {
+
+            return;
+
+        }
+
+
+        const elapsed =
+            Date.now() -
+            storyTimerStart;
+
+
+        const percent =
+            Math.min(
+                100,
+                (
+                    elapsed /
+                    storyDuration
+                ) * 100
+            );
+
+
+        if (progressFill) {
+
+            progressFill.style.width =
+                percent + "%";
+
+        }
+
+
+        if (
+            elapsed >=
+            storyDuration
+        ) {
+
+            nextStory();
+
+            return;
+
+        }
+
+
+        storyTimer =
+            requestAnimationFrame(
+                update
+            );
+
+    }
+
+
+    update();
+
+}
+
+
+/* =========================================================
+   VIDEO PROGRESS
+========================================================= */
+
+function startVideoProgress() {
+
+    const video =
+        document.getElementById(
+            "storyViewerVideo"
+        );
+
+    const progressFill =
+        getCurrentProgressFill();
+
+
+    function update() {
+
+        if (
+            !video ||
+            !currentStory ||
+            currentStory.type !==
+                "video"
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            video.duration &&
+            isFinite(video.duration)
+        ) {
+
+            const percent =
+                (
+                    video.currentTime /
+                    video.duration
+                ) * 100;
+
+
+            if (progressFill) {
+
+                progressFill.style.width =
+                    Math.min(
+                        100,
+                        percent
+                    ) + "%";
+
+            }
+
+        }
+
+
+        if (
+            !video.paused &&
+            !video.ended
+        ) {
+
+            storyTimer =
+                requestAnimationFrame(
+                    update
+                );
+
+        }
+
+    }
+
+
+    update();
+
+}
+
+
+/* =========================================================
+   CURRENT PROGRESS BAR
+========================================================= */
+
+function getCurrentProgressFill() {
+
+    const bars =
+        document.querySelectorAll(
+            ".story-progress-fill"
+        );
+
+
+    return bars[
+        currentStoryIndex
+    ] || null;
+
+}
+
+
+/* =========================================================
+   CLEAR TIMER
+========================================================= */
+
+function clearStoryTimer() {
+
+    if (storyTimer) {
+
+        cancelAnimationFrame(
+            storyTimer
+        );
+
+        storyTimer =
+            null;
+
+    }
+
+
+    const video =
+        document.getElementById(
+            "storyViewerVideo"
+        );
+
+    if (video) {
+
+        video.pause();
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD LIKE / COMMENT DATA
+========================================================= */
+
+async function loadStoryInteractionData(
+    storyId
+) {
+
+    const likeButton =
+        document.getElementById(
+            "storyLikeButton"
+        );
+
+    const likeCount =
+        document.getElementById(
+            "storyLikeCount"
+        );
+
+    const commentCount =
+        document.getElementById(
+            "storyCommentCount"
+        );
+
+
+    try {
+
+        const url =
+            "{% url 'story_interaction_data' 0 %}"
+                .replace(
+                    "/0/",
+                    "/" +
+                    storyId +
+                    "/"
+                );
+
+
+        const response =
+            await fetch(
+                url,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Accept":
+                            "application/json"
+                    },
+
+                    credentials:
+                        "same-origin"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            return;
+
+        }
+
+
+        updateStoryLikeUI(
+            data.liked,
+            data.likes_count
+        );
+
+
+        if (commentCount) {
+
+            commentCount.textContent =
+                data.comments_count;
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Story interaction load error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LIKE STORY
+========================================================= */
+
+async function toggleStoryLike(
+    event
+) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+
+    if (!currentStory) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                "{% url 'like_story' 0 %}"
+                    .replace(
+                        "/0/",
+                        "/" +
+                        currentStory.id +
+                        "/"
+                    ),
+
+                {
+                    method: "POST",
+
+                    headers: {
+
+                        "X-CSRFToken":
+                            getStoryCSRFToken(),
+
+                        "X-Requested-With":
+                            "XMLHttpRequest",
+
+                        "Accept":
+                            "application/json"
+
+                    },
+
+                    credentials:
+                        "same-origin"
+
+                }
+
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            return;
+
+        }
+
+
+        updateStoryLikeUI(
+            data.liked,
+            data.likes_count
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Story like error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LIKE UI
+========================================================= */
+
+function updateStoryLikeUI(
+    liked,
+    count
+) {
+
+    const button =
+        document.getElementById(
+            "storyLikeButton"
+        );
+
+
+    const countElement =
+        document.getElementById(
+            "storyLikeCount"
+        );
+
+
+    if (!button) {
+        return;
+    }
+
+
+    const icon =
+        button.querySelector("i");
+
+
+    if (liked) {
+
+        button.classList.add(
+            "liked"
+        );
+
+
+        if (icon) {
+
+            icon.className =
+                "fa-solid fa-heart";
+
+        }
+
+    } else {
+
+        button.classList.remove(
+            "liked"
+        );
+
+
+        if (icon) {
+
+            icon.className =
+                "fa-regular fa-heart";
+
+        }
+
+    }
+
+
+    if (countElement) {
+
+        countElement.textContent =
+            count;
+    }
+
+}
+
+
+/* =========================================================
+   DOUBLE TAP LIKE
+========================================================= */
+
+document
+    .getElementById(
+        "storyViewerImage"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            const now =
+                Date.now();
+
+
+            const difference =
+                now -
+                lastStoryTap;
+
+
+            if (
+                difference > 0 &&
+                difference < 350
+            ) {
+
+                event.preventDefault();
+
+
+                showStoryHeart();
+
+
+                const button =
+                    document.getElementById(
+                        "storyLikeButton"
+                    );
+
+
+                if (
+                    button &&
+                    !button.classList.contains(
+                        "liked"
+                    )
+                ) {
+
+                    toggleStoryLike();
+
+                }
+
+            }
+
+
+            lastStoryTap =
+                now;
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "storyViewerVideo"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            const now =
+                Date.now();
+
+
+            const difference =
+                now -
+                lastStoryTap;
+
+
+            if (
+                difference > 0 &&
+                difference < 350
+            ) {
+
+                event.preventDefault();
+
+
+                showStoryHeart();
+
+
+                const button =
+                    document.getElementById(
+                        "storyLikeButton"
+                    );
+
+
+                if (
+                    button &&
+                    !button.classList.contains(
+                        "liked"
+                    )
+                ) {
+
+                    toggleStoryLike();
+
+                }
+
+            }
+
+
+            lastStoryTap =
+                now;
+
+        }
+    );
+
+
+/* =========================================================
+   HEART
+========================================================= */
+
+function showStoryHeart() {
+
+    const container =
+        document.querySelector(
+            ".story-viewer-content"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    const oldHeart =
+        container.querySelector(
+            ".story-double-heart"
+        );
+
+
+    if (oldHeart) {
+        oldHeart.remove();
+    }
+
+
+    const heart =
+        document.createElement(
+            "i"
+        );
+
+
+    heart.className =
+        "fa-solid fa-heart story-double-heart";
+
+
+    container.appendChild(
+        heart
+    );
+
+
+    requestAnimationFrame(
+        function() {
+
+            heart.classList.add(
+                "show"
+            );
+
+        }
+    );
+
+
+    setTimeout(
+        function() {
+
+            if (heart) {
+                heart.remove();
+            }
+
+        },
+        800
+    );
+
+}
+
+
+/* =========================================================
+   MARK VIEWED SERVER
+========================================================= */
+
+async function markStoryViewedServer(
+    storyId
+) {
+
+    if (!storyId) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                "{% url 'view_story' 0 %}"
+                    .replace(
+                        "/0/",
+                        "/" +
+                        storyId +
+                        "/"
+                    ),
+
+                {
+                    method: "POST",
+
+                    headers: {
+
+                        "X-CSRFToken":
+                            getStoryCSRFToken(),
+
+                        "X-Requested-With":
+                            "XMLHttpRequest",
+
+                        "Accept":
+                            "application/json"
+
+                    },
+
+                    credentials:
+                        "same-origin"
+
+                }
+
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (data.success) {
+
+            currentStory.viewed =
+                true;
+
+
+            /*
+             * Update the group locally.
+             */
+
+            otherStoryGroups.forEach(
+                function(group) {
+
+                    group.stories.forEach(
+                        function(story) {
+
+                            if (
+                                Number(story.id) ===
+                                Number(storyId)
+                            ) {
+
+                                story.viewed =
+                                    true;
+
+                            }
+
+                        }
+                    );
+
+
+                    group.hasUnseen =
+                        group.stories.some(
+                            function(story) {
+
+                                return !story.viewed;
+
+                            }
+                        );
+
+                }
+            );
+
+
+            updateStoryCircleOrder();
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Story view error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   UPDATE STORY CIRCLE ORDER
+========================================================= */
+
+function updateStoryCircleOrder() {
+
+    const storiesRow =
+        document.querySelector(".stories-row");
+
+    if (!storiesRow) {
+        return;
+    }
+
+    /*
+     * Sort:
+     *
+     * 1. Unseen users first
+     * 2. Seen users last
+     */
+    otherStoryGroups.sort(
+        function(a, b) {
+
+            if (
+                a.hasUnseen &&
+                !b.hasUnseen
+            ) {
+                return -1;
+            }
+
+            if (
+                !a.hasUnseen &&
+                b.hasUnseen
+            ) {
+                return 1;
+            }
+
+            return 0;
+        }
+    );
+
+    /*
+     * Move the actual story circles
+     * into the new order.
+     */
+    otherStoryGroups.forEach(
+        function(group) {
+
+            const storyElement =
+                storiesRow.querySelector(
+                    '[data-story-user-id="' +
+                    group.userId +
+                    '"]'
+                );
+
+            if (!storyElement) {
+                return;
+            }
+
+            /*
+             * Update seen/unseen state
+             */
+            const storyImage =
+                storyElement.querySelector(
+                    ".story-image"
+                );
+
+            if (storyImage) {
+
+                if (group.hasUnseen) {
+
+                    storyImage.classList.remove(
+                        "seen-story"
+                    );
+
+                    storyElement.dataset.storySeen =
+                        "false";
+
+                } else {
+
+                    storyImage.classList.add(
+                        "seen-story"
+                    );
+
+                    storyElement.dataset.storySeen =
+                        "true";
+                }
+            }
+
+            /*
+             * Move this user to the correct
+             * position in the story row.
+             */
+            storiesRow.appendChild(
+                storyElement
+            );
+        }
+    );
+}
+
+/* =========================================================
+   COMMENT FOCUS
+========================================================= */
+
+function focusStoryComment(
+    event
+) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+
+    const input =
+        document.getElementById(
+            "storyCommentInput"
+        );
+
+
+    if (input) {
+
+        input.focus();
+
+    }
+
+}
+
+
+/* =========================================================
+   ENTER KEY COMMENT
+========================================================= */
+
+function storyCommentKeydown(
+    event
+) {
+
+    if (
+        event.key ===
+        "Enter"
+    ) {
+
+        event.preventDefault();
+
+        submitStoryComment(event);
+
+    }
+
+}
+
+
+/* =========================================================
+   COMMENT STORY
+========================================================= */
+
+async function submitStoryComment(
+    event
+) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+
+    const input =
+        document.getElementById(
+            "storyCommentInput"
+        );
+
+
+    if (
+        !currentStory ||
+        !input
+    ) {
+
+        return;
+
+    }
+
+
+    const text =
+        input.value.trim();
+
+
+    if (!text) {
+
+        return;
+
+    }
+
+
+    const formData =
+        new FormData();
+
+
+    formData.append(
+        "text",
+        text
+    );
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                "{% url 'comment_story' 0 %}"
+                    .replace(
+                        "/0/",
+                        "/" +
+                        currentStory.id +
+                        "/"
+                    ),
+
+                {
+                    method: "POST",
+
+                    headers: {
+
+                        "X-CSRFToken":
+                            getStoryCSRFToken(),
+
+                        "X-Requested-With":
+                            "XMLHttpRequest",
+
+                        "Accept":
+                            "application/json"
+
+                    },
+
+                    body:
+                        formData,
+
+                    credentials:
+                        "same-origin"
+
+                }
+
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            alert(
+                data.message ||
+                "Unable to add comment."
+            );
+
+            return;
+
+        }
+
+
+        input.value =
+            "";
+
+
+        const commentCount =
+            document.getElementById(
+                "storyCommentCount"
+            );
+
+
+        if (commentCount) {
+
+            commentCount.textContent =
+                data.comments_count;
+
+        }
+
+
+        input.blur();
+
+    } catch (error) {
+
+        console.error(
+            "Story comment error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SHARE
+========================================================= */
+
+function toggleStoryShare(
+    event
+) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+
+    const panel =
+        document.getElementById(
+            "storySharePanel"
+        );
+
+
+    if (panel) {
+
+        panel.classList.toggle(
+            "show"
+        );
+
+    }
+
+}
+
+
+async function shareStoryWithUser(
+    userId,
+    event
+) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+
+    if (!currentStory) {
+        return;
+    }
+
+
+    const formData =
+        new FormData();
+
+
+    formData.append(
+        "receiver_id",
+        userId
+    );
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                "{% url 'share_story' 0 %}"
+                    .replace(
+                        "/0/",
+                        "/" +
+                        currentStory.id +
+                        "/"
+                    ),
+
+                {
+                    method: "POST",
+
+                    headers: {
+
+                        "X-CSRFToken":
+                            getStoryCSRFToken(),
+
+                        "X-Requested-With":
+                            "XMLHttpRequest"
+
+                    },
+
+                    body:
+                        formData,
+
+                    credentials:
+                        "same-origin"
+
+                }
+
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            alert(
+                data.message ||
+                "Unable to share story."
+            );
+
+            return;
+
+        }
+
+
+        const panel =
+            document.getElementById(
+                "storySharePanel"
+            );
+
+
+        if (panel) {
+
+            panel.classList.remove(
+                "show"
+            );
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Story share error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   THREE DOT
+========================================================= */
+
+function toggleStoryOwnerMenu(
+    event
+) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+
+    if (
+        !currentStory ||
+        !currentStory.owner
+    ) {
+
+        return;
+
+    }
+
+
+    const menu =
+        document.getElementById(
+            "storyOwnerMenu"
+        );
+
+
+    if (menu) {
+
+        menu.classList.toggle(
+            "show"
+        );
+
+    }
+
+}
+
+
+function closeStoryOwnerMenu() {
+
+    const menu =
+        document.getElementById(
+            "storyOwnerMenu"
+        );
+
+
+    if (menu) {
+
+        menu.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DELETE STORY CONFIRM
+========================================================= */
+
+function askDeleteStory(
+    event
+) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+
+    closeStoryOwnerMenu();
+
+
+    const confirmBox =
+        document.getElementById(
+            "storyDeleteConfirm"
+        );
+
+
+    if (confirmBox) {
+
+        confirmBox.classList.add(
+            "show"
+        );
+
+    }
+
+}
+
+
+function cancelDeleteStory(
+    event
+) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+
+    const confirmBox =
+        document.getElementById(
+            "storyDeleteConfirm"
+        );
+
+
+    if (confirmBox) {
+
+        confirmBox.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DELETE CURRENT STORY
+========================================================= */
+
+async function deleteCurrentStory(
+    event
+) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+
+    if (
+        !currentStory ||
+        !currentStory.owner
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                "{% url 'delete_story' 0 %}"
+                    .replace(
+                        "/0/",
+                        "/" +
+                        currentStory.id +
+                        "/"
+                    ),
+
+                {
+                    method: "POST",
+
+                    headers: {
+
+                        "X-CSRFToken":
+                            getStoryCSRFToken(),
+
+                        "X-Requested-With":
+                            "XMLHttpRequest",
+
+                        "Accept":
+                            "application/json"
+
+                    },
+
+                    credentials:
+                        "same-origin"
+
+                }
+
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            alert(
+                data.message ||
+                "Unable to delete story."
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Remove story locally.
+         */
+
+        myStories.splice(
+            currentStoryIndex,
+            1
+        );
+
+
+        if (!myStories.length) {
+
+            closeStory();
+
+            window.location.reload();
+
+            return;
+
+        }
+
+
+        if (
+            currentStoryIndex >=
+            myStories.length
+        ) {
+
+            currentStoryIndex =
+                myStories.length - 1;
+
+        }
+
+
+        currentStories =
+            [...myStories];
+
+
+        const confirmBox =
+            document.getElementById(
+                "storyDeleteConfirm"
+            );
+
+
+        if (confirmBox) {
+
+            confirmBox.classList.remove(
+                "show"
+            );
+
+        }
+
+
+        showCurrentStory();
+
+
+    } catch (error) {
+
+        console.error(
+            "Delete story error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   NEXT
+========================================================= */
+
+function nextStory(event) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+
+    clearStoryTimer();
+
+
+    if (
+        currentStoryIndex <
+        currentStories.length - 1
+    ) {
+
+        currentStoryIndex++;
+
+        showCurrentStory();
+
+    } else {
+
+        closeStory();
+
+    }
+
+}
+
+
+/* =========================================================
+   PREVIOUS
+========================================================= */
+
+function previousStory(event) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+
+    clearStoryTimer();
+
+
+    if (
+        currentStoryIndex >
+        0
+    ) {
+
+        currentStoryIndex--;
+
+        showCurrentStory();
+
+    }
+
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+function closeStory(event) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+
+    clearStoryTimer();
+
+
+    const viewer =
+        document.getElementById(
+            "storyViewer"
+        );
+
+
+    if (!viewer) {
+        return;
+    }
+
+
+    viewer.classList.remove(
+        "active"
+    );
+
+
+    viewer.style.display =
+        "none";
+
+
+    document.body.style.overflow =
+        "";
+
+
+    const video =
+        document.getElementById(
+            "storyViewerVideo"
+        );
+
+
+    if (video) {
+
+        video.pause();
+
+        video.removeAttribute(
+            "src"
+        );
+
+        video.load();
+
+    }
+
+
+    const sharePanel =
+        document.getElementById(
+            "storySharePanel"
+        );
+
+
+    if (sharePanel) {
+
+        sharePanel.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    const commentInput =
+        document.getElementById(
+            "storyCommentInput"
+        );
+
+
+    if (commentInput) {
+
+        commentInput.value =
+            "";
+
+    }
+
+
+    const deleteBox =
+        document.getElementById(
+            "storyDeleteConfirm"
+        );
+
+
+    if (deleteBox) {
+
+        deleteBox.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    closeStoryOwnerMenu();
+
+
+    currentStories = [];
+
+    currentStoryIndex = 0;
+
+    currentStory = null;
+
+}
+
+
+/* =========================================================
+   OUTSIDE CLICK
+========================================================= */
+
+document
+    .getElementById(
+        "storyViewer"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                this
+            ) {
+
+                closeStory();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        const viewer =
+            document.getElementById(
+                "storyViewer"
+            );
+
+
+        if (
+            !viewer ||
+            viewer.style.display !==
+                "flex"
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeStory();
+
+            return;
+
+        }
+
+
+        if (
+            event.key ===
+            "ArrowRight"
+        ) {
+
+            nextStory();
+
+            return;
+
+        }
+
+
+        if (
+            event.key ===
+            "ArrowLeft"
+        ) {
+
+            previousStory();
+
+            return;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CSRF
+========================================================= */
+
+function getStoryCSRFToken() {
+
+    const cookies =
+        document.cookie.split(";");
+
+
+    for (
+        let cookie of cookies
+    ) {
+
+        cookie =
+            cookie.trim();
+
+
+        if (
+            cookie.startsWith(
+                "csrftoken="
+            )
+        ) {
+
+            return decodeURIComponent(
+                cookie.substring(
+                    "csrftoken=".length
+                )
+            );
+
+        }
+
+    }
+
+
+    const csrfInput =
+        document.querySelector(
+            'input[name="csrfmiddlewaretoken"]'
+        );
+
+
+    if (csrfInput) {
+
+        return csrfInput.value;
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+prepareStoryGroups();
+
+</script>
+
+{% endblock %}

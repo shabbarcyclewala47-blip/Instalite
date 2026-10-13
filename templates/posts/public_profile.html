@@ -1,0 +1,913 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ profile_user.full_name|default:profile_user.username }} | InstaLite
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* =========================================================
+   INSTALITE PUBLIC PROFILE — PREMIUM GRADIENT DESIGN
+========================================================= */
+
+.public-profile-page {
+    min-height: calc(100vh - 72px);
+    padding: 10px 0 50px;
+    position: relative;
+}
+
+.public-profile-page::before,
+.public-profile-page::after {
+    content: "";
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(10px);
+}
+
+.public-profile-page::before {
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(124,58,237,.18), transparent 68%);
+    top: 100px;
+    left: 22%;
+}
+
+.public-profile-page::after {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(6,182,212,.15), transparent 68%);
+    bottom: 20px;
+    right: 12%;
+}
+
+.public-profile-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border-radius: 28px;
+    padding: 34px;
+    background: linear-gradient(135deg, rgba(255,255,255,.88), rgba(248,243,255,.91), rgba(235,249,255,.90), rgba(255,241,249,.88));
+    border: 1px solid rgba(124,58,237,.15);
+    box-shadow: 0 18px 55px rgba(70,48,130,.13);
+    backdrop-filter: blur(20px);
+}
+
+.public-profile-card::before,
+.public-profile-card::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.public-profile-card::before {
+    width: 270px;
+    height: 270px;
+    background: radial-gradient(circle, rgba(124,58,237,.13), transparent 70%);
+    top: -140px;
+    right: -80px;
+}
+
+.public-profile-card::after {
+    width: 230px;
+    height: 230px;
+    background: radial-gradient(circle, rgba(6,182,212,.11), transparent 70%);
+    bottom: -130px;
+    left: -70px;
+}
+
+/* Profile header and avatar */
+.public-profile-header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 42px;
+}
+
+.public-profile-avatar-wrapper {
+    width: 145px;
+    height: 145px;
+    min-width: 145px;
+    padding: 5px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7c3aed, #6366f1, #06b6d4, #ec4899);
+    box-shadow: 0 12px 35px rgba(103,75,235,.25);
+}
+
+.public-profile-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #eee7ff, #e4f9ff);
+    border: 4px solid rgba(255,255,255,.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7955df;
+    font-size: 46px;
+}
+
+.public-profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.public-profile-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.public-profile-name-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
+
+.public-profile-name {
+    margin: 0;
+    color: #30264a;
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -.5px;
+    overflow-wrap: anywhere;
+}
+
+.verified-badge {
+    width: 21px;
+    height: 21px;
+    flex: 0 0 21px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: linear-gradient(135deg, #7c3aed, #0891b2);
+    font-size: 10px;
+    box-shadow: 0 4px 10px rgba(124,58,237,.20);
+}
+
+.public-profile-username {
+    color: #77718c;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    overflow-wrap: anywhere;
+}
+
+/* Statistics */
+.profile-statistics {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+    margin-bottom: 17px;
+}
+
+.profile-stat {
+    text-align: left;
+}
+
+.profile-stat strong {
+    display: block;
+    color: #30264a;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.profile-stat span {
+    display: block;
+    color: #858095;
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+/* Bio */
+.public-profile-bio {
+    max-width: 620px;
+    color: #5f5a70;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.public-profile-bio.empty {
+    color: #aaa4b4;
+    font-style: italic;
+}
+
+/* Action buttons */
+.profile-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.profile-action-btn {
+    min-width: 115px;
+    min-height: 39px;
+    padding: 0 18px;
+    border-radius: 11px;
+    border: 1px solid rgba(124,58,237,.15);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 750;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+}
+
+.follow-btn {
+    color: white;
+    background: linear-gradient(135deg, #7c3aed, #6366f1, #0891b2);
+    border: none;
+    box-shadow: 0 7px 18px rgba(100,75,230,.24);
+}
+
+.follow-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(100,75,230,.30);
+}
+
+.follow-btn.following,
+.follow-btn.requested {
+    color: #6143c7;
+    background: linear-gradient(135deg, #eee7ff, #e2f8ff);
+    border: 1px solid rgba(124,58,237,.18);
+    box-shadow: none;
+}
+
+.message-btn {
+    color: #5f4b99;
+    background: linear-gradient(135deg, rgba(255,255,255,.88), rgba(238,232,255,.90));
+}
+
+.message-btn:hover {
+    color: #6339d4;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #eee7ff, #e1f8ff);
+}
+
+.follow-btn.loading {
+    pointer-events: none;
+    opacity: .65;
+}
+
+/* Divider and tabs */
+.profile-divider {
+    position: relative;
+    z-index: 1;
+    height: 1px;
+    margin: 30px 0 0;
+    background: linear-gradient(90deg, transparent, rgba(124,58,237,.18), rgba(6,182,212,.18), transparent);
+}
+
+.profile-tabs {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    height: 64px;
+}
+
+.profile-tab {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #9790a4;
+    font-size: 12px;
+    font-weight: 750;
+    position: relative;
+    cursor: pointer;
+    transition: color .2s ease;
+    border: none;
+    background: transparent;
+}
+
+.profile-tab i {
+    font-size: 13px;
+}
+
+.profile-tab:hover,
+.profile-tab.active {
+    color: #5e3ac9;
+}
+
+.profile-tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #7c3aed, #06b6d4);
+}
+
+/* Post and Reel grids */
+.profile-posts-section {
+    margin-top: 20px;
+}
+
+.profile-post-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.profile-post {
+    position: relative;
+    display: block;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #eee7ff, #e4f9ff);
+    cursor: pointer;
+    box-shadow: 0 7px 20px rgba(70,48,130,.09);
+    border: 1px solid rgba(124,58,237,.08);
+    text-decoration: none;
+}
+
+.profile-post img,
+.profile-post video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .35s ease;
+}
+
+.profile-post:hover img,
+.profile-post:hover video {
+    transform: scale(1.06);
+}
+
+.profile-post-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    color: white;
+    background: linear-gradient(135deg, rgba(79,35,150,.68), rgba(6,120,150,.62));
+    opacity: 0;
+    transition: opacity .25s ease;
+}
+
+.profile-post:hover .profile-post-overlay {
+    opacity: 1;
+}
+
+.post-stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 750;
+    text-shadow: 0 2px 7px rgba(0,0,0,.25);
+}
+
+/* Empty states and private notice */
+.profile-empty {
+    grid-column: 1 / -1;
+    min-height: 270px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 35px;
+    background: linear-gradient(145deg, rgba(255,255,255,.80), rgba(242,236,255,.82), rgba(235,250,255,.82));
+    border: 1px solid rgba(124,58,237,.10);
+}
+
+.profile-private-notice {
+    margin-top: 25px;
+}
+
+.profile-empty-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #eee5ff, #def8ff);
+    color: #7954df;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.profile-empty h3 {
+    color: #3b3150;
+    font-size: 17px;
+    margin: 0 0 6px;
+}
+
+.profile-empty p {
+    color: #9690a0;
+    font-size: 12px;
+    margin: 0;
+    max-width: 420px;
+    line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .public-profile-card {
+        padding: 25px 20px;
+        border-radius: 22px;
+    }
+
+    .public-profile-header {
+        gap: 25px;
+        align-items: flex-start;
+    }
+
+    .public-profile-avatar-wrapper {
+        width: 115px;
+        height: 115px;
+        min-width: 115px;
+    }
+
+    .public-profile-name {
+        font-size: 22px;
+    }
+
+    .profile-statistics {
+        gap: 20px;
+    }
+
+    .profile-stat strong {
+        font-size: 16px;
+    }
+
+    .profile-post-grid {
+        gap: 8px;
+    }
+
+    .profile-post {
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 560px) {
+    .public-profile-page {
+        padding-top: 0;
+    }
+
+    .public-profile-card {
+        padding: 20px 15px;
+        border-radius: 18px;
+    }
+
+    .public-profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 18px;
+    }
+
+    .public-profile-avatar-wrapper {
+        width: 110px;
+        height: 110px;
+        min-width: 110px;
+    }
+
+    .public-profile-name-row {
+        justify-content: center;
+    }
+
+    .public-profile-info {
+        width: 100%;
+    }
+
+    .public-profile-username {
+        margin-bottom: 13px;
+    }
+
+    .profile-statistics {
+        justify-content: center;
+        gap: 27px;
+    }
+
+    .profile-stat {
+        text-align: center;
+    }
+
+    .public-profile-bio {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .profile-actions {
+        justify-content: center;
+    }
+
+    .profile-action-btn {
+        min-width: 105px;
+        padding: 0 12px;
+    }
+
+    .profile-tabs {
+        gap: 45px;
+    }
+
+    .profile-post-grid {
+        gap: 5px;
+    }
+
+    .profile-post {
+        border-radius: 7px;
+    }
+
+    .profile-post-overlay {
+        display: none;
+    }
+
+    .profile-empty {
+        padding: 25px 16px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="public-profile-page">
+    <div class="public-profile-card">
+
+        <!-- PROFILE HEADER -->
+        <div class="public-profile-header">
+            <div class="public-profile-avatar-wrapper">
+                <div class="public-profile-avatar">
+                    {% if profile_user.profile_picture %}
+                        <img
+                            src="{{ profile_user.profile_picture.url }}"
+                            alt="{{ profile_user.username }}"
+                        >
+                    {% else %}
+                        <i class="fa-solid fa-user" aria-hidden="true"></i>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="public-profile-info">
+                <div class="public-profile-name-row">
+                    <h1 class="public-profile-name">
+                        {{ profile_user.full_name|default:profile_user.username }}
+                    </h1>
+                    <span class="verified-badge" title="InstaLite profile" aria-label="InstaLite profile">
+                        <i class="fa-solid fa-check" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="public-profile-username">
+                    @{{ profile_user.username }}
+                    {% if profile_user.private_account %}
+                        <i class="fa-solid fa-lock" title="Private account" aria-label="Private account"></i>
+                    {% endif %}
+                </div>
+
+                <div class="profile-statistics">
+                    <div class="profile-stat">
+                        <strong>{{ posts_count }}</strong>
+                        <span>Posts</span>
+                    </div>
+
+                    <div class="profile-stat">
+                        <strong id="followersCount">{{ followers_count }}</strong>
+                        <span>Followers</span>
+                    </div>
+
+                    <div class="profile-stat">
+                        <strong>{{ following_count }}</strong>
+                        <span>Following</span>
+                    </div>
+                </div>
+
+                {% if profile_user.bio %}
+                    <div class="public-profile-bio">{{ profile_user.bio }}</div>
+                {% else %}
+                    <div class="public-profile-bio empty">No bio added yet.</div>
+                {% endif %}
+
+                <!-- PROFILE ACTIONS -->
+                <div class="profile-actions">
+                    {% if request.user.id != profile_user.id %}
+                        <button
+                            type="button"
+                            id="followButton"
+                            data-status="{% if pending_request %}requested{% elif is_following %}following{% else %}not_following{% endif %}"
+                            class="profile-action-btn follow-btn{% if is_following %} following{% elif pending_request %} requested{% endif %}"
+                            aria-label="Update follow status"
+                        >
+                            {% if pending_request %}
+                                <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                                <span>Requested</span>
+                            {% elif is_following %}
+                                <i class="fa-solid fa-user-check" aria-hidden="true"></i>
+                                <span>Following</span>
+                            {% elif profile_user.private_account %}
+                                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                                <span>Request to Follow</span>
+                            {% else %}
+                                <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                                <span>Follow</span>
+                            {% endif %}
+                        </button>
+
+                        {% if can_message %}
+                            <a
+                                href="{% url 'conversation' profile_user.id %}"
+                                class="profile-action-btn message-btn"
+                            >
+                                <i class="fa-regular fa-paper-plane" aria-hidden="true"></i>
+                                Message
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if profile_user.private_account and not profile_can_view %}
+            <!-- PRIVATE ACCOUNT LOCKED STATE -->
+            <div class="profile-divider"></div>
+
+            <div class="profile-empty profile-private-notice">
+                <div class="profile-empty-icon">
+                    <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                </div>
+
+                <h3>This Account Is Private</h3>
+
+                <p>
+                    {% if pending_request %}
+                        Your follow request is waiting for approval.
+                    {% elif is_following and not follows_you %}
+                        Your follow request has been accepted. This account must follow you back before you can view its posts and Reels.
+                    {% else %}
+                        Send a follow request and wait for approval. You must follow each other to view this account's posts and Reels.
+                    {% endif %}
+                </p>
+            </div>
+        {% else %}
+            <!-- PROFILE CONTENT TABS -->
+            <div class="profile-divider"></div>
+
+            <div class="profile-tabs" role="tablist" aria-label="Profile content">
+                <button
+                    type="button"
+                    id="postsTab"
+                    class="profile-tab active"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="postsSection"
+                >
+                    <i class="fa-solid fa-table-cells" aria-hidden="true"></i>
+                    Posts
+                </button>
+
+                <button
+                    type="button"
+                    id="reelsTab"
+                    class="profile-tab"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="reelsSection"
+                >
+                    <i class="fa-solid fa-clapperboard" aria-hidden="true"></i>
+                    Reels
+                </button>
+            </div>
+
+            <!-- POSTS GRID -->
+            <section id="postsSection" class="profile-posts-section" role="tabpanel" aria-labelledby="postsTab">
+                <div class="profile-post-grid">
+                    {% for post in user_posts %}
+                        <div class="profile-post" title="{{ post.caption|default:'Post' }}">
+                            {% if post.image %}
+                                <img
+                                    src="{{ post.image.url }}"
+                                    alt="Post by {{ profile_user.username }}"
+                                    loading="lazy"
+                                >
+                            {% else %}
+                                <div class="profile-empty-icon" aria-label="Post media unavailable">
+                                    <i class="fa-regular fa-image" aria-hidden="true"></i>
+                                </div>
+                            {% endif %}
+
+                            <div class="profile-post-overlay">
+                                <div class="post-stat">
+                                    <i class="fa-solid fa-heart" aria-hidden="true"></i>
+                                    {{ post.likes.count }}
+                                </div>
+                                <div class="post-stat">
+                                    <i class="fa-solid fa-comment" aria-hidden="true"></i>
+                                    {{ post.comments.count }}
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="profile-empty">
+                            <div class="profile-empty-icon">
+                                <i class="fa-regular fa-images" aria-hidden="true"></i>
+                            </div>
+                            <h3>No Posts Yet</h3>
+                            <p>{{ profile_user.username }} hasn't shared any posts yet.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- REELS GRID -->
+            <section id="reelsSection" class="profile-posts-section" role="tabpanel" aria-labelledby="reelsTab" hidden>
+                <div class="profile-post-grid">
+                    {% for reel in user_reels %}
+                        {% if reel.video %}
+                            <a
+                                class="profile-post"
+                                href="{% url 'reels' %}?reel={{ reel.id }}"
+                                title="{{ reel.caption|default:'Reel' }}"
+                                aria-label="Watch Reel by {{ profile_user.username }}"
+                            >
+                                <video
+                                    src="{{ reel.video.url }}"
+                                    muted
+                                    preload="metadata"
+                                    playsinline
+                                    aria-label="Reel preview"
+                                ></video>
+
+                                <div class="profile-post-overlay">
+                                    <div class="post-stat">
+                                        <i class="fa-solid fa-play" aria-hidden="true"></i>
+                                        Watch Reel
+                                    </div>
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% empty %}
+                        <div class="profile-empty">
+                            <div class="profile-empty-icon">
+                                <i class="fa-solid fa-clapperboard" aria-hidden="true"></i>
+                            </div>
+                            <h3>No Reels Yet</h3>
+                            <p>{{ profile_user.username }} hasn't uploaded any Reels yet.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+    </div>
+</div>
+
+<form id="csrfForm" style="display:none;" aria-hidden="true">
+    {% csrf_token %}
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const followButton = document.getElementById('followButton');
+    const followersCount = document.getElementById('followersCount');
+
+    const postsTab = document.getElementById('postsTab');
+    const reelsTab = document.getElementById('reelsTab');
+    const postsSection = document.getElementById('postsSection');
+    const reelsSection = document.getElementById('reelsSection');
+
+    const csrfInput = document.querySelector(
+        '#csrfForm [name="csrfmiddlewaretoken"]'
+    );
+
+    const isPrivateProfile =
+        {{ profile_user.private_account|yesno:"true,false" }};
+
+    function renderFollowButton(status) {
+        if (!followButton) return;
+
+        followButton.dataset.status = status;
+        followButton.classList.toggle('following', status === 'following');
+        followButton.classList.toggle('requested', status === 'requested');
+
+        if (status === 'requested') {
+            followButton.innerHTML =
+                '<i class="fa-solid fa-clock" aria-hidden="true"></i><span>Requested</span>';
+        } else if (status === 'following') {
+            followButton.innerHTML =
+                '<i class="fa-solid fa-user-check" aria-hidden="true"></i><span>Following</span>';
+        } else if (isPrivateProfile) {
+            followButton.innerHTML =
+                '<i class="fa-solid fa-lock" aria-hidden="true"></i><span>Request to Follow</span>';
+        } else {
+            followButton.innerHTML =
+                '<i class="fa-solid fa-user-plus" aria-hidden="true"></i><span>Follow</span>';
+        }
+    }
+
+    if (followButton && csrfInput) {
+        followButton.addEventListener('click', async function () {
+            if (followButton.classList.contains('loading')) return;
+
+            followButton.classList.add('loading');
+            followButton.setAttribute('aria-busy', 'true');
+
+            try {
+                const response = await fetch(
+                    "{% url 'follow_user' profile_user.id %}",
+                    {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': csrfInput.value,
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        credentials: 'same-origin'
+                    }
+                );
+
+                const data = await response.json();
+
+                if (!response.ok || !data.success) {
+                    throw new Error(
+                        data.message || 'Unable to update follow status.'
+                    );
+                }
+
+                const status = data.status ||
+                    (data.requested ? 'requested' :
+                    (data.following ? 'following' : 'not_following'));
+
+                renderFollowButton(status);
+
+                if (followersCount && data.followers_count !== undefined) {
+                    followersCount.textContent = data.followers_count;
+                }
+
+                /*
+                 * Reload to refresh private-profile permissions and the
+                 * profile content. The endpoint must support cancelling
+                 * a pending request when the button is clicked again.
+                 */
+                window.location.reload();
+            } catch (error) {
+                console.error('Follow error:', error);
+                alert(error.message || 'Could not update follow status.');
+            } finally {
+                followButton.classList.remove('loading');
+                followButton.removeAttribute('aria-busy');
+            }
+        });
+    }
+
+    function showTab(tab) {
+        if (!postsTab || !reelsTab || !postsSection || !reelsSection) return;
+
+        const showPosts = tab === 'posts';
+
+        postsTab.classList.toggle('active', showPosts);
+        reelsTab.classList.toggle('active', !showPosts);
+
+        postsTab.setAttribute('aria-selected', String(showPosts));
+        reelsTab.setAttribute('aria-selected', String(!showPosts));
+
+        postsSection.hidden = !showPosts;
+        reelsSection.hidden = showPosts;
+    }
+
+    if (postsTab) {
+        postsTab.addEventListener('click', function () {
+            showTab('posts');
+        });
+    }
+
+    if (reelsTab) {
+        reelsTab.addEventListener('click', function () {
+            showTab('reels');
+        });
+    }
+});
+</script>
+{% endblock %}
