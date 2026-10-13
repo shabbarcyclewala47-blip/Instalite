@@ -253,73 +253,31 @@
                 </p>
             </div>
 
-            <div class="skills-grid">
 
-                <div class="skill-card">
-                    <span>Py</span>
-                    <div>
-                        <h3>Python</h3>
-                        <p>Programming</p>
-                    </div>
-                </div>
+<div class="skill-categories">
 
-                <div class="skill-card">
-                    <span>D</span>
-                    <div>
-                        <h3>Django</h3>
-                        <p>Backend development</p>
-                    </div>
-                </div>
+    <div class="skill-category glass-card">
+        <h3>Frontend Development</h3>
+        <p>HTML5 · CSS3 · JavaScript · Bootstrap</p>
+    </div>
 
-                <div class="skill-card">
-                    <span>API</span>
-                    <div>
-                        <h3>REST APIs</h3>
-                        <p>API development</p>
-                    </div>
-                </div>
+    <div class="skill-category glass-card">
+        <h3>Backend Development</h3>
+        <p>Python · Django · REST APIs</p>
+    </div>
 
-                <div class="skill-card">
-                    <span>H5</span>
-                    <div>
-                        <h3>HTML5</h3>
-                        <p>Web structure</p>
-                    </div>
-                </div>
+    <div class="skill-category glass-card">
+        <h3>Database Management</h3>
+        <p>SQL · MySQL · PostgreSQL</p>
+    </div>
 
-                <div class="skill-card">
-                    <span>C3</span>
-                    <div>
-                        <h3>CSS3</h3>
-                        <p>Responsive styling</p>
-                    </div>
-                </div>
+    <div class="skill-category glass-card">
+        <h3>Development Tools</h3>
+        <p>Git · GitHub · VS Code</p>
+    </div>
 
-                <div class="skill-card">
-                    <span>JS</span>
-                    <div>
-                        <h3>JavaScript</h3>
-                        <p>Frontend functionality</p>
-                    </div>
-                </div>
+</div>
 
-                <div class="skill-card">
-                    <span>DB</span>
-                    <div>
-                        <h3>SQL</h3>
-                        <p>Database fundamentals</p>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <span>Git</span>
-                    <div>
-                        <h3>Git & GitHub</h3>
-                        <p>Version control</p>
-                    </div>
-                </div>
-
-            </div>
 
             <p class="skills-note">
                 Keep only technologies you can confidently explain and demonstrate.
@@ -345,48 +303,25 @@
             <!-- INSTALITE PROJECT -->
             <article class="project-card glass-card">
 
-                <div class="project-visual instalite-visual">
+      <div class="project-visual instalite-visual">
+    <div class="project-screenshots">
 
-                    <div class="mock-social">
+          <img
+            src="{% static 'portfolio/images/instalite.png' %}"
+            alt="InstaLite Home Feed"
+            class="project-screenshot"
+        >
 
-                        <div class="mock-top">
-                            <span>◎ InstaLite</span>
-                            <span>＋</span>
-                        </div>
+        <img src="{% static 'portfolio/images/create-post.png.png' %}"
+             alt="Create Post"
+             class="project-screenshot">
 
-                        <div class="mock-story-row">
-                            <i>SC</i>
-                            <i>JD</i>
-                            <i>AM</i>
-                            <i>RK</i>
-                        </div>
+        <img src="{% static 'portfolio/images/profile.png.png' %}"
+             alt="Profile"
+             class="project-screenshot">
 
-                        <div class="mock-post">
-
-                            <div class="mock-post-head">
-                                <b>developer_diary</b>
-                                <span>•••</span>
-                            </div>
-
-                            <div class="mock-post-art">
-                                Create.<br>
-                                Connect.<br>
-                                <strong>Share.</strong>
-                            </div>
-
-                            <div class="mock-post-actions">
-                                ♡　◯　↗
-                            </div>
-
-                            <div class="mock-post-caption">
-                                Building a community, one post at a time.
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
+    </div>
+</div>
 
 
                 <div class="project-info">
@@ -411,43 +346,131 @@
                         <span>SQL</span>
                     </div>
 
-                    <div class="project-links">
 
-                        <a href="#contact">
-                            Project details ↗
-                        </a>
+<div class="project-links">
 
-                        <!-- Replace YOUR_USERNAME with your GitHub username -->
-                        <a href="https://github.com/shabbarcyclewala47-blip/InstaLite"
-                           target="_blank"
-                           rel="noopener noreferrer">
-                            View Source Code ↗
-                        </a>
+    <a href="#instalite-details">
+        Project Details ↗
+    </a>
 
-                    </div>
+    <a href="https://github.com/shabbarcyclewala47-blip/InstaLite"
+       target="_blank"
+       rel="noopener noreferrer">
+        View Source Code ↗
+    </a>
+
+</div>
 
                 </div>
 
             </article>
 
+<!-- INSTALITE PROJECT DETAILS -->
+<section class="instalite-details glass-card"
+         id="instalite-details">
+
+    <p class="eyebrow">PROJECT OVERVIEW</p>
+
+    <h3>Inside <span>InstaLite.</span></h3>
+
+    <p>
+        InstaLite is a social media web application inspired by
+        Instagram. I developed it to practise full stack web
+        development, database integration and user authentication.
+    </p>
+
+    <h4>Key Features</h4>
+
+    <ul>
+        <li>User registration, login and logout</li>
+        <li>User profiles and profile picture uploads</li>
+        <li>Create posts with multiple images</li>
+        <li>Like and comment on posts</li>
+        <li>Stories and following functionality</li>
+        <li>Notifications, saved posts and messaging</li>
+    </ul>
+
+    <h4>Technology Stack</h4>
+
+    <div class="tech-tags">
+        <span>Python</span>
+        <span>Django</span>
+        <span>HTML5</span>
+        <span>CSS3</span>
+        <span>JavaScript</span>
+        <span>Bootstrap</span>
+        <span>SQL</span>
+    </div>
+
+    <p class="project-note">
+        This project demonstrates my practical learning in
+        frontend development, backend logic, authentication
+        and database operations.
+    </p>
+
+    <a href="https://github.com/shabbarcyclewala47-blip/InstaLite"
+       target="_blank"
+       rel="noopener noreferrer">
+        Explore the code on GitHub ↗
+    </a>
+
+</section>
+
+
 
             <!-- FUTURE PROJECTS -->
-            <div class="coming-soon glass-card">
 
-                <span>✳</span>
+<!-- PROJECT 02: E-COMMERCE -->
+<article class="project-card glass-card">
 
-                <div>
-                    <h3>More projects coming soon</h3>
+    <div class="project-visual ecommerce-visual">
+        <div class="project-placeholder">
+            <span>🛍️</span>
+            <h3>E-Commerce Website</h3>
+            <p>Full Stack Web Application</p>
+        </div>
+    </div>
 
-                    <p>
-                        I'll add more completed projects as I build
-                        and document them.
-                    </p>
-                </div>
+    <div class="project-info">
 
-            </div>
+        <span class="project-label">
+            02 / E-COMMERCE
+        </span>
 
-        </section>
+        <h3>E-Commerce Website</h3>
+
+        <p>
+            A Django-based online shopping application designed
+            to practise product management, database operations,
+            user authentication and shopping workflows.
+        </p>
+
+        <div class="tech-tags">
+            <span>Python</span>
+            <span>Django</span>
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>JavaScript</span>
+            <span>SQL</span>
+        </div>
+
+        <div class="project-links">
+            <a href="https://github.com/shabbarcyclewala47-blip"
+               target="_blank"
+               rel="noopener noreferrer">
+                Explore GitHub ↗
+            </a>
+        </div>
+
+        <p class="project-note">
+            Project status: Update this card with your completed
+            features and repository when ready.
+        </p>
+
+    </div>
+
+</article>
+
 
 
         <!-- RESUME -->
@@ -467,9 +490,21 @@
                 </div>
 
                 <!-- Replace with your actual resume PDF URL when available -->
-                <a class="btn btn-primary" href="#contact">
-                    Request My Resume ↗
-                </a>
+
+<a class="btn btn-primary"
+   href="{% static 'portfolio/files/Shabbar_Cyclewala_Resume.pdf' %}"
+   target="_blank"
+   rel="noopener noreferrer">
+    View Resume ↗
+</a>
+
+<a class="btn btn-outline"
+   href="{% static 'portfolio/files/Shabbar_Cyclewala_Resume.pdf' %}"
+   download>
+    Download Resume ↓
+</a>
+
+
 
             </div>
 

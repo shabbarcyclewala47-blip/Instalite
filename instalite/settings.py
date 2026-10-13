@@ -3,6 +3,7 @@ Django settings for instalite project.
 """
 
 from pathlib import Path
+import os
 
 
 # =========================================================
@@ -15,13 +16,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # =========================================================
 # SECURITY SETTINGS
 # =========================================================
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "")
 
-SECRET_KEY = 'django-insecure-5&+nrcddlzicn)%&t0szgjqk(d+zk6$4u$6@5c5@xj1-g_+2+z'
+DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
 
-DEBUG = True
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+    if host.strip()
+]
 
-ALLOWED_HOSTS = []
-
+if not DEBUG and not SECRET_KEY:
+    raise ValueError("DJANGO_SECRET_KEY must be set in production")
 
 # =========================================================
 # CUSTOM USER MODEL
@@ -57,6 +63,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
 
@@ -181,11 +188,20 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 
 # =========================================================
 # MEDIA FILES
 # =========================================================
+
 
 MEDIA_URL = '/media/'
 
