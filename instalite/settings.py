@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # =========================================================
 # SECURITY SETTINGS
-# =========================================================
+#  =========================================================
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "")
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
@@ -48,6 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Cloudinary media storage
+    'cloudinary_storage',
+    'cloudinary',
+
 
     'rest_framework',
 
@@ -129,13 +133,24 @@ WSGI_APPLICATION = 'instalite.wsgi.application'
 # DATABASE
 # =========================================================
 
-DATABASES = {
-    "default": dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-    )
-}
+# Database configuration
+DATABASE_URL = os.environ.get("DATABASE_URL", "").strip()
 
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+        )
+    }
+else:
+    # Local development and deployments without DATABASE_URL
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 
 # =========================================================
@@ -189,14 +204,16 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
 
 
 # =========================================================
@@ -207,6 +224,11 @@ STORAGES = {
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
 
 
 # =========================================================
