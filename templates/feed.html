@@ -75,8 +75,13 @@
 }
 
 .post-avatar {
-    width: 44px;
-    height: 44px;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px;
+    min-height: 44px;
+    max-width: 44px;
+    max-height: 44px;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     background: linear-gradient(
         135deg,
@@ -89,14 +94,26 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    overflow: hidden;
     font-size: 18px;
     box-shadow: 0 4px 12px rgba(117, 91, 163, 0.20);
 }
 
 .post-profile-picture {
+    display: block !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px;
+    min-height: 44px;
+    max-width: 44px;
+    max-height: 44px;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
+    object-position: center;
     border: 2px solid #e9def7;
-    box-shadow: 0 4px 12px rgba(117, 91, 163, 0.20);
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
 }
 
 .post-user-details {
