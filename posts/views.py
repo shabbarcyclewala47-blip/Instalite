@@ -1143,6 +1143,13 @@ def create_reel(request):
         return render(request, "posts/create_reel.html")
 
     video = request.FILES.get("video")
+    field_storage = Reel._meta.get_field("video").storage
+
+    logger.warning(
+    "REEL STORAGE CHECK: class=%s, resource_type=%s",
+    field_storage.__class__.__name__,
+    getattr(field_storage, "RESOURCE_TYPE", "NOT SET"),
+)
     caption = request.POST.get("caption", "").strip()
 
     if not video:
