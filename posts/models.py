@@ -4,6 +4,7 @@ from django.utils import timezone
 from datetime import timedelta
 
 from accounts.models import Account
+from cloudinary_storage.storage import VideoMediaCloudinaryStorage
 
 
 # =========================================================
