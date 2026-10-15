@@ -464,13 +464,14 @@ class Reel(models.Model):
         related_name='reels'
     )
     video = models.FileField(
-        upload_to='reels/',
-        validators=[
-            FileExtensionValidator(
-                allowed_extensions=['mp4', 'webm', 'mov']
-            )
-        ]
-    )
+    upload_to='reels/',
+    storage=VideoMediaCloudinaryStorage(),
+    validators=[
+        FileExtensionValidator(
+            allowed_extensions=['mp4', 'webm', 'mov']
+        )
+    ]
+)
     caption = models.CharField(max_length=500, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
