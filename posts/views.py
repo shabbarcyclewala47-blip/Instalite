@@ -1132,6 +1132,11 @@ def conversation(request, user_id):
 # CREATE REEL
 # =========================================================
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 @login_required
 def create_reel(request):
     if request.method != "POST":
@@ -1152,14 +1157,23 @@ def create_reel(request):
         messages.error(request, "The maximum video size is 100 MB.")
         return redirect("create_reel")
 
-    Reel.objects.create(
-        user=request.user,
-        video=video,
-        caption=caption,
-    )
+    try:
+        Reel.objects.create(
+            user=request.user,
+            video=video,
+            caption=caption,
+        )
 
-    messages.success(request, "Your Reel was uploaded!")
-    return redirect("reels")
+        messages.success(request, "Your Reel was uploaded!")
+        return redirect("reels")
+
+    except Exception:
+        logger.exception("Reel upload failed for user ID %s", request.user.pk)
+        messages.error(
+            request,
+            "Reel upload failed. Please check the server logs."
+        )
+        return redirect("create_reel")
 
 
 # =========================================================
